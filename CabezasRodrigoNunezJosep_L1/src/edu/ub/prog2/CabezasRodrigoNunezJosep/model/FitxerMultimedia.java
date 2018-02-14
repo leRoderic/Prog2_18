@@ -11,42 +11,92 @@ public class FitxerMultimedia extends File{
         super(cami);
     }
     
+    /**
+    * Estableix la data de la última modificació.
+    * 
+    * @param lastModified data de la última modificació
+    */
     public void setUltimaModificacio(Date lastModified){
         this.lastModified=lastModified;
     }
     
+    /**
+     * Estableix ruta on és el fitxer.
+     * 
+     * @param camiAbsolut directori del fitxer
+     */
     public void setCamiAbsolut(String camiAbsolut){
         this.camiAbsolut=camiAbsolut;
     }
     
+    /**
+     * Dóna nom a un fitxer.
+     * 
+     * @param nom el nom del fitxer
+     */
     public void setNomFitxer(String nom){
         this.nom=nom;
     }
     
+    /**
+     * Estableix extensió per el fitxer.
+     * 
+     * @param extensio la extensió del fitxer
+     */
     public void setExtensio(String extensio){
         this.extensio=extensio;
     }
     
+    /**
+     * Dóna descprició al fitxer.
+     * 
+     * @param descripcio la descripció del fitxer
+     */
     public void setDescripcio(String descripcio){
         this.descripcio=descripcio;
     }
     
+    /**
+     * Retorna la data de la última modificació.
+     * 
+     * @return data de la última modificació
+     */
     public Date getUltimaModificacio(){
         return lastModified;
     }
     
+    /**
+     * Retorna el directori on és troba el fitxer.
+     * 
+     * @return path del fitxer
+     */
     public String getCamiAbsolut(){
         return camiAbsolut;
     }
     
+    /**
+     * Retorna el nom del fitxer.
+     * 
+     * @return nom del fitxer
+     */
     public String getNomFitxer(){
         return nom;
     }
     
+    /**
+     * Retorna la extensió del fitxer.
+     * 
+     * @return extensió del fitxer
+     */
     public String getExtensio(){
         return extensio;
     }
     
+    /**
+     * Retorna la descripció del fitxer.
+     * 
+     * @return la descripció
+     */
     public String getDescripcio(){
         return descripcio;
     }
