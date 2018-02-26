@@ -1,10 +1,11 @@
-package edu.ub.prog2.CabezasRodriguezNunezJosep.model;
+package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
 
 public class CarpetaFitxers {
     private int size;
     private int freeSpace;
+    private ArrayList <File>carpeta;
     
     /**
      * Constructor per defecte.
@@ -13,6 +14,7 @@ public class CarpetaFitxers {
     public CarpetaFitxers(){
         this.size = 100;
         this.freeSpace = 100;
+        this.carpeta = new ArrayList(100);
     }
     
     /**
@@ -23,6 +25,7 @@ public class CarpetaFitxers {
     public CarpetaFitxers(int tamany){
         this.size = tamany;
         this.freeSpace = tamany;
+        this.carpeta = new ArrayList(tamany);
     }
     
     /**
@@ -42,6 +45,7 @@ public class CarpetaFitxers {
      */
     public void addFitxer(File fitxer){
         this.freeSpace =- 1;
+        this.carpeta.add(fitxer);
         
     }
     
@@ -51,6 +55,7 @@ public class CarpetaFitxers {
      * @param fitxer el fitxer a borrar
      */
     public void removeFitxer(File fitxer){
+        //Iterator it = carpeta.iterator();
         this.freeSpace =+ 1;
         
     }
@@ -61,9 +66,9 @@ public class CarpetaFitxers {
      * @param position la posició de la carpeta
      * @return el fitxer de la carpeta
      */
-    //public File getAt(int position){
-        //return ;
-    //}
+    public File getAt(int position){
+        return this.carpeta.get(position);
+    }
     
     /**
      * Buidar la carpeta de fitxers.
@@ -71,6 +76,7 @@ public class CarpetaFitxers {
      */
     public void clear(){
         this.freeSpace = this.size;
+        this.carpeta.clear();
         
     }
     

@@ -1,4 +1,4 @@
-package edu.ub.prog2.CabezasRodriguezNunezJosep.model;
+package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
 import java.io.File;
 import java.util.*;
 
