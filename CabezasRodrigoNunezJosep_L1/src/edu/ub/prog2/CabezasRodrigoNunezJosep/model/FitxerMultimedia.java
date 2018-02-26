@@ -7,8 +7,35 @@ public class FitxerMultimedia extends File{
     private Date lastModified;
     private String descripcio;
     
+    /**
+     * Constructor per defecte.
+     * 
+     */
     public FitxerMultimedia(String cami) {
         super(cami);
+        this.setUltimaModificacio(new Date(this.lastModified()));
+        this.setCamiAbsolut(this.getAbsolutePath());
+        String name=this.getName();
+        int punt=name.lastIndexOf(".");
+        this.setNomFitxer(name.substring(0,punt));        
+        this.setExtensio(name.substring(punt));
+        this.setDescripcio("");
+    }
+    
+    /**
+     * Constructor indicant la descripció.
+     * 
+     * @param desc descripció del fitxer
+     */
+    public FitxerMultimedia(String cami, String desc) {
+        super(cami);
+        this.setUltimaModificacio(new Date(this.lastModified()));
+        this.setCamiAbsolut(this.getAbsolutePath());
+        String name=this.getName();
+        int punt=name.lastIndexOf(".");
+        this.setNomFitxer(name.substring(0,punt));        
+        this.setExtensio(name.substring(punt));
+        this.setDescripcio(desc);
     }
     
     /**
@@ -119,7 +146,8 @@ public class FitxerMultimedia extends File{
     }
     
     public String toString(){
-        String retorn="Nom del fitxer: "+this.getNomFitxer()+"\nExtensió: "+this.getExtensio()+"\nCamí absolut: "+this.getCamiAbsolut()+"\nDescripció: "+this.getDescripcio()+"\nÚltima modificació: "+this.getUltimaModificacio();
+        //String retorn="Nom del fitxer: "+this.getNomFitxer()+"\nExtensió: "+this.getExtensio()+"\nCamí absolut: "+this.getCamiAbsolut()+"\nDescripció: "+this.getDescripcio()+"\nÚltima modificació: "+this.getUltimaModificacio();
+        String retorn="Descripció = "+this.getDescripcio()+",\ndata = "+this.getUltimaModificacio()+",\nnom = "+this.getNomFitxer()+",\next = "+this.getExtensio()+",\ncamí complet = "+this.getCamiAbsolut()+"\n";
         return retorn;
     }
 }

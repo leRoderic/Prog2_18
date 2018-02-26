@@ -3,8 +3,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class CarpetaFitxers {
+    private int maxSize;
     private int size;
-    private int freeSpace;
     private ArrayList <File>carpeta;
     
     /**
@@ -12,8 +12,8 @@ public class CarpetaFitxers {
      * 
      */
     public CarpetaFitxers(){
+        this.maxSize = 100;
         this.size = 100;
-        this.freeSpace = 100;
         this.carpeta = new ArrayList(100);
     }
     
@@ -23,8 +23,8 @@ public class CarpetaFitxers {
      * @param tamany el tamany de la carpeta
      */
     public CarpetaFitxers(int tamany){
+        this.maxSize = tamany;
         this.size = tamany;
-        this.freeSpace = tamany;
         this.carpeta = new ArrayList(tamany);
     }
     
@@ -34,7 +34,7 @@ public class CarpetaFitxers {
      * @return nombre elements
      */
     public int getSize(){
-        return this.freeSpace;
+        return this.size;
         
     }
     
@@ -44,7 +44,8 @@ public class CarpetaFitxers {
      * @param fitxer el fitxer a afegir
      */
     public void addFitxer(File fitxer){
-        this.freeSpace =- 1;
+        //S'ha de comprovar si està ple i llançar excepció
+        this.size += 1;
         this.carpeta.add(fitxer);
         
     }
@@ -55,8 +56,9 @@ public class CarpetaFitxers {
      * @param fitxer el fitxer a borrar
      */
     public void removeFitxer(File fitxer){
+        //S'ha de comprovar si hi és i llançar excepció
         //Iterator it = carpeta.iterator();
-        this.freeSpace =+ 1;
+        this.size += 1;
         
     }
     
@@ -67,6 +69,7 @@ public class CarpetaFitxers {
      * @return el fitxer de la carpeta
      */
     public File getAt(int position){
+        //comprovar que hi és
         return this.carpeta.get(position);
     }
     
@@ -75,7 +78,7 @@ public class CarpetaFitxers {
      * 
      */
     public void clear(){
-        this.freeSpace = this.size;
+        this.size = 0;
         this.carpeta.clear();
         
     }
@@ -86,7 +89,7 @@ public class CarpetaFitxers {
      * @return true: plena  false: hi ha espai encara
      */
     public boolean isFull(){
-        if(this.freeSpace == 0){
+        if(this.size == this.maxSize){
             return true;
         }
         else{
@@ -96,6 +99,9 @@ public class CarpetaFitxers {
     
     public String toString(){
         String resum = "Carpeta fitxers:\n==============\n\n";
+        for (int i=0;i<carpeta.size();i++){
+            resum=resum+"["+(i+1)+"] "+this.getAt(i).toString()+"\n";
+        }
         return resum;
     }
 }
