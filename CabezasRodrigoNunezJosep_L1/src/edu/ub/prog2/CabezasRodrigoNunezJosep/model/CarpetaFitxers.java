@@ -50,7 +50,7 @@ public class CarpetaFitxers {
             if(this.size == 0){
                 throw new Exception();
             }
-            this.size += 1;
+            this.size -= 1;
             this.carpeta.add(fitxer);
         }
         catch(Exception e){
@@ -108,7 +108,7 @@ public class CarpetaFitxers {
      * 
      */
     public void clear(){
-        this.size = 0;
+        this.size = this.maxSize;
         this.carpeta.clear();
         
     }
