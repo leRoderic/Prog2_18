@@ -10,31 +10,49 @@ public class FitxerMultimedia extends File{
     /**
      * Constructor per defecte.
      * 
+     * @param cami camí absolut del fitxer
      */
     public FitxerMultimedia(String cami) {
         super(cami);
-        this.setUltimaModificacio(new Date(this.lastModified()));
-        this.setCamiAbsolut(this.getAbsolutePath());
-        String name=this.getName();
-        int punt=name.lastIndexOf(".");
-        this.setNomFitxer(name.substring(0,punt));        
-        this.setExtensio(name.substring(punt));
+        if((this.exists()) && (!(this.isDirectory()))){
+            this.setUltimaModificacio(new Date(this.lastModified()));
+            this.setCamiAbsolut(this.getAbsolutePath());
+            String name=this.getName();
+            int punt=name.lastIndexOf(".");
+            this.setNomFitxer(name.substring(0,punt));        
+            this.setExtensio(name.substring(punt));
+        }else{
+            //System.out.println("\nEl fitxer no existeix.\n");
+            this.setUltimaModificacio(new Date());
+            this.setCamiAbsolut(cami);            
+            this.setNomFitxer("");        
+            this.setExtensio("");
+        }
         this.setDescripcio("");
     }
     
     /**
      * Constructor indicant la descripció.
      * 
+     * @param cami camí absolut del fitxer
      * @param desc descripció del fitxer
      */
     public FitxerMultimedia(String cami, String desc) {
         super(cami);
-        this.setUltimaModificacio(new Date(this.lastModified()));
-        this.setCamiAbsolut(this.getAbsolutePath());
-        String name=this.getName();
-        int punt=name.lastIndexOf(".");
-        this.setNomFitxer(name.substring(0,punt));        
-        this.setExtensio(name.substring(punt));
+        if((this.exists()) && (!(this.isDirectory()))){
+            this.setUltimaModificacio(new Date(this.lastModified()));
+            this.setCamiAbsolut(this.getAbsolutePath());
+            String name=this.getName();
+            int punt=name.lastIndexOf(".");
+            this.setNomFitxer(name.substring(0,punt));        
+            this.setExtensio(name.substring(punt));
+        }else{
+            //System.out.println("\nEl fitxer no existeix.\n");
+            this.setUltimaModificacio(new Date());
+            this.setCamiAbsolut(cami);            
+            this.setNomFitxer("");        
+            this.setExtensio("");
+        }
         this.setDescripcio(desc);
     }
     
@@ -128,8 +146,12 @@ public class FitxerMultimedia extends File{
         return descripcio;
     }
     
+    /**
+     * Comparador de dos fitxers.
+     * 
+     * @return true: són iguals false: són diferents
+     */
     public boolean equals(/*Object*/FitxerMultimedia fitxerMultimedia){
-        boolean retorn=true;
         if (!(fitxerMultimedia.getUltimaModificacio().equals(this.getUltimaModificacio()))){
             return false;
         }else if (!(fitxerMultimedia.getCamiAbsolut().equals(this.getCamiAbsolut()))){
@@ -138,16 +160,15 @@ public class FitxerMultimedia extends File{
             return false;
         }else if (!(fitxerMultimedia.getExtensio().equals(this.getExtensio()))){
             return false;
-        }else if (!(fitxerMultimedia.getDescripcio().equals(this.getDescripcio()))){
-            return false;
         }else{
-            return true;
+            return fitxerMultimedia.getDescripcio().equals(this.getDescripcio());
         }        
     }
     
+    @Override
     public String toString(){
         //String retorn="Nom del fitxer: "+this.getNomFitxer()+"\nExtensió: "+this.getExtensio()+"\nCamí absolut: "+this.getCamiAbsolut()+"\nDescripció: "+this.getDescripcio()+"\nÚltima modificació: "+this.getUltimaModificacio();
-        String retorn="Descripció = "+this.getDescripcio()+",\ndata = "+this.getUltimaModificacio()+",\nnom = "+this.getNomFitxer()+",\next = "+this.getExtensio()+",\ncamí complet = "+this.getCamiAbsolut()+"\n";
+        String retorn="Descripció = "+this.getDescripcio()+"\ndata = "+this.getUltimaModificacio()+"\nnom = "+this.getNomFitxer()+"\next = "+this.getExtensio()+"\ncamí complet = "+this.getCamiAbsolut()+"\n";
         return retorn;
     }
 }
