@@ -1,35 +1,46 @@
-
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
-import edu.ub.prog2.CabezasRodrigoNunezJosep.model.FitxerReproduible;
 import java.io.File;
 
 
-public abstract class Audio extends FitxerReproduible {
+public class Audio extends FitxerReproduible {
     
     private int kbps;
     private File fitxerImatge;
     
     /**
-     * Constructor de Audio.
+     * Constructor de Audio
      * 
      * @param cami          path del fitxer
-     * @param fitxerImatge  caratula per l'audio
-     * @param nom           el nom del audio
-     * @param codec         el codec del audio
-     * @param durada        la durada del audio
-     * @param kbps          la velocitat del audio
+     * @param fitxerImatge  caratula per l'àudio
+     * @param nom           descripció de l'àudio
+     * @param codec         el codec de l'àudio
+     * @param durada        la durada de l'àudio
+     * @param kbps          la velocitat de l'àudio
      * @param r             el reproductor
      */
-    public Audio(String cami, File fitxerImatge, String nom, String codec, float durada, int kbps, Reproductor r){
+    public Audio(String cami, String nom, String codec, float durada, File fitxerImatge, int kbps, Reproductor r){
         super(cami, nom, codec, durada, r);
         this.kbps = kbps;
         this.fitxerImatge = fitxerImatge;
     }
-    /*
-    IMPLEMENTAR LLIURAMENT 3
+    
+    public int getKbps(){
+        return this.kbps;
+    }
+    
+    public File getImatge(){
+        return this.fitxerImatge;
+    }
+    
+    @Override
+    public String toString(){
+        String retorn=super.toString()+"kbps = "+this.getKbps()+"\n";
+        return retorn;
+    }
+    
     @Override
     public void reproduir(){
+        // TO DO
     }
-    */
     
 }

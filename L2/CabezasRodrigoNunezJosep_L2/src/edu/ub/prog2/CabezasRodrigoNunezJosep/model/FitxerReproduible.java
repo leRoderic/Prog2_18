@@ -1,7 +1,4 @@
-
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
-
-import edu.ub.prog2.CabezasRodrigoNunezJosep.model.FitxerMultimedia;
 
 public abstract class FitxerReproduible extends FitxerMultimedia{
     
@@ -13,7 +10,7 @@ public abstract class FitxerReproduible extends FitxerMultimedia{
      * Constructor de fitxer reproduible
      * 
      * @param cami      path del fitxer
-     * @param nom       el nom del fitxer
+     * @param nom       descripció del fitxer
      * @param codec     el codec del fitxer
      * @param durada    la durada del fitxer reproduible
      * @param r         el reproductor pel fitxer reproduible
@@ -27,8 +24,21 @@ public abstract class FitxerReproduible extends FitxerMultimedia{
     
     protected abstract void reproduir();
     
-    protected Reproductor getReproductor(){
-        return reproductor;
-    }    
+    public Reproductor getReproductor(){
+        return this.reproductor;
+    }
+
+    public String getCodec(){
+        return this.codec;
+    }
     
+    public float getDurada(){
+        return this.durada;
+    }
+    
+    @Override
+    public String toString(){
+        String retorn=super.toString()+"codec = "+this.getCodec()+"\ndurada = "+this.getDurada()+"\n";
+        return retorn;
+    }
 }

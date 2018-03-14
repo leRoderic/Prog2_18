@@ -22,9 +22,8 @@ public class FitxerMultimedia extends File{
             this.setNomFitxer(name.substring(0,punt));        
             this.setExtensio(name.substring(punt));
         }else{
-            //System.out.println("\nEl fitxer no existeix.\n");
-            this.setUltimaModificacio(new Date());
-            this.setCamiAbsolut(cami);            
+            this.setUltimaModificacio(new Date(this.lastModified()));
+            this.setCamiAbsolut(this.getAbsolutePath());
             this.setNomFitxer("");        
             this.setExtensio("");
         }
@@ -47,9 +46,8 @@ public class FitxerMultimedia extends File{
             this.setNomFitxer(name.substring(0,punt));        
             this.setExtensio(name.substring(punt));
         }else{
-            //System.out.println("\nEl fitxer no existeix.\n");
-            this.setUltimaModificacio(new Date());
-            this.setCamiAbsolut(cami);            
+            this.setUltimaModificacio(new Date(this.lastModified()));
+            this.setCamiAbsolut(this.getAbsolutePath());
             this.setNomFitxer("");        
             this.setExtensio("");
         }
@@ -149,9 +147,10 @@ public class FitxerMultimedia extends File{
     /**
      * Comparador de dos fitxers.
      * 
+     * @param fitxerMultimedia fitxer a comparar
      * @return true: són iguals false: són diferents
      */
-    public boolean equals(/*Object*/FitxerMultimedia fitxerMultimedia){
+    public boolean equals(FitxerMultimedia fitxerMultimedia){
         if (!(fitxerMultimedia.getUltimaModificacio().equals(this.getUltimaModificacio()))){
             return false;
         }else if (!(fitxerMultimedia.getCamiAbsolut().equals(this.getCamiAbsolut()))){
@@ -167,7 +166,6 @@ public class FitxerMultimedia extends File{
     
     @Override
     public String toString(){
-        //String retorn="Nom del fitxer: "+this.getNomFitxer()+"\nExtensió: "+this.getExtensio()+"\nCamí absolut: "+this.getCamiAbsolut()+"\nDescripció: "+this.getDescripcio()+"\nÚltima modificació: "+this.getUltimaModificacio();
         String retorn="Descripció = "+this.getDescripcio()+"\ndata = "+this.getUltimaModificacio()+"\nnom = "+this.getNomFitxer()+"\next = "+this.getExtensio()+"\ncamí complet = "+this.getCamiAbsolut()+"\n";
         return retorn;
     }

@@ -1,29 +1,30 @@
-
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
-
-import edu.ub.prog2.CabezasRodrigoNunezJosep.model.CarpetaFitxers;
-import edu.ub.prog2.CabezasRodrigoNunezJosep.model.FitxerMultimedia;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
+import java.io.Serializable;
         
-public class BibliotecaFitxersMultimedia extends CarpetaFitxers{
+public class BibliotecaFitxersMultimedia extends CarpetaFitxers implements Serializable{
+    
+    public BibliotecaFitxersMultimedia(){
+        super();
+    }
     
     /**
      * Permet afegir un fitxer a la biblioteca.
      * 
      * @param file fitxer a afegir
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
-    public void addFitxer(File fitxer) throws AplicacioException{
-        FitxerMultimedia fm = (FitxerMultimedia) fitxer;
-        if(!fitxer.exists()){
+    public void addFitxer(File file) throws AplicacioException{
+        FitxerMultimedia fitxer=(FitxerMultimedia) file;
+        if((fitxer.exists()) && (!(fitxer.isDirectory()))){
+            if (this.contains(fitxer)){
+                throw new AplicacioException("Aquest fitxer ja es troba a la biblioteca.");
+            }else{
+                this.carpeta.add(fitxer);
+            }
+        }else{
             throw new AplicacioException("Aquest fitxer no existeix.");
-        }
-        // Tal qual copiat a classe
-        if(!super.contains(fm)){ 
-            super.addFitxer(fm);
-        }
-        else{
-            throw new AplicacioException("Aquest fitxer ja és troba a la biblioteca.");
         }
     }
     
@@ -32,14 +33,20 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers{
      * 
      * @param fitxer el fitxer a eliminar
      */
-    public void removeFitxer(File fitxer) throws AplicacioException{
-        FitxerMultimedia fm = (FitxerMultimedia) fitxer;
-        if(!fitxer.exists()){
-            throw new AplicacioException("Aquest fitxer no existeix.");
+    public void removeFitxer(FitxerMultimedia fitxer){
+        boolean removed = false;
+        int i =0;
+        while((i<this.getSize())&&(!(removed))){
+            if (fitxer.equals(this.getAt(i))){
+                this.carpeta.remove(i);
+                removed = true;
+            }
+            i++;
         }
-        else{
-            super.removeFitxer(fm);
-        }
+    }
+    
+    public boolean isRemovable(int i){
+        return ((i<this.getSize())&&(i>-1));
     }
     
 }

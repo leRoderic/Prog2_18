@@ -1,72 +1,186 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.vista;
-import edu.ub.prog2.CabezasRodrigoNunezJosep.model.CarpetaFitxers;
-import edu.ub.prog2.CabezasRodrigoNunezJosep.model.FitxerMultimedia;
 import edu.ub.prog2.utils.Menu;
 import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Controlador;
+import edu.ub.prog2.utils.AplicacioException;
+import java.io.File;
 import java.util.*;
 
 public class AplicacioUB2 {
-    static private enum OpcionsMenuPrincipal {MENU_PRINCIPAL_AFEGIR,MENU_PRINCIPAL_ELIMINAR,MENU_PRINCIPAL_MOSTRAR,MENU_PRINCIPAL_SORTIR};
-    static private String[] descMenuPrincipal={"Afegeir un nou arxiu a la carpeta",
-                                               "Eliminar un dels fitxers existents a la carpeta",
-                                               "Mostrar el contingut de la carpeta",
-                                               "Sortir de l'aplicació"};
+    static private enum OpcionsPrincipal {PRINCIPAL_GESTIO,PRINCIPAL_GUARDAR,PRINCIPAL_RECUPERAR,PRINCIPAL_SORTIR};
+    static private String[] descPrincipal={"Gestionar la biblioteca","Guardar les dades a disc","Carregar les dades de disc","Sortir de l'aplicació"};
+    static private enum OpcionsGestio {GESTIO_AFEGIR,GESTIO_MOSTRAR,GESTIO_ELIMINAR,GESTIO_SORTIR};
+    static private String[] descGestio={"Afegir un nou fitxer multimèdia","Mostrar el contingut de la biblioteca","Eliminar un dels fitxers existents","Menú anterior"};
+    static private enum OpcionsAfegir {AFEGIR_VIDEO,AFEGIR_AUDIO,AFEGIR_SORTIR};
+    static private String[] descAfegir={"Afegir un fitxer de vídeo","Afegir un fitxer d'àudio","Menú anterior"};
+    private Controlador controlador;
     
-    public void gestioAplicacioUB(Scanner sc){
-        Controlador controlador = new Controlador();
-        Menu<OpcionsMenuPrincipal> menu=new Menu<OpcionsMenuPrincipal>("Menu principal",OpcionsMenuPrincipal.values());
-        menu.setDescripcions(descMenuPrincipal);
-        OpcionsMenuPrincipal opcio = null;
-        CarpetaFitxers carpeta=new CarpetaFitxers();
+    public AplicacioUB2(){
+        this.controlador=new Controlador();
+    }
+    
+    public void gestioAplicacioUB(Scanner sc) throws AplicacioException{
+        Menu<OpcionsPrincipal> menu=new Menu<OpcionsPrincipal>("Menú principal",OpcionsPrincipal.values());
+        menu.setDescripcions(descPrincipal);
+        OpcionsPrincipal opcio = null;
+        do {
+            menu.mostrarMenu();opcio=menu.getOpcio(sc);
+            switch(opcio) {
+                case PRINCIPAL_GESTIO:
+                    System.out.println("\nHas triat Gestionar la biblioteca.\n");
+                    gestioBiblioteca(sc);
+                    break;
+                case PRINCIPAL_GUARDAR:
+                    try{
+                        System.out.println("\nHas triat Guardar les dades a disc.\n");                    
+                        System.out.println("\nIntrodueix el camí del fitxer a on guardar: ");
+                        String camiDesti=sc.nextLine();
+                        this.controlador.guardarDadesDisc(camiDesti);
+                    }catch(AplicacioException e){}
+                    break;
+                case PRINCIPAL_RECUPERAR:
+                    try{
+                        System.out.println("\nHas triat Carregar les dades de disc.\n");                    
+                        System.out.println("\nIntrodueix el camí del fitxer d'on carregar: ");
+                        String camiOrigen=sc.nextLine();
+                        this.controlador.carregarDadesDisc(camiOrigen);
+                    }catch(AplicacioException e){}
+                    break;                
+                case PRINCIPAL_SORTIR:
+                    System.out.println("\nFins aviat!\n");
+                    break;
+            }
+        } while(opcio!=OpcionsPrincipal.PRINCIPAL_SORTIR);
+    }
+    
+    public void gestioBiblioteca(Scanner sc) throws AplicacioException{
+        Menu<OpcionsGestio> menu=new Menu<OpcionsGestio>("Gestió de la biblioteca",OpcionsGestio.values());
+        menu.setDescripcions(descGestio);
+        OpcionsGestio opcio = null;
         do {
             menu.mostrarMenu();
             opcio=menu.getOpcio(sc);
             switch(opcio) {
-                case MENU_PRINCIPAL_AFEGIR:
-                    System.out.println("\nHas triat Afegir un nou arxiu a la carpeta.\n");
-                    FitxerMultimedia fitxer;
-                    System.out.println("\nIntrodueix el camí del fitxer: ");
-                    String cami=sc.nextLine();
-                    System.out.println("\nVols introduir descripció? (y/n) ");
-                    String resposta=sc.nextLine();
-                    while((!(resposta.equals("n")))&&(!(resposta.equals("y")))){
-                        System.out.println("\nIntrodueix 'y' o 'n' ");
-                        resposta=sc.nextLine();
-                    }
-                    if (resposta.equals("y")){
-                        System.out.println("\nIntrodueix la descripció del fitxer: ");
-                        String dsc=sc.nextLine();
-                        fitxer=new FitxerMultimedia(cami,dsc);
-                    }else{
-                        fitxer=new FitxerMultimedia(cami);                        
-                    }
-                    carpeta.addFitxer(fitxer);
+                case GESTIO_AFEGIR:
+                    System.out.println("\nHas triat Afegir un nou arxiu a la biblioteca.\n");
+                    gestioAfegir(sc);
                     break;
-                case MENU_PRINCIPAL_ELIMINAR:
-                    System.out.println("\nHas triat Eliminar un dels fitxers existents a la carpeta.\n");
-                    if ((!carpeta.isEmpty())){
-                        System.out.println("\nAquests són els camins dels fitxers de la carpeta: ");                    
-                        System.out.print(carpeta.toStringCami());
+                case GESTIO_MOSTRAR:
+                    System.out.println("\nHas triat Mostrar el contingut de la biblioteca.\n");
+                    System.out.print(this.controlador.mostrarBiblioteca());
+                    break;
+                case GESTIO_ELIMINAR:
+                    System.out.println("\nHas triat Eliminar un dels fitxers existents a la biblioteca.\n");
+                    if ((!this.controlador.isEmpty())){
+                        System.out.println("\nAquests són els camins dels fitxers de la biblioteca: ");                    
+                        System.out.print(this.controlador.mostrarCamins());
                         System.out.println("\nIntrodueix l'índex del fitxer a eliminar: ");
-                        FitxerMultimedia elim=carpeta.getAt(sc.nextInt()-1);
-                        while (elim==null){
+                        int num=sc.nextInt()-1;
+                        while (!(this.controlador.isRemovable(num))){
                             System.out.println("\nTorna-ho a provar: ");
-                            elim=carpeta.getAt(sc.nextInt()-1);
+                            num=sc.nextInt()-1;
                         }
-                        carpeta.removeFitxer(elim);
+                        this.controlador.esborrarFitxer(num);
                     }else{
-                        System.out.println("\nLa carpeta és buida. No es pot esborrar cap fitxer.\n");
+                        System.out.println("\nLa biblioteca és buida. No es pot esborrar cap fitxer.\n");
                     }
-                    here:
-                    break;
-                case MENU_PRINCIPAL_MOSTRAR:
-                    System.out.println("\nHas triat Mostrar el contingut de la carpeta.\n");
-                    System.out.print(carpeta.toString());
                     break;                
-                case MENU_PRINCIPAL_SORTIR:
-                    System.out.println("\nFins aviat!\n");
+                case GESTIO_SORTIR:
+                    System.out.println("\nHas triat Tornar al menú anterior.\n");
                     break;
             }
-        } while(opcio!=OpcionsMenuPrincipal.MENU_PRINCIPAL_SORTIR);
+        } while(opcio!=OpcionsGestio.GESTIO_SORTIR);
     }
+    
+    public void gestioAfegir(Scanner sc) throws AplicacioException{
+        Menu<OpcionsAfegir> menu=new Menu<OpcionsAfegir>("Afegir un nou fitxer multimèdia",OpcionsAfegir.values());
+        menu.setDescripcions(descAfegir);
+        OpcionsAfegir opcio = null;
+        do {
+            menu.mostrarMenu();
+            opcio=menu.getOpcio(sc);
+            Object[] compartit;
+            switch(opcio) {
+                case AFEGIR_VIDEO:
+                    try{
+                        System.out.println("\nHas triat Afegir un nou fitxer de vídeo.\n");
+                        compartit=this.demana(sc);
+                        Object[] video=this.demanaVideo(sc);
+                        this.controlador.afegirVideo((String)compartit[0], (String)compartit[1], (String)compartit[2], (Float)compartit[3], (int)video[0], (int)video[1], (Float)video[2]);
+                    }catch(AplicacioException e){}
+                    break;
+                case AFEGIR_AUDIO:
+                    try{
+                        System.out.println("\nHas triat Afegir un nou fitxer d'àudio.\n");
+                        compartit=this.demana(sc);
+                        Object[] audio=this.demanaAudio(sc);
+                        this.controlador.afegirAudio((String)compartit[0], (String)compartit[1], (String)compartit[2], (Float)compartit[3], (String)audio[0], (int)audio[1]);
+                    }catch(AplicacioException e){}
+                    break;
+                case AFEGIR_SORTIR:
+                    System.out.println("\nHas triat Tornar al menú anterior.\n");
+                    break;
+            }
+        } while(opcio!=OpcionsAfegir.AFEGIR_SORTIR);
+    }
+    
+    public Object[] demanaVideo(Scanner sc){
+        Object[] dades=new Object[3];                 
+        System.out.println("\nIntrodueix l'alçada (valor enter) del vídeo: ");
+        dades[0]=(int)sc.nextInt();         
+        System.out.println("\nIntrodueix l'amplada (valor enter) del vídeo: ");
+        dades[1]=(int)sc.nextInt();        
+        System.out.println("\nIntrodueix els fps (valor float) del fitxer: ");
+        dades[2]=sc.nextFloat();
+        return dades;
+    }
+    
+    public Object[] demanaAudio(Scanner sc){    
+        Object[] dades=new Object[2];
+        System.out.println("\nVols introduir una imatge per la reproducció? (y/n) ");
+        String resposta=sc.nextLine();
+        while((!(resposta.equals("n")))&&(!(resposta.equals("y")))){
+            System.out.println("\nIntrodueix 'y' o 'n' ");
+            resposta=sc.nextLine();
+        }
+        if (resposta.equals("y")){
+            System.out.println("\nIntrodueix el camí de la imatge: ");
+            resposta=sc.nextLine();
+            File a=new File(resposta);
+            while((a.isDirectory()) || (!(a.exists()))){                
+                System.out.println("\nIntrodueix un camí vàlid: ");
+                resposta=sc.nextLine();
+                a=new File(resposta);
+            }
+            dades[0]=resposta;
+        }else{
+            dades[0]="";                        
+        }         
+        System.out.println("\nIntrodueix els kbps (valor enter) de l'arxiu: ");
+        dades[1]=(int)sc.nextInt();
+        return dades;
+    }
+    
+    public Object[] demana(Scanner sc){        
+        Object[] dades=new Object[4];
+        System.out.println("\nIntrodueix el camí del fitxer: ");
+        dades[0]=sc.nextLine();
+        System.out.println("\nVols introduir descripció? (y/n) ");
+        String resposta=sc.nextLine();
+        while((!(resposta.equals("n")))&&(!(resposta.equals("y")))){
+            System.out.println("\nIntrodueix 'y' o 'n' ");
+            resposta=sc.nextLine();
+        }
+        if (resposta.equals("y")){
+            System.out.println("\nIntrodueix la descripció del fitxer: ");
+            dades[1]=sc.nextLine();
+        }else{
+            dades[1]="";                        
+        }        
+        System.out.println("\nIntrodueix el codec de l'arxiu: ");
+        dades[2]=sc.nextLine();        
+        System.out.println("\nIntrodueix la durada (valor float) de reproducció del fitxer: ");
+        dades[3]=sc.nextFloat();
+        return dades;
+    }
+    
 }

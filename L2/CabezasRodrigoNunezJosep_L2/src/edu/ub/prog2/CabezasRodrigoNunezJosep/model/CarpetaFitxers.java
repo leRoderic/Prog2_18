@@ -2,26 +2,14 @@ package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
 import java.util.ArrayList;
 
 public class CarpetaFitxers {
-    private int maxSize;
-    private ArrayList<FitxerMultimedia> carpeta;
+    protected ArrayList<FitxerMultimedia> carpeta;
     
     /**
      * Constructor per defecte.
      * 
      */
     public CarpetaFitxers(){
-        this.maxSize = 100;
-        this.carpeta = new ArrayList<FitxerMultimedia>(100);
-    }
-    
-    /**
-     * Constructor de carpeta amb tamany variable.
-     * 
-     * @param tamany el tamany de la carpeta
-     */
-    public CarpetaFitxers(int tamany){
-        this.maxSize = tamany;
-        this.carpeta = new ArrayList<FitxerMultimedia>(tamany);
+        this.carpeta = new ArrayList<FitxerMultimedia>();
     }
     
     /**
@@ -38,31 +26,23 @@ public class CarpetaFitxers {
      * Afegeix fitxer a la carpeta.
      * 
      * @param fitxer el fitxer a afegir
-     * @return èxit o fracàs de la inserció
      */
-    public int addFitxer(FitxerMultimedia fitxer){
-        if(this.isFull()){            
-            System.out.print("\n\033[31mError! La carpeta ja és plena.\033[0m\n");
-            return -2;
-        }
+    public void afegirFitxer(FitxerMultimedia fitxer){
         for(int i=0;i<this.getSize();i++){
             if(this.getAt(i).equals(fitxer)){
                 System.out.print("\n\033[31mError! El fitxer ja es troba a la carpeta.\033[0m\n");
-                return -1;
             }
         }
         this.carpeta.add(fitxer);
         System.out.print("\n\033[32mFitxer afegit amb èxit.\033[0m\n");
-        return 1;
-}
+    }
     
     /**
      * Suprimeix el fitxer de la carpeta.
      * 
      * @param fitxer el fitxer a borrar
-     * @return èxit o fracàs de l'eliminació
      */
-    public boolean removeFitxer(FitxerMultimedia fitxer){
+    public void eliminarFitxer(FitxerMultimedia fitxer){
         boolean removed = false;
         int i =0;
         while((i<this.getSize())&&(!(removed))){
@@ -74,10 +54,8 @@ public class CarpetaFitxers {
         }
         if(!removed){
             System.out.print("\n\033[31mError! L'arxiu no existeix o no es troba en aquesta carpeta.\033[0m\n");
-            return false;
         }
         System.out.print("\n\033[32mFitxer eliminat amb èxit.\033[0m\n");
-        return true;
     }
     
     /**
@@ -101,15 +79,6 @@ public class CarpetaFitxers {
      */
     public void clear(){
         this.carpeta.clear();        
-    }
-    
-    /**
-     * Retorna true si la carpeta és plena.
-     * 
-     * @return true: plena  false: hi ha espai encara
-     */
-    public boolean isFull(){
-        return this.getSize() == this.maxSize;
     }
     
     /**
@@ -138,7 +107,7 @@ public class CarpetaFitxers {
      * 
      * @return llista de camins absoluts dels fitxers
      */
-    public String toStringCami(){        
+    public String mostrarCamins(){        
         String resum = "\n==============\n\n";
         for (int i=0;i<carpeta.size();i++){
             resum=resum+"["+(i+1)+"] "+this.getAt(i).getCamiAbsolut()+"\n";
@@ -149,8 +118,8 @@ public class CarpetaFitxers {
     /**
      * Comprova si un fitxer és a la carpeta.
      * 
-     * @param fitxer     el fitxer que had de ser comprovat
-     * @return true: si que hi és   false: no hi és el fitxer
+     * @param fitxer el fitxer que ha de ser comprovat
+     * @return true: sí que hi és   false: no hi és
      */
     public boolean contains(FitxerMultimedia fitxer){
         boolean found = false;
@@ -163,4 +132,5 @@ public class CarpetaFitxers {
         }
         return found;
     }
+    
 }

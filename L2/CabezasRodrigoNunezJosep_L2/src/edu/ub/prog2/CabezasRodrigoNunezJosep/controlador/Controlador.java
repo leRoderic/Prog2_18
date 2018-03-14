@@ -1,14 +1,14 @@
-
 package edu.ub.prog2.CabezasRodrigoNunezJosep.controlador;
-
 import edu.ub.prog2.utils.AplicacioException;
-import java.util.List;
 import edu.ub.prog2.CabezasRodrigoNunezJosep.model.Dades;
-import edu.ub.prog2.CabezasRodrigoNunezJosep.model.BibliotecaFitxersMultimedia;
 
 public class Controlador {
-    // S'INICIALITZA A APLICACIÓUB2 (JA ESTÀ FET)
+    
     private Dades dades;
+    
+    public Controlador(){
+        this.dades=new Dades();
+    }
     
     /**
      * Afegir vídeo a BibliotecaFitxerMultimedia
@@ -23,7 +23,7 @@ public class Controlador {
      * @throws edu.ub.prog2.utils.AplicacioException
      */
     public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException{
-        
+        this.dades.afegirVideo(path,nomVideo,codec,durada,alcada,amplada,fps);
     }
     
     /**
@@ -37,8 +37,8 @@ public class Controlador {
      * @param kbps velocitat del audio
      * @throws edu.ub.prog2.utils.AplicacioException
      */
-    public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException{
-        
+    public void afegirAudio(String cami, String nomAudio, String codec, float durada, String camiImatge, int kbps) throws AplicacioException{
+        this.dades.afegirAudio(cami,nomAudio,codec,durada,camiImatge,kbps);
     }
     
     /**
@@ -46,19 +46,17 @@ public class Controlador {
      * 
      * @return list llista amb el contingut de la carpeta
      */
-    public List<String> mostrarBiblioteca(){
-        List<String> now = null;
-        return now;
+    public String mostrarBiblioteca(){
+        return this.dades.toString();
     }
     
     /**
      * Elimina un fitxer de BibliotecaFitxerMultimedia.
      * 
      * @param id el id del fitxer a eliminar
-     * @throws edu.ub.prog2.utils.AplicacioException
      */
-    public void esborrarFitxer(int id) throws AplicacioException{
-        
+    public void esborrarFitxer(int id){
+        this.dades.esborrarFitxer(id);
     }
     
     /**
@@ -68,7 +66,7 @@ public class Controlador {
      * @throws edu.ub.prog2.utils.AplicacioException
      */
     public void guardarDadesDisc(String camiDesti) throws AplicacioException{
-        
+        this.dades.guardar(camiDesti);
     }
     
     /**
@@ -78,15 +76,19 @@ public class Controlador {
      * @throws edu.ub.prog2.utils.AplicacioException
      */
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException{
-        
+        this.dades.carregar(camiOrigen);
+    }
+
+    public String mostrarCamins() {
+        return this.dades.mostrarCamins();
     }
     
-    /**
-     * Retorna les dades de l'aplicació.
-     * 
-     * @return dades les dades del fitxer
-     */
-    public Dades getDades(){
-        return dades;
+    public boolean isEmpty(){
+        return this.dades.isEmpty();
     }
+    
+    public boolean isRemovable(int i){
+        return this.dades.isRemovable(i);
+    }
+    
 }
