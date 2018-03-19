@@ -1,6 +1,8 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.controlador;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.CabezasRodrigoNunezJosep.model.Dades;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Controlador {
     
@@ -64,8 +66,9 @@ public class Controlador {
      * 
      * @param camiDesti path on es guardaran les dades
      * @throws edu.ub.prog2.utils.AplicacioException
+     * @throws java.io.IOException
      */
-    public void guardarDadesDisc(String camiDesti) throws AplicacioException{
+    public void guardarDadesDisc(String camiDesti) throws AplicacioException, IOException{
         this.dades.guardar(camiDesti);
     }
     
@@ -74,8 +77,11 @@ public class Controlador {
      *
      * @param camiOrigen path d'on es carregaran les dades per BibliotectaFitxersMultimedia
      * @throws edu.ub.prog2.utils.AplicacioException
+     * @throws java.io.IOException
+     * @throws java.io.FileNotFoundException
+     * @throws java.lang.ClassNotFoundException
      */
-    public void carregarDadesDisc(String camiOrigen) throws AplicacioException{
+    public void carregarDadesDisc(String camiOrigen) throws AplicacioException, IOException, FileNotFoundException, ClassNotFoundException{
         this.dades.carregar(camiOrigen);
     }
 
