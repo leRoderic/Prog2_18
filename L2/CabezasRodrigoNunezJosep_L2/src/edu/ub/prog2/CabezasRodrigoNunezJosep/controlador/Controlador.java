@@ -8,6 +8,9 @@ public class Controlador {
     
     private Dades dades;
     
+    /**
+     * Constructor per defecte classe Controlador.
+     */
     public Controlador(){
         this.dades=new Dades();
     }
@@ -65,10 +68,9 @@ public class Controlador {
      * Guarda les dades de BibliotecaFixerMultimedia al disc.
      * 
      * @param camiDesti path on es guardaran les dades
-     * @throws edu.ub.prog2.utils.AplicacioException
      * @throws java.io.IOException
      */
-    public void guardarDadesDisc(String camiDesti) throws AplicacioException, IOException{
+    public void guardarDadesDisc(String camiDesti) throws IOException{
         this.dades.guardar(camiDesti);
     }
     
@@ -76,25 +78,38 @@ public class Controlador {
      * Carrega les dades d'un determinat path a BibliotecaFitxerMultimedia.
      *
      * @param camiOrigen path d'on es carregaran les dades per BibliotectaFitxersMultimedia
-     * @throws edu.ub.prog2.utils.AplicacioException
-     * @throws java.io.IOException
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException
      */
-    public void carregarDadesDisc(String camiOrigen) throws AplicacioException, IOException, FileNotFoundException, ClassNotFoundException{
+    public void carregarDadesDisc(String camiOrigen) throws FileNotFoundException, IOException, ClassNotFoundException{
         this.dades.carregar(camiOrigen);
     }
-
+    
+    /**
+     * Mostra per pantalla les path contenides.
+     * 
+     * @return string amb les path
+     */
     public String mostrarCamins() {
         return this.dades.mostrarCamins();
     }
     
+    /**
+     * Comprova si dades és buida.
+     * 
+     * @return true: és buida   false: no és buida
+     */
     public boolean isEmpty(){
         return this.dades.isEmpty();
     }
     
+    /**
+     * Indica si les dades són borrables.
+     * 
+     * @param i l'id de les dades
+     * @return  true: borrable  false: no borrable
+     */
     public boolean isRemovable(int i){
         return this.dades.isRemovable(i);
     }
-    
 }

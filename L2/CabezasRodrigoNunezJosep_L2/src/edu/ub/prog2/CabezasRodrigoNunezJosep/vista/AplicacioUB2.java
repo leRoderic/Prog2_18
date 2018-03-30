@@ -3,6 +3,7 @@ import edu.ub.prog2.utils.Menu;
 import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Controlador;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class AplicacioUB2 {
@@ -18,7 +19,7 @@ public class AplicacioUB2 {
         this.controlador=new Controlador();
     }
     
-    public void gestioAplicacioUB(Scanner sc) throws AplicacioException{
+    public void gestioAplicacioUB(Scanner sc) throws AplicacioException, ClassNotFoundException{
         Menu<OpcionsPrincipal> menu=new Menu<OpcionsPrincipal>("Menú principal",OpcionsPrincipal.values());
         menu.setDescripcions(descPrincipal);
         OpcionsPrincipal opcio = null;
@@ -35,7 +36,7 @@ public class AplicacioUB2 {
                         System.out.println("\nIntrodueix el camí del fitxer a on guardar: ");
                         String camiDesti=sc.nextLine();
                         this.controlador.guardarDadesDisc(camiDesti);
-                    }catch(AplicacioException e){}
+                    }catch(IOException e){}
                     break;
                 case PRINCIPAL_RECUPERAR:
                     try{
@@ -43,7 +44,7 @@ public class AplicacioUB2 {
                         System.out.println("\nIntrodueix el camí del fitxer d'on carregar: ");
                         String camiOrigen=sc.nextLine();
                         this.controlador.carregarDadesDisc(camiOrigen);
-                    }catch(AplicacioException e){}
+                    }catch(IOException e){}
                     break;                
                 case PRINCIPAL_SORTIR:
                     System.out.println("\nFins aviat!\n");

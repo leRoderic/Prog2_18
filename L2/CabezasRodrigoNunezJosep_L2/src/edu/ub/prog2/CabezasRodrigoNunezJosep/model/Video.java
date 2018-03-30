@@ -24,27 +24,49 @@ public class Video extends FitxerReproduible {
         this.fps = fps;
     }
     
+    /**
+     * Retorna la alçada del video
+     * 
+     * @return alcada la alcaçada del video
+     */
     public int getAlcada(){
         return this.alcada;
     }
     
+    /**
+     * Retorna la amplada del video.
+     * 
+     * @return amplada  la amplada del video
+     */
     public int getAmplada(){
         return this.amplada;
     }
     
+    /**
+     * Retorna els fps' del video
+     * 
+     * @return fps els fps'
+     */
     public float getFps(){
         return this.fps;
     }
     
+    /**
+     * ToString de la classe Video.
+     * 
+     * @return string amb el resum dels fitxers
+     */
     @Override
     public String toString(){
         String retorn=super.toString()+"alçada = "+this.getAlcada()+"\namplada = "+this.getAmplada()+"\nfps = "+this.getFps()+"\n";
         return retorn;
     }
     
+    /**
+     * Reprodueix el vídeo.
+     */
     @Override
     public void reproduir(){
-        // TO DO
+        // TO DO -> LLIURAMENT 3
     }
-    
 }

@@ -19,7 +19,6 @@ public class CarpetaFitxers {
      */
     public int getSize(){        
         return this.carpeta.size();
-        
     }
     
     /**
@@ -90,6 +89,11 @@ public class CarpetaFitxers {
         return this.getSize() == 0;
     }
     
+    /**
+     * ToString de la classe CarpetaFitxers.
+     * 
+     * @return string amb resum de la carpeta
+     */
     @Override
     public String toString(){
         if(this.isEmpty()){
@@ -132,5 +136,4 @@ public class CarpetaFitxers {
         }
         return found;
     }
-    
 }

@@ -24,23 +24,40 @@ public class Audio extends FitxerReproduible {
         this.fitxerImatge = fitxerImatge;
     }
     
+    /**
+     * Getter de la velocitat.
+     * 
+     * @return kpbs la velocitat del audio
+     */
     public int getKbps(){
         return this.kbps;
     }
     
+    /**
+     * Getter de la caratula.
+     * 
+     * @return File el fitxer imatge del audio
+     */
     public File getImatge(){
         return this.fitxerImatge;
     }
     
+    /**
+     * ToString de la classe Audio.
+     * 
+     * @return string amb el resum de les dades
+     */
     @Override
     public String toString(){
         String retorn=super.toString()+"kbps = "+this.getKbps()+"\n";
         return retorn;
     }
     
+    /**
+     * Reprodueix l'audio
+     */
     @Override
     public void reproduir(){
-        // TO DO
+        // TO DO -> LLIURAMENT 3
     }
-    
 }

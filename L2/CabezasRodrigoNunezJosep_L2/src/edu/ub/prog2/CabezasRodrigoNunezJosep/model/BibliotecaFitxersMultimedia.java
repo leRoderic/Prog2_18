@@ -45,8 +45,13 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers implements Seria
         }
     }
     
+    /**
+     * Indica si el fitxer és pot borrar.
+     * 
+     * @param i id del fitxer
+     * @return  true: borrable  false: no borrable
+     */
     public boolean isRemovable(int i){
         return ((i<this.getSize())&&(i>-1));
-    }
-    
+    }   
 }
