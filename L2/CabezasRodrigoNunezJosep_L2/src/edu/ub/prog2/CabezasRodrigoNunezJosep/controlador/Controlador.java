@@ -68,9 +68,10 @@ public class Controlador {
      * Guarda les dades de BibliotecaFixerMultimedia al disc.
      * 
      * @param camiDesti path on es guardaran les dades
+     * @throws edu.ub.prog2.utils.AplicacioException
      * @throws java.io.IOException
      */
-    public void guardarDadesDisc(String camiDesti) throws IOException{
+    public void guardarDadesDisc(String camiDesti) throws AplicacioException, IOException{
         this.dades.guardar(camiDesti);
     }
     
@@ -78,10 +79,12 @@ public class Controlador {
      * Carrega les dades d'un determinat path a BibliotecaFitxerMultimedia.
      *
      * @param camiOrigen path d'on es carregaran les dades per BibliotectaFitxersMultimedia
+     * @throws edu.ub.prog2.utils.AplicacioException
+     * @throws java.io.IOException
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException
      */
-    public void carregarDadesDisc(String camiOrigen) throws FileNotFoundException, IOException, ClassNotFoundException{
+    public void carregarDadesDisc(String camiOrigen) throws AplicacioException, FileNotFoundException, IOException, ClassNotFoundException{
         this.dades.carregar(camiOrigen);
     }
     

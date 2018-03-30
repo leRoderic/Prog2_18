@@ -108,7 +108,11 @@ public class Dades implements Serializable{
         ObjectOutputStream os;
         try (FileOutputStream fileStream = new FileOutputStream(desti)) {
             os = new ObjectOutputStream(fileStream);
-            os.writeObject(this.biblioteca);
+            for(int i=0;i<this.biblioteca.getSize();i++){
+                FitxerMultimedia guardo=this.biblioteca.getAt(i);
+                os.writeObject(guardo);
+            }
+            os.writeObject(null);
         }
         os.close();
     }
@@ -120,13 +124,18 @@ public class Dades implements Serializable{
      * @throws FileNotFoundException
      * @throws IOException
      * @throws ClassNotFoundException 
+     * @throws edu.ub.prog2.utils.AplicacioException 
      */
-    public void carregar(String origen) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public void carregar(String origen) throws FileNotFoundException, IOException, ClassNotFoundException, AplicacioException {
         ObjectInputStream ois;
         try (FileInputStream fileStream = new FileInputStream(origen)) {
             ois = new ObjectInputStream(fileStream);
-            this.biblioteca=(BibliotecaFitxersMultimedia)ois.readObject();
+            Object carrego=ois.readObject();
+            while (carrego!=null){
+                this.biblioteca.addFitxer((FitxerMultimedia)carrego);
+                carrego=ois.readObject();
+            }
         }
-       ois.close();
+        ois.close();
     }
 }
