@@ -1,17 +1,54 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Dades implements Serializable{
     
     private final BibliotecaFitxersMultimedia biblioteca;
+    private final ArrayList<AlbumFitxersMultimedia> albums;
     
     /**
      * Constructor per defecte.
      */
     public Dades(){
         this.biblioteca=new BibliotecaFitxersMultimedia();
+        this.albums=new ArrayList<>();
     }
+    
+    public void addAlbum(String titol){
+        albums.add(new AlbumFitxersMultimedia(titol));    
+    }
+    
+    public void addAlbum(String titol,int i){
+        albums.add(new AlbumFitxersMultimedia(titol,i));
+    }
+    
+    public String mostrarAlbum(int i){
+        return this.albums.get(i).toString();
+    }
+    
+    public String mostrarAlbums(){
+        if(this.albums.size()==0){
+            return "No hi ha cap àlbum.\n\n";
+        }
+        String resum = "Àlbums:\n==============\n\n";
+        for (int i=0;i<this.albums.size();i++){
+            resum=resum+"["+(i+1)+"] "+this.albums.get(i).getTitol()+"\n";
+        }
+        return resum;
+    }
+    
+    /*public String caminsAlbums(){
+        if(this.albums.size()==0){
+            return "No hi ha cap àlbum.\n\n";
+        }
+        String resum = "Àlbums:\n==============\n\n";
+        for (int i=0;i<this.albums.size();i++){
+            resum=resum+"["+(i+1)+"] "+this.albums.get(i).getTitol()+"\n";
+        }
+        return resum;
+    }*/
     
     /**
      * Donat un id, esborra el fitxer corresponent.

@@ -214,11 +214,29 @@ public class AplicacioUB3 {
             switch(opcio) {
                 case ALBUM_AFEGIR:
                     System.out.println("\nHas triat Afegir un nou àlbum.\n");
-                    //gestioAfegir();
+                    System.out.println("\nIntrodueix el nom de l'àlbum: ");
+                    String titol=sc.nextLine();
+                    System.out.println("\nVols que la capacitat de l'àlbum sigui diferent a 10 fitxers? (y/n) ");
+                    String resposta=sc.nextLine();
+                    while((!(resposta.equals("n")))&&(!(resposta.equals("y")))){
+                        System.out.println("\nIntrodueix 'y' o 'n' ");
+                        resposta=sc.nextLine();
+                    }
+                    if (resposta.equals("y")){
+                        System.out.println("\nIntrodueix el número de fitxers: ");
+                        int numero=sc.nextInt();
+                        while(numero<=0){                
+                            System.out.println("\nIntrodueix un número més gran que zero: ");
+                            numero=sc.nextInt();
+                        }
+                        this.controlador.addAlbum(titol,numero);
+                    }else{
+                        this.controlador.addAlbum(titol);                    
+                    }
                     break;
                 case ALBUM_MOSTRAR:
                     System.out.println("\nHas triat Mostrar el conjunt dels àlbums.\n");
-                    //System.out.print(this.controlador.mostrarBiblioteca());
+                    System.out.print(this.controlador.mostrarAlbums());
                     break;
                 case ALBUM_ELIMINAR:
                     System.out.println("\nHas triat Eliminar un dels àlbums existents.\n");

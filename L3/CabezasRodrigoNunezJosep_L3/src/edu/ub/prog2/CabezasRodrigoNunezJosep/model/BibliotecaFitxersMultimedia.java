@@ -46,7 +46,7 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers implements Seria
     }
     
     /**
-     * Indica si el fitxer és pot borrar.
+     * Indica si el fitxer es pot borrar.
      * 
      * @param i id del fitxer
      * @return  true: borrable  false: no borrable

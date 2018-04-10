@@ -114,4 +114,17 @@ public class Controlador {
     public boolean isRemovable(int i){
         return this.dades.isRemovable(i);
     }
+
+    public void addAlbum(String titol, int numero) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void addAlbum(String titol) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean mostrarAlbums() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
