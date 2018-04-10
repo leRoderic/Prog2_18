@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Controlador {
-    private Dades dades;
+    private final Dades dades;
     
     /**
      * Constructor per defecte classe Controlador.
