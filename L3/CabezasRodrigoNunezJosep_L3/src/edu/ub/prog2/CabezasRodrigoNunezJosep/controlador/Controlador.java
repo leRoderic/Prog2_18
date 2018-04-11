@@ -1,18 +1,39 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.controlador;
 import edu.ub.prog2.CabezasRodrigoNunezJosep.model.Dades;
+import edu.ub.prog2.CabezasRodrigoNunezJosep.model.EscoltadorReproduccio;
+import edu.ub.prog2.CabezasRodrigoNunezJosep.model.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
-//import edu.ub.prog2.utils.InControlador;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import edu.ub.prog2.utils.InControlador;
+import java.util.List;
 
-public class Controlador /*implements InControlador*/{
-    private final Dades dades;
+public class Controlador implements InControlador{
+    private Dades dades;
+    private Reproductor reproductor;
+    private final EscoltadorReproduccio escoltador;
     
     /**
      * Constructor per defecte classe Controlador.
      */
     public Controlador(){
         this.dades=new Dades();
+        this.escoltador=new EscoltadorReproduccio();
+        this.reproductor=new Reproductor(this.escoltador);
+    }
+    
+    public void setContinu(boolean state){
+        this.escoltador.setCiclica(state);
+        this.reproductor=new Reproductor(this.escoltador);
+        this.setReproductor();
+    }
+    
+    public void setAleatori(boolean state){
+        this.escoltador.setAleatoria(state);
+        this.reproductor=new Reproductor(this.escoltador);
+        this.setReproductor();
+    }
+    
+    public void setReproductor(){
+        this.dades.setReproductor(this.reproductor);
     }
     
     /**
@@ -27,8 +48,13 @@ public class Controlador /*implements InControlador*/{
      * @param fps els fps' del video
      * @throws edu.ub.prog2.utils.AplicacioException
      */
+    @Override
     public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException{
-        this.dades.afegirVideo(path,nomVideo,codec,durada,alcada,amplada,fps);
+        this.dades.afegirVideo(path,nomVideo,codec,durada,alcada,amplada,fps,this.getReproductor());
+    }
+    
+    public Reproductor getReproductor(){
+        return this.reproductor;
     }
     
     /**
@@ -42,8 +68,9 @@ public class Controlador /*implements InControlador*/{
      * @param kbps velocitat del audio
      * @throws edu.ub.prog2.utils.AplicacioException
      */
-    public void afegirAudio(String cami, String nomAudio, String codec, float durada, String camiImatge, int kbps) throws AplicacioException{
-        this.dades.afegirAudio(cami,nomAudio,codec,durada,camiImatge,kbps);
+    @Override
+    public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException{
+        this.dades.afegirAudio(cami,nomAudio,codec,durada,camiImatge,kbps,this.getReproductor());
     }
     
     /**
@@ -51,8 +78,9 @@ public class Controlador /*implements InControlador*/{
      * 
      * @return list llista amb el contingut de la carpeta
      */
-    public String mostrarBiblioteca(){
-        return this.dades.toString();
+    @Override
+    public List<String> mostrarBiblioteca(){
+        return this.dades.mostrarBiblioteca();
     }
     
     /**
@@ -60,6 +88,7 @@ public class Controlador /*implements InControlador*/{
      * 
      * @param id el id del fitxer a eliminar
      */
+    @Override
     public void esborrarFitxer(int id){
         this.dades.esborrarFitxer(id);
     }
@@ -69,9 +98,9 @@ public class Controlador /*implements InControlador*/{
      * 
      * @param camiDesti path on es guardaran les dades
      * @throws edu.ub.prog2.utils.AplicacioException
-     * @throws java.io.IOException
      */
-    public void guardarDadesDisc(String camiDesti) throws AplicacioException, IOException{
+    @Override
+    public void guardarDadesDisc(String camiDesti) throws AplicacioException{
         this.dades.guardar(camiDesti);
     }
     
@@ -80,12 +109,11 @@ public class Controlador /*implements InControlador*/{
      *
      * @param camiOrigen path d'on es carregaran les dades per BibliotectaFitxersMultimedia
      * @throws edu.ub.prog2.utils.AplicacioException
-     * @throws java.io.IOException
-     * @throws java.io.FileNotFoundException
-     * @throws java.lang.ClassNotFoundException
      */
-    public void carregarDadesDisc(String camiOrigen) throws AplicacioException, FileNotFoundException, IOException, ClassNotFoundException{
-        this.dades.carregar(camiOrigen);
+    @Override
+    public void carregarDadesDisc(String camiOrigen) throws AplicacioException{
+        this.dades=this.dades.carregar(camiOrigen);
+        this.dades.setReproductor(this.reproductor);
     }
     
     /**
@@ -93,9 +121,13 @@ public class Controlador /*implements InControlador*/{
      * 
      * @return string amb les path
      */
-    public String mostrarCamins() {
+    public List<String> mostrarCamins() {
         return this.dades.mostrarCamins();
-    }
+    }    
+    
+    public List<String> mostrarCaminsAlbum(String titol){
+        return this.dades.mostrarCaminsAlbum(titol);
+    } 
     
     public boolean anyAlbums(){
         return this.dades.anyAlbums();
@@ -105,12 +137,17 @@ public class Controlador /*implements InControlador*/{
         return this.dades.albumAcotat(i);
     }
     
-    public boolean albumAcotat(int i,int j){
-        return this.dades.albumAcotat(i,j);
+    public boolean albumAcotat(String titol,int j){
+        return this.dades.albumAcotat(titol,j);
     }
     
-    public void esborrarAlbum(int i){
-        this.dades.esborrarAlbum(i);
+    @Override
+    public void esborrarAlbum(String titol) throws AplicacioException {
+        this.dades.esborrarAlbum(titol);
+    }
+        
+    public boolean isEmpty(String titol){
+        return this.dades.isEmpty(titol);
     }
     
     /**
@@ -132,40 +169,93 @@ public class Controlador /*implements InControlador*/{
         return this.dades.isRemovable(i);
     }
 
-    public void addAlbum(String titol, int numero) {
+    public void afegirAlbum(String titol, int numero) {
         this.dades.addAlbum(titol,numero);
     }
 
-    public void addAlbum(String titol) {
+    @Override
+    public void afegirAlbum(String titol) {
         this.dades.addAlbum(titol);
     }
 
-    public String mostrarAlbums() {
+    @Override
+    public List<String> mostrarLlistatAlbums() {
         return this.dades.mostrarAlbums();
     }
     
-    public void setReproductor(){
-        this.dades.setReproductor();
+    @Override
+    public void afegirFitxer(String titol, int i) throws AplicacioException {
+        this.dades.afegirFitxer(titol,i);
     }
     
-    public void albFitxerAdd(int i,int j) throws AplicacioException{
-        this.dades.albFitxerAdd(i,j);
+    @Override
+    public void esborrarFitxer(String titol, int i) throws AplicacioException {
+        this.dades.esborrarFitxer(titol,i);
+    }
+
+    @Override
+    public List<String> mostrarAlbum(String titol) throws AplicacioException {
+        return this.dades.mostrarAlbum(titol);
+    }
+
+    @Override
+    public boolean existeixAlbum(String titol) {
+        return this.dades.existeixAlbum(titol);
+    } 
+
+    @Override
+    public void reproduirFitxer(int i) throws AplicacioException {
+        obrirFinestraReproductor();
+        escoltador.setLlista(this.dades.reproduirFitxer(i));
+        tancarFinestraReproductor();
+    }
+
+    @Override
+    public void reproduirCarpeta() throws AplicacioException {
+        obrirFinestraReproductor();
+        escoltador.setLlista(this.dades.reproduirCarpeta());
+        tancarFinestraReproductor();
+    }
+
+    @Override
+    public void reproduirCarpeta(String titol) throws AplicacioException {
+        obrirFinestraReproductor();
+        escoltador.setLlista(this.dades.reproduirCarpeta(titol));
+        tancarFinestraReproductor();
     }
     
-    public void albFitxerRemove(int i,int j){
-        this.dades.albFitxerRemove(i,j);
+    @Override
+    public void obrirFinestraReproductor() {
+        this.reproductor.open();
+    }
+
+    @Override
+    public void tancarFinestraReproductor() throws AplicacioException {
+        this.reproductor.close();
+    }
+
+    @Override
+    public void reemprenReproduccio() throws AplicacioException {
+        this.reproductor.resume();
+    }
+
+    @Override
+    public void pausaReproduccio() throws AplicacioException {
+        this.reproductor.pause();
+    }
+
+    @Override
+    public void aturaReproduccio() throws AplicacioException {
+        this.reproductor.stop();
+    }
+
+    @Override
+    public void saltaReproduccio() throws AplicacioException {
+        this.escoltador.next();
     }
     
-    public String mostrarAlbum(int i){
-        return this.dades.mostrarAlbum(i);
-    }
-    
-    public String mostrarCaminsAlbum(int i){
-        return this.dades.mostrarCaminsAlbum(i);
-    }
-    
-    public boolean albumEmpty(int i){
-        return this.dades.albumEmpty(i);
+    public String id2Titol(int id){
+        return this.dades.id2Titol(id);
     }
     
 }

@@ -4,7 +4,7 @@ import edu.ub.prog2.utils.Menu;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Controlador;
 import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
 public class AplicacioUB3 {
     
@@ -30,7 +30,7 @@ public class AplicacioUB3 {
         this.sc=new Scanner(System.in);
     }
     
-    public void gestioAplicacioUB() throws AplicacioException, ClassNotFoundException{
+    public void gestioAplicacioUB(){
         Menu<OpcionsPrincipal> menu=new Menu<>("Menú principal",OpcionsPrincipal.values());
         menu.setDescripcions(PRINCIPAL);
         OpcionsPrincipal opcio;
@@ -56,7 +56,7 @@ public class AplicacioUB3 {
                         System.out.println("\nIntrodueix el camí del fitxer a on guardar: ");
                         String camiDesti=sc.nextLine();
                         this.controlador.guardarDadesDisc(camiDesti);
-                    }catch(IOException e){}
+                    }catch(AplicacioException e){}
                     break;
                 case PRINCIPAL_RECUPERAR:
                     try{
@@ -64,7 +64,7 @@ public class AplicacioUB3 {
                         System.out.println("\nIntrodueix el camí del fitxer d'on carregar: ");
                         String camiOrigen=sc.nextLine();
                         this.controlador.carregarDadesDisc(camiOrigen);
-                    }catch(IOException e){}
+                    }catch(AplicacioException e){}
                     break;                
                 case PRINCIPAL_SORTIR:
                     System.out.println("\nFins aviat!\n");
@@ -73,7 +73,7 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsPrincipal.PRINCIPAL_SORTIR);
     }
     
-    public void gestioBiblioteca() throws AplicacioException{
+    public void gestioBiblioteca(){
         Menu<OpcionsBiblio> menu=new Menu<>("Gestió de la biblioteca",OpcionsBiblio.values());
         menu.setDescripcions(BIBLIO);
         OpcionsBiblio opcio;
@@ -87,13 +87,13 @@ public class AplicacioUB3 {
                     break;
                 case BIBLIO_MOSTRAR:
                     System.out.println("\nHas triat Mostrar el contingut de la biblioteca.\n");
-                    System.out.print(this.controlador.mostrarBiblioteca());
+                    imprimir(this.controlador.mostrarBiblioteca());
                     break;
                 case BIBLIO_ELIMINAR:
                     System.out.println("\nHas triat Eliminar un dels fitxers existents a la biblioteca.\n");
                     if (!(this.controlador.isEmpty())){
                         System.out.println("\nAquests són els camins dels fitxers de la biblioteca: ");                    
-                        System.out.print(this.controlador.mostrarCamins());
+                        imprimir(this.controlador.mostrarCamins());
                         System.out.println("\nIntrodueix l'índex del fitxer a eliminar: ");
                         int num=sc.nextInt()-1;
                         while (!(this.controlador.isRemovable(num))){
@@ -112,7 +112,7 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsBiblio.BIBLIO_SORTIR);
     }
     
-    public void gestioAfegir() throws AplicacioException{
+    public void gestioAfegir(){
         Menu<OpcionsAfegir> menu=new Menu<>("Afegir un nou fitxer multimèdia",OpcionsAfegir.values());
         menu.setDescripcions(AFEGIR);
         OpcionsAfegir opcio;
@@ -134,7 +134,7 @@ public class AplicacioUB3 {
                         System.out.println("\nHas triat Afegir un nou fitxer d'àudio.\n");
                         compartit=this.demana();
                         Object[] audio=this.demanaAudio();
-                        this.controlador.afegirAudio((String)compartit[0], (String)compartit[1], (String)compartit[2], (Float)compartit[3], (String)audio[0], (int)audio[1]);
+                        this.controlador.afegirAudio((String)compartit[0], (String)audio[0], (String)compartit[1], (String)compartit[2], (Float)compartit[3], (int)audio[1]);
                     }catch(AplicacioException e){}
                     break;
                 case AFEGIR_SORTIR:
@@ -204,7 +204,7 @@ public class AplicacioUB3 {
         return dades;
     }
     
-    public void gestioAlbums() {
+    public void gestioAlbums(){
         Menu<OpcionsAlbum> menu=new Menu<>("Gestió dels àlbums",OpcionsAlbum.values());
         menu.setDescripcions(ALBUM);
         OpcionsAlbum opcio;
@@ -216,6 +216,10 @@ public class AplicacioUB3 {
                     System.out.println("\nHas triat Afegir un nou àlbum.\n");
                     System.out.println("\nIntrodueix el nom de l'àlbum: ");
                     String titol=sc.nextLine();
+                    while(this.controlador.existeixAlbum(titol)){
+                        System.out.println("\nProva amb un nom d'àlbum que no existeixi encara: ");
+                        titol=sc.nextLine();
+                    }
                     System.out.println("\nVols que la capacitat de l'àlbum sigui diferent a 10 fitxers? (y/n) ");
                     String resposta=sc.nextLine();
                     while((!(resposta.equals("n")))&&(!(resposta.equals("y")))){
@@ -229,27 +233,30 @@ public class AplicacioUB3 {
                             System.out.println("\nIntrodueix un número més gran que zero: ");
                             numero=sc.nextInt();
                         }
-                        this.controlador.addAlbum(titol,numero);
+                        this.controlador.afegirAlbum(titol,numero);
                     }else{
-                        this.controlador.addAlbum(titol);                    
+                        this.controlador.afegirAlbum(titol);                    
                     }
                     break;
                 case ALBUM_MOSTRAR:
                     System.out.println("\nHas triat Mostrar el conjunt dels àlbums.\n");
-                    System.out.print(this.controlador.mostrarAlbums());
+                    imprimir(this.controlador.mostrarLlistatAlbums());
                     break;
                 case ALBUM_ELIMINAR:
                     System.out.println("\nHas triat Eliminar un dels àlbums existents.\n");
                     if (!(this.controlador.anyAlbums())){
                         System.out.println("\nAquests són àlbums de la biblioteca: ");                    
-                        System.out.print(this.controlador.mostrarAlbums());
+                        imprimir(this.controlador.mostrarLlistatAlbums());
                         System.out.println("\nIntrodueix l'índex de l'àlbum a eliminar: ");
                         int num=sc.nextInt()-1;
                         while (!(this.controlador.albumAcotat(num))){
                             System.out.println("\nTorna-ho a provar: ");
                             num=sc.nextInt()-1;
                         }
-                        this.controlador.esborrarAlbum(num);
+                        String number=this.controlador.id2Titol(num);
+                        try{
+                            this.controlador.esborrarAlbum(number);
+                        }catch (AplicacioException e){}
                     }else{
                         System.out.println("\nNo hi ha cap àlbum.\n");
                     }
@@ -258,14 +265,15 @@ public class AplicacioUB3 {
                     System.out.println("\nHas triat Gestionar un dels àlbums.\n");
                     if (!(this.controlador.anyAlbums())){
                         System.out.println("\nAquests són àlbums de la biblioteca: ");                    
-                        System.out.print(this.controlador.mostrarAlbums());
+                        imprimir(this.controlador.mostrarLlistatAlbums());
                         System.out.println("\nIntrodueix l'índex de l'àlbum a gestionar: ");
                         int num=sc.nextInt()-1;
                         while (!(this.controlador.albumAcotat(num))){
                             System.out.println("\nTorna-ho a provar: ");
                             num=sc.nextInt()-1;
                         }
-                        gestioContingut(num);
+                        String number=this.controlador.id2Titol(num);
+                        gestioContingut(number);
                     }else{
                         System.out.println("\nNo hi ha cap àlbum.\n");
                     }
@@ -277,7 +285,7 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsAlbum.ALBUM_SORTIR);
     }
     
-    public void gestioContingut(int number) {
+    public void gestioContingut(String number){
         Menu<OpcionsInclos> menu=new Menu<>("Gestió d'un dels àlbums",OpcionsInclos.values());
         menu.setDescripcions(INCLOS);
         OpcionsInclos opcio;
@@ -289,7 +297,7 @@ public class AplicacioUB3 {
                     System.out.println("\nHas triat Afegir un fitxer multimèdia.\n");
                     if (!(this.controlador.isEmpty())){
                         System.out.println("\nAquests són els camins dels fitxers de la biblioteca: ");                    
-                        System.out.print(this.controlador.mostrarCamins());
+                        imprimir(this.controlador.mostrarCamins());
                         System.out.println("\nIntrodueix l'índex del fitxer a afegir: ");
                         int num=sc.nextInt()-1;
                         while (!(this.controlador.isRemovable(num))){
@@ -297,30 +305,32 @@ public class AplicacioUB3 {
                             num=sc.nextInt()-1;
                         }
                         try{
-                            this.controlador.albFitxerAdd(number,num);                        
-                        }catch(AplicacioException e){
-                            System.out.println(e.getMessage());
-                        }
+                            this.controlador.afegirFitxer(number,num);                        
+                        }catch(AplicacioException e){}
                     }else{
                         System.out.println("\nLa biblioteca és buida. No es pot afegir cap fitxer.\n");
                     }
                     break;
                 case INCLOS_MOSTRAR:
                     System.out.println("\nHas triat Mostrar el contingut de l'àlbum.\n");
-                    System.out.print(this.controlador.mostrarAlbum(number));
+                    try{
+                        imprimir(this.controlador.mostrarAlbum(number));                        
+                    }catch(AplicacioException e){}
                     break;
                 case INCLOS_ELIMINAR:
                     System.out.println("\nHas triat Eliminar un dels fitxers de l'àlbum.\n");
-                    if (!(this.controlador.albumEmpty(number))){
+                    if (!(this.controlador.isEmpty(number))){
                         System.out.println("\nAquests són els camins dels fitxers de l'àlbum: ");                    
-                        System.out.print(this.controlador.mostrarCaminsAlbum(number));
+                        imprimir(this.controlador.mostrarCaminsAlbum(number));
                         System.out.println("\nIntrodueix l'índex del fitxer a eliminar: ");
                         int num=sc.nextInt()-1;
                         while (!(this.controlador.albumAcotat(number,num))){
                             System.out.println("\nTorna-ho a provar: ");
                             num=sc.nextInt()-1;
                         }
-                        this.controlador.albFitxerRemove(number,num);
+                        try{
+                            this.controlador.esborrarFitxer(number,num);
+                        }catch (AplicacioException e){}
                     }else{
                         System.out.println("\nL'àlbum és buit. No es pot esborrar cap fitxer.\n");
                     }
@@ -332,7 +342,7 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsInclos.INCLOS_SORTIR);
     }
     
-    public void gestioReproductor() {
+    public void gestioReproductor(){
         Menu<OpcionsRepro> menu=new Menu<>("Gestió del reproductor",OpcionsRepro.values());
         menu.setDescripcions(REPRO);
         OpcionsRepro opcio;
@@ -342,23 +352,78 @@ public class AplicacioUB3 {
             switch(opcio) {
                 case REPRO_FITXER:
                     System.out.println("\nHas triat Reproduir un fitxer multimèdia.\n");
-                    // TO DO
+                    if (!(this.controlador.isEmpty())){
+                        System.out.println("\nAquests són els camins dels fitxers de la biblioteca: ");                    
+                        imprimir(this.controlador.mostrarCamins());
+                        System.out.println("\nIntrodueix l'índex del fitxer a reproduir: ");
+                        int num=sc.nextInt()-1;
+                        while (!(this.controlador.isRemovable(num))){
+                            System.out.println("\nTorna-ho a provar: ");
+                            num=sc.nextInt()-1;
+                        }
+                        try{
+                            this.controlador.reproduirFitxer(num);
+                        }catch(AplicacioException e){}
+                    }else{
+                        System.out.println("\nLa biblioteca és buida. No es pot reproduir cap fitxer.\n");
+                    }
                     break;
                 case REPRO_BIBLIO:
                     System.out.println("\nHas triat Reproduir el contingut de la biblioteca.\n");
-                    // TO DO
+                    if (!(this.controlador.isEmpty())){
+                        try{
+                            this.controlador.reproduirCarpeta();
+                        }catch(AplicacioException e){}
+                    }else{
+                        System.out.println("\nLa biblioteca és buida. No es pot reproduir cap fitxer.\n");
+                    }
                     break;
                 case REPRO_ALBUM:
                     System.out.println("\nHas triat Reproduir el contingut d'un àlbum.\n");
-                    // TO DO
+                    if (!(this.controlador.anyAlbums())){
+                        System.out.println("\nAquests són àlbums de la biblioteca: ");                    
+                        imprimir(this.controlador.mostrarLlistatAlbums());
+                        System.out.println("\nIntrodueix l'índex de l'àlbum a reproduir: ");
+                        int num=sc.nextInt()-1;
+                        while (!(this.controlador.albumAcotat(num))){
+                            System.out.println("\nTorna-ho a provar: ");
+                            num=sc.nextInt()-1;
+                        }
+                        String number=this.controlador.id2Titol(num);
+                        try{
+                            this.controlador.reproduirCarpeta(number);
+                        }catch(AplicacioException e){}
+                    }else{
+                        System.out.println("\nNo hi ha cap àlbum.\n");
+                    }
                     break;
                 case REPRO_CONT:
                     System.out.println("\nHas triat Modificar la continuïtat de la reproducció.\n");
-                    // TO DO
+                    System.out.println("\nVols que la reproducció sigui en mode continu? (y/n) ");
+                    String resposta=sc.nextLine();
+                    while((!(resposta.equals("n")))&&(!(resposta.equals("y")))){
+                        System.out.println("\nIntrodueix 'y' o 'n' ");
+                        resposta=sc.nextLine();
+                    }
+                    if (resposta.equals("y")){
+                        this.controlador.setContinu(true);
+                    }else{
+                        this.controlador.setContinu(false);                    
+                    }
                     break;
                 case REPRO_ALE:
                     System.out.println("\nHas triat Modificar l'aleatorietat de la reproducció.\n");
-                    // TO DO
+                    System.out.println("\nVols que la reproducció sigui en mode aleatori? (y/n) ");
+                    resposta=sc.nextLine();
+                    while((!(resposta.equals("n")))&&(!(resposta.equals("y")))){
+                        System.out.println("\nIntrodueix 'y' o 'n' ");
+                        resposta=sc.nextLine();
+                    }
+                    if (resposta.equals("y")){
+                        this.controlador.setAleatori(true);
+                    }else{
+                        this.controlador.setAleatori(false);                    
+                    }
                     break;
                 case REPRO_CURS:
                     System.out.println("\nHas triat Gestionar la reproducció en curs.\n");
@@ -381,25 +446,39 @@ public class AplicacioUB3 {
             switch(opcio) {
                 case CURS_PLAY:
                     System.out.println("\nHas triat Reactivar la reproducció.\n");
-                    // TO DO
+                    try{
+                        this.controlador.reemprenReproduccio();
+                    }catch (AplicacioException e){}
                     break;
                 case CURS_PAUSE:
                     System.out.println("\nHas triat Pausar la reproducció.\n");
-                    // TO DO
+                    try{
+                        this.controlador.pausaReproduccio();
+                    }catch (AplicacioException e){}
                     break;
                 case CURS_STOP:
                     System.out.println("\nHas triat Parar la reproducció.\n");
-                    // TO DO
+                    try{
+                        this.controlador.aturaReproduccio();
+                    }catch (AplicacioException e){}
                     break;
                 case CURS_NEXT:
                     System.out.println("\nHas triat Saltar al següent fitxer.\n");
-                    // TO DO
+                    try{
+                        this.controlador.saltaReproduccio();
+                    }catch (AplicacioException e){}
                     break;
                 case CURS_SORTIR:
                     System.out.println("\nHas triat Tornar al menú anterior.\n");
                     break;
             }
         } while(opcio!=OpcionsCurs.CURS_SORTIR);
+    }
+    
+    public void imprimir(List<String> llista){
+        for(int i=0;i<llista.size();i++){
+            System.out.print(llista.get(i));
+        }
     }
     
 }

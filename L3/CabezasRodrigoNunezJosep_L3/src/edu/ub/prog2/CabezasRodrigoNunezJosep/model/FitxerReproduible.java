@@ -5,7 +5,7 @@ public abstract class FitxerReproduible extends FitxerMultimedia{
     
     private final String codec;
     private final float durada;
-    private transient final Reproductor reproductor;
+    private transient Reproductor reproductor;
    
     /**
      * Constructor de fitxer reproduible
@@ -35,6 +35,10 @@ public abstract class FitxerReproduible extends FitxerMultimedia{
     
     public float getDurada(){
         return this.durada;
+    }
+    
+    public void setReproductor(Reproductor reproductor){
+        this.reproductor=reproductor;
     }
     
     @Override

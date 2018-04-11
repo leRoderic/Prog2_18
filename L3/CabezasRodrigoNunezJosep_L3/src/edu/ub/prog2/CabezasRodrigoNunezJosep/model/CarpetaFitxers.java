@@ -1,8 +1,12 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
+import edu.ub.prog2.utils.AplicacioException;
 import java.util.ArrayList;
-//import edu.ub.prog2.utils.InFileFolder
+import java.util.List;
+import edu.ub.prog2.utils.InFileFolder;
+import java.io.File;
+import java.io.Serializable;
 
-public class CarpetaFitxers /*implements InFileFolder*/{
+public class CarpetaFitxers implements InFileFolder,Serializable{
     protected ArrayList<FitxerMultimedia> carpeta;
     
     /**
@@ -18,45 +22,10 @@ public class CarpetaFitxers /*implements InFileFolder*/{
      * 
      * @return nombre elements
      */
+    @Override
     public int getSize(){        
         return this.carpeta.size();
-    }
-    
-    /**
-     * Afegeix fitxer a la carpeta.
-     * 
-     * @param fitxer el fitxer a afegir
-     */
-    public void afegirFitxer(FitxerMultimedia fitxer){
-        for(int i=0;i<this.getSize();i++){
-            if(this.getAt(i).equals(fitxer)){
-                System.out.print("\n\033[31mError! El fitxer ja es troba a la carpeta.\033[0m\n");
-            }
-        }
-        this.carpeta.add(fitxer);
-        System.out.print("\n\033[32mFitxer afegit amb èxit.\033[0m\n");
-    }
-    
-    /**
-     * Suprimeix el fitxer de la carpeta.
-     * 
-     * @param fitxer el fitxer a borrar
-     */
-    public void eliminarFitxer(FitxerMultimedia fitxer){
-        boolean removed = false;
-        int i =0;
-        while((i<this.getSize())&&(!(removed))){
-            if (fitxer.equals(this.getAt(i))){
-                this.carpeta.remove(i);
-                removed = true;
-            }
-            i++;
-        }
-        if(!removed){
-            System.out.print("\n\033[31mError! L'arxiu no existeix o no es troba en aquesta carpeta.\033[0m\n");
-        }
-        System.out.print("\n\033[32mFitxer eliminat amb èxit.\033[0m\n");
-    }
+    }    
     
     /**
      * Retorna el fitxer de una posició donada.
@@ -64,6 +33,7 @@ public class CarpetaFitxers /*implements InFileFolder*/{
      * @param position la posició de la carpeta
      * @return el fitxer de la carpeta
      */
+    @Override
     public FitxerMultimedia getAt(int position){
         return this.carpeta.get(position);
     }
@@ -72,6 +42,7 @@ public class CarpetaFitxers /*implements InFileFolder*/{
      * Buidar la carpeta de fitxers.
      * 
      */
+    @Override
     public void clear(){
         this.carpeta.clear();        
     }
@@ -86,19 +57,21 @@ public class CarpetaFitxers /*implements InFileFolder*/{
     }
     
     /**
-     * ToString de la classe CarpetaFitxers.
+     * Sortida per imprimir usant toString de cada fitxer.
      * 
-     * @return string amb resum de la carpeta
+     * @return llista d'string amb resum de la carpeta
      */
-    @Override
-    public String toString(){
+    public List<String> write(){
+        List<String> resum=new ArrayList<>();
         if(this.isEmpty()){
-            return "La carpeta és buida.\n\n";
+            resum.add("\nLa carpeta és buida.\n\n");
+        }else{
+            resum.add("\nCarpeta fitxers:\n==============\n");
+            for (int i=0;i<carpeta.size();i++){
+                resum.add("["+(i+1)+"] "+this.getAt(i).toString()+"\n");
+            }        
         }
-        String resum = "Carpeta fitxers:\n==============\n\n";
-        for (int i=0;i<carpeta.size();i++){
-            resum=resum+"["+(i+1)+"] "+this.getAt(i).toString()+"\n";
-        }
+        resum.add("\n");
         return resum;
     }
     
@@ -107,11 +80,13 @@ public class CarpetaFitxers /*implements InFileFolder*/{
      * 
      * @return llista de camins absoluts dels fitxers
      */
-    public String mostrarCamins(){        
-        String resum = "\n==============\n\n";
+    public List<String> writeCamins(){        
+        List<String> resum =new ArrayList<>();
+        resum.add("\n==============\n");
         for (int i=0;i<carpeta.size();i++){
-            resum=resum+"["+(i+1)+"] "+this.getAt(i).getCamiAbsolut()+"\n";
+            resum.add("["+(i+1)+"] "+this.getAt(i).getCamiAbsolut()+"\n");
         }
+        resum.add("\n");
         return resum;
     }
     
@@ -132,4 +107,53 @@ public class CarpetaFitxers /*implements InFileFolder*/{
         }
         return found;
     }
+    
+    public boolean acotat(int i){
+        return ((i<this.getSize())&&(i>-1));
+    }
+
+    /**
+     * Permet afegir un fitxer a la biblioteca.
+     * 
+     * @param file fitxer a afegir
+     * @throws edu.ub.prog2.utils.AplicacioException
+     */
+    @Override
+    public void addFitxer(File file) throws AplicacioException{
+        FitxerMultimedia fitxer=(FitxerMultimedia) file;
+        if((fitxer.exists()) && (!(fitxer.isDirectory()))){
+            if (this.contains(fitxer)){
+                throw new AplicacioException("Aquest fitxer ja es troba a la carpeta.");
+            }else{
+                this.carpeta.add(fitxer);
+            }
+        }else{
+            throw new AplicacioException("Aquest fitxer no existeix.");
+        }
+    }
+
+    @Override
+    public boolean isFull(){
+        return false;
+    }
+    
+    /**
+     * Elimina un fitxer de la biblioteca.
+     * 
+     * @param file el fitxer a eliminar
+     */
+    @Override
+    public void removeFitxer(File file){
+        FitxerMultimedia fitxer=(FitxerMultimedia) file;
+        boolean removed = false;
+        int i =0;
+        while((i<this.getSize())&&(!(removed))){
+            if (fitxer.equals(this.getAt(i))){
+                this.carpeta.remove(i);
+                removed = true;
+            }
+            i++;
+        }
+    }
+    
 }

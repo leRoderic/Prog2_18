@@ -59,6 +59,6 @@ public class Audio extends FitxerReproduible {
      */
     @Override
     public void reproduir() throws AplicacioException{
-        this.getReproductor().reprodueix(this,fitxerImatge);
+        this.getReproductor().reprodueix(this,this.getImatge());
     }
 }

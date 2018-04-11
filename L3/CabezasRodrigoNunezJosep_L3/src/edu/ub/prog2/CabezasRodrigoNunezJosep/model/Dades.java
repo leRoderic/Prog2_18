@@ -2,6 +2,7 @@ package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Dades implements Serializable{
     
@@ -28,47 +29,61 @@ public class Dades implements Serializable{
         albums.add(new AlbumFitxersMultimedia(titol,i));
     }
     
-    public String mostrarAlbum(int i){
-        return this.albums.get(i).toString();
+    public List<String> mostrarAlbum(String titol){
+        return this.albums.get(titol2Id(titol)).write();
     }
     
-    public String mostrarCaminsAlbum(int i){
-        return this.albums.get(i).mostrarCamins();
+    public List<String> mostrarCaminsAlbum(String titol){
+        return this.albums.get(titol2Id(titol)).writeCamins();
     }
     
-    public String mostrarAlbums(){
+    public List<String> mostrarAlbums(){
+        List<String> resum=new ArrayList<>();
         if(this.albums.isEmpty()){
-            return "No hi ha cap àlbum.\n\n";
+            resum.add("\nNo hi ha cap àlbum.\n\n");
+        }else{
+            resum.add("\nÀlbums:\n==============\n\n");
+            for (int i=0;i<this.albums.size();i++){
+                resum.add("["+(i+1)+"] "+this.albums.get(i).getTitol()+"\n");
+            }        
         }
-        String resum = "Àlbums:\n==============\n\n";
-        for (int i=0;i<this.albums.size();i++){
-            resum=resum+"["+(i+1)+"] "+this.albums.get(i).getTitol()+"\n";
-        }
+        resum.add("\n");
         return resum;
     }
     
-    public boolean albumEmpty(int i){
-        return this.albums.get(i).isEmpty();
+    public boolean isEmpty(String titol){
+        return this.albums.get(titol2Id(titol)).isEmpty();
     }
     
     public boolean albumAcotat(int i){
         return ((i<this.albums.size())&&(i>-1));
     }
     
-    public void esborrarAlbum(int i){
-        this.albums.remove(i);
+    public void esborrarAlbum(String titol){
+        this.albums.remove(titol2Id(titol));
     }
     
-    public boolean albumAcotat(int i, int j){
-        return this.albums.get(i).acotat(j);
+    public boolean existeixAlbum(String titol) {
+        int i=0;
+        while(i<this.albums.size()){
+            if(titol.equals(this.albums.get(i).getTitol())){
+                return true;
+            }
+            i++;
+        }
+        return false;
+    } 
+    
+    public boolean albumAcotat(String titol, int j){
+        return this.albums.get(titol2Id(titol)).acotat(j);
     }
     
-    public void albFitxerAdd(int i, int j) throws AplicacioException{
-        this.albums.get(i).addFitxer(this.biblioteca.getAt(j));
+    public void afegirFitxer(String titol, int i) throws AplicacioException{
+        this.albums.get(titol2Id(titol)).addFitxer(this.biblioteca.getAt(i));
     }
     
-    public void albFitxerRemove(int i, int j){
-        this.albums.get(i).removeFitxer(j);
+    public void esborrarFitxer(String titol, int i){
+        this.albums.get(titol2Id(titol)).removeFitxer(i);
     }
     
     /**
@@ -80,7 +95,7 @@ public class Dades implements Serializable{
         FitxerMultimedia fitxer=this.biblioteca.getAt(i);
         this.biblioteca.removeFitxer(fitxer);
         for(int j =0;j<this.albums.size();j++){
-            this.albums.get(j).removeFitxers(fitxer);
+            this.albums.get(j).removeFitxer(fitxer);
         }
     }
     
@@ -89,9 +104,8 @@ public class Dades implements Serializable{
      * 
      * @return resum de les dades de la bibioteca
      */
-    @Override
-    public String toString(){
-        return this.biblioteca.toString();
+    public List<String> mostrarBiblioteca(){
+        return this.biblioteca.write();
     }
     
     /**
@@ -110,7 +124,7 @@ public class Dades implements Serializable{
      * @return  true: pot ser borrat    false: no és borrable
      */
     public boolean isRemovable(int i){
-        return this.biblioteca.isRemovable(i);
+        return this.biblioteca.acotat(i);
     }
     
     /**
@@ -118,8 +132,8 @@ public class Dades implements Serializable{
      * 
      * @return path dels fitxers
      */
-    public String mostrarCamins() {
-        return this.biblioteca.mostrarCamins();
+    public List<String> mostrarCamins() {
+        return this.biblioteca.writeCamins();
     }
     
     /**
@@ -131,10 +145,10 @@ public class Dades implements Serializable{
      * @param durada    duració del audio
      * @param camiImatge path de la caratula
      * @param kbps      velocitat del audio
+     * @param r         reproductor
      * @throws AplicacioException 
      */
-    public void afegirAudio(String cami, String nomAudio, String codec, float durada, String camiImatge, int kbps) throws AplicacioException {
-        Reproductor r=new Reproductor();
+    public void afegirAudio(String cami, String nomAudio, String codec, float durada, String camiImatge, int kbps, Reproductor r) throws AplicacioException {
         File image=new File(camiImatge);
         Audio fitxer=new Audio(cami,nomAudio,codec,durada,image,kbps,r);
         this.biblioteca.addFitxer(fitxer);
@@ -150,10 +164,10 @@ public class Dades implements Serializable{
      * @param alcada    alçada del video
      * @param amplada   amplada del video
      * @param fps       els fps
+     * @param r         reproductor
      * @throws AplicacioException 
      */
-    public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException {        
-        Reproductor r=new Reproductor();
+    public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps, Reproductor r) throws AplicacioException {        
         Video fitxer=new Video(path,nomVideo,codec,durada,alcada,amplada,fps,r);
         this.biblioteca.addFitxer(fitxer);
     }
@@ -161,46 +175,97 @@ public class Dades implements Serializable{
     /**
      * Guarda les dades al disc.
      * 
-     * @param desti     path on es guardarà
-     * @throws FileNotFoundException
-     * @throws IOException 
+     * @param desti     path on es guardarà 
+     * @throws edu.ub.prog2.utils.AplicacioException 
      */
-    public void guardar(String desti) throws FileNotFoundException, IOException {
-        ObjectOutputStream os;
-        try (FileOutputStream fileStream = new FileOutputStream(desti)) {
-            os = new ObjectOutputStream(fileStream);
-            for(int i=0;i<this.biblioteca.getSize();i++){
-                FitxerMultimedia guardo=this.biblioteca.getAt(i);
-                os.writeObject(guardo);
+    public void guardar(String desti) throws AplicacioException{
+        try{
+            ObjectOutputStream os;
+            try (FileOutputStream fileStream = new FileOutputStream(desti)) {
+                os = new ObjectOutputStream(fileStream);
+                /*for(int i=0;i<this.biblioteca.getSize();i++){
+                    FitxerMultimedia guardo=this.biblioteca.getAt(i);
+                    os.writeObject(guardo);
+                }
+                for(int j=0;j<this.albums.size();j++){
+                    AlbumFitxersMultimedia guarda=this.albums.get(j);
+                    os.writeObject(guarda);
+                }*/
+                os.writeObject(this);
+                fileStream.close();
             }
-            os.writeObject(null);
-        }
-        os.close();
+            os.close();        
+        }catch(FileNotFoundException e1){
+            throw new AplicacioException("Fitxer no trobat.");
+        }catch(IOException e2){
+            throw new AplicacioException("Problema amb el tractament del fitxer.");
+        }        
     }
     
     /**
      * Carrega els fitxers.
      * 
      * @param origen    path d'on carregar les dades.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ClassNotFoundException 
+     * @return model    Dades a carregar  
      * @throws edu.ub.prog2.utils.AplicacioException 
      */
-    public void carregar(String origen) throws FileNotFoundException, IOException, ClassNotFoundException, AplicacioException {
-        ObjectInputStream ois;
-        try (FileInputStream fileStream = new FileInputStream(origen)) {
-            ois = new ObjectInputStream(fileStream);
-            Object carrego=ois.readObject();
-            while (carrego!=null){
-                this.biblioteca.addFitxer((FitxerMultimedia)carrego);
-                carrego=ois.readObject();
+    public Dades carregar(String origen) throws AplicacioException {
+        try{
+            Dades model;
+            ObjectInputStream ois;
+            try (FileInputStream fileStream = new FileInputStream(origen)) {
+                ois = new ObjectInputStream(fileStream);
+                model=(Dades)ois.readObject();
+                fileStream.close();
             }
+            ois.close();
+            return model;
+        }catch(FileNotFoundException e1){
+            throw new AplicacioException("Fitxer no trobat.");
+        }catch(IOException e2){
+            throw new AplicacioException("Problema amb el tractament del fitxer.");
+        }catch(ClassNotFoundException e3){
+            throw new AplicacioException("Problema amb el casting dels objectes.");
         }
-        ois.close();
     }
     
-    public void setReproductor(){
-        //TO DO
+    public void setReproductor(Reproductor r){
+        for(int i=0;i<this.biblioteca.getSize();i++){
+            FitxerReproduible elem=(FitxerReproduible)this.biblioteca.getAt(i);
+            elem.setReproductor(r);
+        }
     }
+    
+    public String id2Titol(int id){
+        return this.albums.get(id).getTitol();
+    }
+    
+    public int titol2Id(String titol){
+        boolean found=false;
+        int ret=-1;
+        int i=0;
+        while((i<this.albums.size())&&(!(found))){
+            if(titol.equals(this.albums.get(i).getTitol())){
+                ret=i;
+                found=true;
+            }
+            i++;
+        }
+        return ret;
+    }
+
+    public CarpetaFitxers reproduirFitxer(int i) throws AplicacioException {
+        CarpetaFitxers retorn=new CarpetaFitxers();
+        retorn.addFitxer(this.biblioteca.getAt(i));
+        return retorn;
+    }
+
+    public CarpetaFitxers reproduirCarpeta() {
+        return this.biblioteca;
+    }
+
+    public CarpetaFitxers reproduirCarpeta(String titol) {
+        return this.albums.get(titol2Id(titol));
+    }
+            
 }

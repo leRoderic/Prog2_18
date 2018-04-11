@@ -1,6 +1,8 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
 import edu.ub.prog2.utils.AplicacioException;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AlbumFitxersMultimedia extends CarpetaFitxers{
     
@@ -27,15 +29,28 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers{
         return this.titol;
     }
     
+    @Override
     public boolean isFull(){
         return this.getSize()==this.getMaxSize();
     }
     
-    public void addFitxer(FitxerMultimedia fitxer) throws AplicacioException{
-        if(!(this.isFull())){
-            this.carpeta.add(fitxer);
+    /**
+     * Permet afegir un fitxer a la biblioteca.
+     * 
+     * @param file fitxer a afegir
+     * @throws edu.ub.prog2.utils.AplicacioException
+     */
+    @Override
+    public void addFitxer(File file) throws AplicacioException{
+        FitxerMultimedia fitxer=(FitxerMultimedia) file;
+        if((fitxer.exists()) && (!(fitxer.isDirectory()))){
+            if(!(this.isFull())){
+                this.carpeta.add(fitxer);
+            }else{
+                throw new AplicacioException("L'àlbum ja és ple.");
+            }
         }else{
-            throw new AplicacioException("L'àlbum ja és ple.");
+            throw new AplicacioException("Aquest fitxer no existeix.");
         }
     }
     
@@ -43,42 +58,39 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers{
         this.carpeta.remove(i);
     }
     
-    public void removeFitxers(FitxerMultimedia fitxer){
-        for(int i=0;i<this.getSize();i++){
-            if(this.carpeta.get(i).equals(fitxer)){
+    /**
+     * Elimina un fitxer de la biblioteca.
+     * 
+     * @param file el fitxer a eliminar
+     */
+    @Override
+    public void removeFitxer(File file){
+        FitxerMultimedia fitxer=(FitxerMultimedia) file;
+        for (int i=0;i<this.getSize();i++){
+            if(fitxer.equals(this.getAt(i))){
                 this.carpeta.remove(i);
                 i--;
             }
         }
     }
     
-    public boolean acotat(int i){
-        return ((i<this.getSize())&&(i>-1));
-    }
-    
-    @Override
-    public String toString(){
-        if(this.isEmpty()){
-            return "L'àlbum és buit.\n\n";
-        }
-        String resum = "Àlbum "+this.getTitol()+":\n==============\n\n";
-        for (int i=0;i<this.getSize();i++){
-            resum=resum+"["+(i+1)+"] "+this.getAt(i).toString()+"\n";
-        }
-        return resum;
-    }
-    
     /**
-     * Mostra el camí dels fitxers de l'àlbum.
+     * Sortida per imprimir usant toString de cada fitxer.
      * 
-     * @return llista de camins absoluts dels fitxers
+     * @return llista d'string amb resum de la carpeta
      */
     @Override
-    public String mostrarCamins(){        
-        String resum = "\n==============\n\n";
-        for (int i=0;i<this.getSize();i++){
-            resum=resum+"["+(i+1)+"] "+this.getAt(i).getCamiAbsolut()+"\n";
+    public List<String> write(){
+        List<String> resum=new ArrayList<>();
+        if(this.isEmpty()){
+            resum.add("\nL'àlbum és buit.\n\n");
+        }else{
+            resum.add("\nÀlbum "+this.getTitol()+":\n==============\n");
+            for (int i=0;i<carpeta.size();i++){
+                resum.add("["+(i+1)+"] "+this.getAt(i).toString()+"\n");
+            }        
         }
+        resum.add("\n");
         return resum;
     }
     

@@ -1,9 +1,8 @@
-package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
+package edu.ub.prog2.CabezasRodrigoNunezJosep.model;        
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
-import java.io.Serializable;
-        
-public class BibliotecaFitxersMultimedia extends CarpetaFitxers implements Serializable{
+
+public class BibliotecaFitxersMultimedia extends CarpetaFitxers{
     
     public BibliotecaFitxersMultimedia(){
         super();
@@ -15,6 +14,7 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers implements Seria
      * @param file fitxer a afegir
      * @throws edu.ub.prog2.utils.AplicacioException
      */
+    @Override
     public void addFitxer(File file) throws AplicacioException{
         FitxerMultimedia fitxer=(FitxerMultimedia) file;
         if((fitxer.exists()) && (!(fitxer.isDirectory()))){
@@ -28,30 +28,4 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers implements Seria
         }
     }
     
-    /**
-     * Elimina un fitxer de la biblioteca.
-     * 
-     * @param fitxer el fitxer a eliminar
-     */
-    public void removeFitxer(FitxerMultimedia fitxer){
-        boolean removed = false;
-        int i =0;
-        while((i<this.getSize())&&(!(removed))){
-            if (fitxer.equals(this.getAt(i))){
-                this.carpeta.remove(i);
-                removed = true;
-            }
-            i++;
-        }
-    }
-    
-    /**
-     * Indica si el fitxer es pot borrar.
-     * 
-     * @param i id del fitxer
-     * @return  true: borrable  false: no borrable
-     */
-    public boolean isRemovable(int i){
-        return ((i<this.getSize())&&(i>-1));
-    }   
 }
