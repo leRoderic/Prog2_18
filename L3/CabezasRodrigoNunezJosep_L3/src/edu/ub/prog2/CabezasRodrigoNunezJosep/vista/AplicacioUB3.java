@@ -91,7 +91,7 @@ public class AplicacioUB3 {
                     break;
                 case BIBLIO_ELIMINAR:
                     System.out.println("\nHas triat Eliminar un dels fitxers existents a la biblioteca.\n");
-                    if ((!this.controlador.isEmpty())){
+                    if (!(this.controlador.isEmpty())){
                         System.out.println("\nAquests són els camins dels fitxers de la biblioteca: ");                    
                         System.out.print(this.controlador.mostrarCamins());
                         System.out.println("\nIntrodueix l'índex del fitxer a eliminar: ");
@@ -240,23 +240,35 @@ public class AplicacioUB3 {
                     break;
                 case ALBUM_ELIMINAR:
                     System.out.println("\nHas triat Eliminar un dels àlbums existents.\n");
-                    /*if ((!this.controlador.isEmpty())){
-                        System.out.println("\nAquests són els camins dels fitxers de la biblioteca: ");                    
-                        System.out.print(this.controlador.mostrarCamins());
-                        System.out.println("\nIntrodueix l'índex del fitxer a eliminar: ");
+                    if (!(this.controlador.anyAlbums())){
+                        System.out.println("\nAquests són àlbums de la biblioteca: ");                    
+                        System.out.print(this.controlador.mostrarAlbums());
+                        System.out.println("\nIntrodueix l'índex de l'àlbum a eliminar: ");
                         int num=sc.nextInt()-1;
-                        while (!(this.controlador.isRemovable(num))){
+                        while (!(this.controlador.albumAcotat(num))){
                             System.out.println("\nTorna-ho a provar: ");
                             num=sc.nextInt()-1;
                         }
-                        this.controlador.esborrarFitxer(num);
+                        this.controlador.esborrarAlbum(num);
                     }else{
-                        System.out.println("\nLa biblioteca és buida. No es pot esborrar cap fitxer.\n");
-                    }*/
+                        System.out.println("\nNo hi ha cap àlbum.\n");
+                    }
                     break;
                 case ALBUM_INCLOS:
                     System.out.println("\nHas triat Gestionar un dels àlbums.\n");
-                    gestioContingut();
+                    if (!(this.controlador.anyAlbums())){
+                        System.out.println("\nAquests són àlbums de la biblioteca: ");                    
+                        System.out.print(this.controlador.mostrarAlbums());
+                        System.out.println("\nIntrodueix l'índex de l'àlbum a gestionar: ");
+                        int num=sc.nextInt()-1;
+                        while (!(this.controlador.albumAcotat(num))){
+                            System.out.println("\nTorna-ho a provar: ");
+                            num=sc.nextInt()-1;
+                        }
+                        gestioContingut(num);
+                    }else{
+                        System.out.println("\nNo hi ha cap àlbum.\n");
+                    }
                     break;
                 case ALBUM_SORTIR:
                     System.out.println("\nHas triat Tornar al menú anterior.\n");
@@ -265,7 +277,7 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsAlbum.ALBUM_SORTIR);
     }
     
-    public void gestioContingut() {
+    public void gestioContingut(int number) {
         Menu<OpcionsInclos> menu=new Menu<>("Gestió d'un dels àlbums",OpcionsInclos.values());
         menu.setDescripcions(INCLOS);
         OpcionsInclos opcio;
@@ -275,27 +287,43 @@ public class AplicacioUB3 {
             switch(opcio) {
                 case INCLOS_AFEGIR:
                     System.out.println("\nHas triat Afegir un fitxer multimèdia.\n");
-                    //gestioAfegir();
-                    break;
-                case INCLOS_MOSTRAR:
-                    System.out.println("\nHas triat Mostrar el contingut de l'àlbum.\n");
-                    //System.out.print(this.controlador.mostrarBiblioteca());
-                    break;
-                case INCLOS_ELIMINAR:
-                    System.out.println("\nHas triat Eliminar un dels fitxers de l'àlbum.\n");
-                    /*if ((!this.controlador.isEmpty())){
+                    if (!(this.controlador.isEmpty())){
                         System.out.println("\nAquests són els camins dels fitxers de la biblioteca: ");                    
                         System.out.print(this.controlador.mostrarCamins());
-                        System.out.println("\nIntrodueix l'índex del fitxer a eliminar: ");
+                        System.out.println("\nIntrodueix l'índex del fitxer a afegir: ");
                         int num=sc.nextInt()-1;
                         while (!(this.controlador.isRemovable(num))){
                             System.out.println("\nTorna-ho a provar: ");
                             num=sc.nextInt()-1;
                         }
-                        this.controlador.esborrarFitxer(num);
+                        try{
+                            this.controlador.albFitxerAdd(number,num);                        
+                        }catch(AplicacioException e){
+                            System.out.println(e.getMessage());
+                        }
                     }else{
-                        System.out.println("\nLa biblioteca és buida. No es pot esborrar cap fitxer.\n");
-                    }*/
+                        System.out.println("\nLa biblioteca és buida. No es pot afegir cap fitxer.\n");
+                    }
+                    break;
+                case INCLOS_MOSTRAR:
+                    System.out.println("\nHas triat Mostrar el contingut de l'àlbum.\n");
+                    System.out.print(this.controlador.mostrarAlbum(number));
+                    break;
+                case INCLOS_ELIMINAR:
+                    System.out.println("\nHas triat Eliminar un dels fitxers de l'àlbum.\n");
+                    if (!(this.controlador.albumEmpty(number))){
+                        System.out.println("\nAquests són els camins dels fitxers de l'àlbum: ");                    
+                        System.out.print(this.controlador.mostrarCaminsAlbum(number));
+                        System.out.println("\nIntrodueix l'índex del fitxer a eliminar: ");
+                        int num=sc.nextInt()-1;
+                        while (!(this.controlador.albumAcotat(number,num))){
+                            System.out.println("\nTorna-ho a provar: ");
+                            num=sc.nextInt()-1;
+                        }
+                        this.controlador.albFitxerRemove(number,num);
+                    }else{
+                        System.out.println("\nL'àlbum és buit. No es pot esborrar cap fitxer.\n");
+                    }
                     break;
                 case INCLOS_SORTIR:
                     System.out.println("\nHas triat Tornar al menú anterior.\n");

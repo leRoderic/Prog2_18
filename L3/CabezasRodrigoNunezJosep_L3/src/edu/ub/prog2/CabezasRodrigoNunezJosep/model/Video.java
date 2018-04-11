@@ -1,4 +1,5 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
+import edu.ub.prog2.utils.AplicacioException;
 
 public class Video extends FitxerReproduible {
     
@@ -64,9 +65,10 @@ public class Video extends FitxerReproduible {
     
     /**
      * Reprodueix el vídeo.
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
-    public void reproduir(){
-        // TO DO -> LLIURAMENT 3
+    public void reproduir() throws AplicacioException{
+        this.getReproductor().reprodueix(this);
     }
 }

@@ -16,6 +16,10 @@ public class Dades implements Serializable{
         this.albums=new ArrayList<>();
     }
     
+    public boolean anyAlbums(){
+        return this.albums.isEmpty();
+    }
+    
     public void addAlbum(String titol){
         albums.add(new AlbumFitxersMultimedia(titol));    
     }
@@ -28,8 +32,12 @@ public class Dades implements Serializable{
         return this.albums.get(i).toString();
     }
     
+    public String mostrarCaminsAlbum(int i){
+        return this.albums.get(i).mostrarCamins();
+    }
+    
     public String mostrarAlbums(){
-        if(this.albums.size()==0){
+        if(this.albums.isEmpty()){
             return "No hi ha cap àlbum.\n\n";
         }
         String resum = "Àlbums:\n==============\n\n";
@@ -39,16 +47,29 @@ public class Dades implements Serializable{
         return resum;
     }
     
-    /*public String caminsAlbums(){
-        if(this.albums.size()==0){
-            return "No hi ha cap àlbum.\n\n";
-        }
-        String resum = "Àlbums:\n==============\n\n";
-        for (int i=0;i<this.albums.size();i++){
-            resum=resum+"["+(i+1)+"] "+this.albums.get(i).getTitol()+"\n";
-        }
-        return resum;
-    }*/
+    public boolean albumEmpty(int i){
+        return this.albums.get(i).isEmpty();
+    }
+    
+    public boolean albumAcotat(int i){
+        return ((i<this.albums.size())&&(i>-1));
+    }
+    
+    public void esborrarAlbum(int i){
+        this.albums.remove(i);
+    }
+    
+    public boolean albumAcotat(int i, int j){
+        return this.albums.get(i).acotat(j);
+    }
+    
+    public void albFitxerAdd(int i, int j) throws AplicacioException{
+        this.albums.get(i).addFitxer(this.biblioteca.getAt(j));
+    }
+    
+    public void albFitxerRemove(int i, int j){
+        this.albums.get(i).removeFitxer(j);
+    }
     
     /**
      * Donat un id, esborra el fitxer corresponent.
@@ -58,6 +79,9 @@ public class Dades implements Serializable{
     public void esborrarFitxer(int i){
         FitxerMultimedia fitxer=this.biblioteca.getAt(i);
         this.biblioteca.removeFitxer(fitxer);
+        for(int j =0;j<this.albums.size();j++){
+            this.albums.get(j).removeFitxers(fitxer);
+        }
     }
     
     /**
@@ -174,5 +198,9 @@ public class Dades implements Serializable{
             }
         }
         ois.close();
+    }
+    
+    public void setReproductor(){
+        //TO DO
     }
 }

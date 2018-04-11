@@ -1,10 +1,11 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.controlador;
 import edu.ub.prog2.CabezasRodrigoNunezJosep.model.Dades;
 import edu.ub.prog2.utils.AplicacioException;
+//import edu.ub.prog2.utils.InControlador;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Controlador {
+public class Controlador /*implements InControlador*/{
     private final Dades dades;
     
     /**
@@ -96,6 +97,22 @@ public class Controlador {
         return this.dades.mostrarCamins();
     }
     
+    public boolean anyAlbums(){
+        return this.dades.anyAlbums();
+    }
+    
+    public boolean albumAcotat(int i){
+        return this.dades.albumAcotat(i);
+    }
+    
+    public boolean albumAcotat(int i,int j){
+        return this.dades.albumAcotat(i,j);
+    }
+    
+    public void esborrarAlbum(int i){
+        this.dades.esborrarAlbum(i);
+    }
+    
     /**
      * Comprova si dades és buida.
      * 
@@ -116,15 +133,39 @@ public class Controlador {
     }
 
     public void addAlbum(String titol, int numero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.dades.addAlbum(titol,numero);
     }
 
     public void addAlbum(String titol) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.dades.addAlbum(titol);
     }
 
-    public boolean mostrarAlbums() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String mostrarAlbums() {
+        return this.dades.mostrarAlbums();
+    }
+    
+    public void setReproductor(){
+        this.dades.setReproductor();
+    }
+    
+    public void albFitxerAdd(int i,int j) throws AplicacioException{
+        this.dades.albFitxerAdd(i,j);
+    }
+    
+    public void albFitxerRemove(int i,int j){
+        this.dades.albFitxerRemove(i,j);
+    }
+    
+    public String mostrarAlbum(int i){
+        return this.dades.mostrarAlbum(i);
+    }
+    
+    public String mostrarCaminsAlbum(int i){
+        return this.dades.mostrarCaminsAlbum(i);
+    }
+    
+    public boolean albumEmpty(int i){
+        return this.dades.albumEmpty(i);
     }
     
 }

@@ -1,4 +1,5 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
+import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 
 public class Audio extends FitxerReproduible {
@@ -54,9 +55,10 @@ public class Audio extends FitxerReproduible {
     
     /**
      * Reprodueix l'audio
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
-    public void reproduir(){
-        // TO DO -> LLIURAMENT 3
+    public void reproduir() throws AplicacioException{
+        this.getReproductor().reprodueix(this,fitxerImatge);
     }
 }

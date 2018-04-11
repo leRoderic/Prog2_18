@@ -1,7 +1,8 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
 import java.util.ArrayList;
+//import edu.ub.prog2.utils.InFileFolder
 
-public class CarpetaFitxers {
+public class CarpetaFitxers /*implements InFileFolder*/{
     protected ArrayList<FitxerMultimedia> carpeta;
     
     /**
@@ -64,12 +65,7 @@ public class CarpetaFitxers {
      * @return el fitxer de la carpeta
      */
     public FitxerMultimedia getAt(int position){
-        if((position>(this.getSize()-1))||(position<0)){
-            System.out.print("\033[31mError! No hi ha cap arxiu en aquesta posició.\033[0m");
-            return null;
-        }else{
-            return this.carpeta.get(position);
-        }
+        return this.carpeta.get(position);
     }
     
     /**

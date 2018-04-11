@@ -1,10 +1,11 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
+import edu.ub.prog2.utils.AplicacioException;
 
 public abstract class FitxerReproduible extends FitxerMultimedia{
     
     private final String codec;
     private final float durada;
-    private final Reproductor reproductor;
+    private transient final Reproductor reproductor;
    
     /**
      * Constructor de fitxer reproduible
@@ -22,7 +23,7 @@ public abstract class FitxerReproduible extends FitxerMultimedia{
         this.reproductor = r;
     }
     
-    protected abstract void reproduir();
+    protected abstract void reproduir() throws AplicacioException;
     
     public Reproductor getReproductor(){
         return this.reproductor;
