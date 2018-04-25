@@ -9,26 +9,52 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers{
     private final int maxSize;
     private final String titol;
     
+    /**
+     * Constructor amb títol per párametre.
+     * 
+     * @param titol el títol del àlbum
+     */
     public AlbumFitxersMultimedia(String titol){
         this.carpeta = new ArrayList<>();
         this.maxSize=10;
         this.titol=titol;
     }
     
+    /**
+     * Constructor amb títol i tamany màxim per paràmetre.
+     * 
+     * @param titol             el títol del àlbum
+     * @param maxSize           la mida màxima del àlbum
+     */
     public AlbumFitxersMultimedia(String titol, int maxSize){
         this.carpeta = new ArrayList<>();
         this.maxSize=maxSize;
         this.titol=titol;
     }
     
+    /**
+     * Getter per la capacitat màxima.
+     * 
+     * @return la capacitat màxima
+     */
     public int getMaxSize(){
         return this.maxSize;
     }
     
+    /**
+     * Getter per títol del àlbum.
+     * 
+     * @return el títol del àlbum
+     */
     public String getTitol(){
         return this.titol;
     }
     
+    /**
+     * Comprova si l'àlbum és ple.
+     * 
+     * @return true: ple    false: !ple
+     */
     @Override
     public boolean isFull(){
         return this.getSize()==this.getMaxSize();
@@ -37,8 +63,7 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers{
     /**
      * Permet afegir un fitxer a la biblioteca.
      * 
-     * @param file fitxer a afegir
-     * @throws edu.ub.prog2.utils.AplicacioException
+     * @param file              fitxer a afegir
      */
     @Override
     public void addFitxer(File file) throws AplicacioException{
@@ -61,7 +86,7 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers{
     /**
      * Elimina un fitxer de la biblioteca.
      * 
-     * @param file el fitxer a eliminar
+     * @param file              el fitxer a eliminar
      */
     @Override
     public void removeFitxer(File file){
@@ -93,5 +118,4 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers{
         resum.add("\n");
         return resum;
     }
-    
 }

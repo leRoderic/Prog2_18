@@ -55,7 +55,7 @@ public class Audio extends FitxerReproduible {
     
     /**
      * Reprodueix l'audio
-     * @throws edu.ub.prog2.utils.AplicacioException
+     * 
      */
     @Override
     public void reproduir() throws AplicacioException{

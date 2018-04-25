@@ -21,15 +21,21 @@ public class AplicacioUB3 {
     static private enum OpcionsRepro {REPRO_FITXER,REPRO_BIBLIO,REPRO_ALBUM,REPRO_CONT,REPRO_ALE,REPRO_CURS,REPRO_SORTIR};
     private static final String[] REPRO={"Reproduir un fitxer multimèdia","Reproduir el contingut de la biblioteca","Reproduir el contingut d'un àlbum","Modificar la continuïtat de la reproducció","Modificar l'aleatorietat de la reproducció","Gestionar la reproducció en curs","Menú anterior"};
     static private enum OpcionsCurs {CURS_PLAY,CURS_PAUSE,CURS_STOP,CURS_NEXT,CURS_SORTIR};
-    private static final String[] CURS={"Reactivar la reproducció","Pausar la reproducció","Parar la reproducció","Saltar al següent fitxer","Menú anterior"};
+    private static final String[] CURS={"Reactivar la reproducció   [▶]","Pausar la reproducció      [❚❚]","Parar la reproducció       [■]","Saltar al següent fitxer   [▶▶]","Menú anterior              [🗙]"};
     private final Controlador controlador;
     private final Scanner sc;
     
+    /**
+     * Constructor AplicacioUB3.
+     */
     public AplicacioUB3(){
         this.controlador=new Controlador();
         this.sc=new Scanner(System.in);
     }
     
+    /**
+     * Gestió general de la aplicació.
+     */
     public void gestioAplicacioUB(){
         Menu<OpcionsPrincipal> menu=new Menu<>("Menú principal",OpcionsPrincipal.values());
         menu.setDescripcions(PRINCIPAL);
@@ -54,7 +60,7 @@ public class AplicacioUB3 {
                     try{
                         System.out.println("\nHas triat Guardar les dades a disc.\n");                    
                         System.out.println("\nIntrodueix el camí del fitxer a on guardar: ");
-                        String camiDesti=sc.nextLine();
+                        String camiDesti=pathClearing(sc.nextLine());
                         this.controlador.guardarDadesDisc(camiDesti);
                     }catch(AplicacioException e){}
                     break;
@@ -62,7 +68,7 @@ public class AplicacioUB3 {
                     try{
                         System.out.println("\nHas triat Carregar les dades de disc.\n");                    
                         System.out.println("\nIntrodueix el camí del fitxer d'on carregar: ");
-                        String camiOrigen=sc.nextLine();
+                        String camiOrigen=pathClearing(sc.nextLine());
                         this.controlador.carregarDadesDisc(camiOrigen);
                     }catch(AplicacioException e){}
                     break;                
@@ -73,6 +79,9 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsPrincipal.PRINCIPAL_SORTIR);
     }
     
+    /**
+     * Gestió de la biblioteca.
+     */
     public void gestioBiblioteca(){
         Menu<OpcionsBiblio> menu=new Menu<>("Gestió de la biblioteca",OpcionsBiblio.values());
         menu.setDescripcions(BIBLIO);
@@ -112,6 +121,9 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsBiblio.BIBLIO_SORTIR);
     }
     
+    /**
+     * Gestió noves entrades a la biblioteca.
+     */
     public void gestioAfegir(){
         Menu<OpcionsAfegir> menu=new Menu<>("Afegir un nou fitxer multimèdia",OpcionsAfegir.values());
         menu.setDescripcions(AFEGIR);
@@ -144,6 +156,11 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsAfegir.AFEGIR_SORTIR);
     }
     
+    /**
+     * Recull dades per afegir un nou vídeo.
+     * 
+     * @return dades del vídeo
+     */
     public Object[] demanaVideo(){
         Object[] dades=new Object[3];                 
         System.out.println("\nIntrodueix l'alçada (valor enter) del vídeo: ");
@@ -155,6 +172,11 @@ public class AplicacioUB3 {
         return dades;
     }
     
+    /**
+     * Recull dades per afegir un àudio.
+     * 
+     * @return dades del àudio
+     */
     public Object[] demanaAudio(){    
         Object[] dades=new Object[2];
         System.out.println("\nVols introduir una imatge per la reproducció? (y/n) ");
@@ -181,10 +203,15 @@ public class AplicacioUB3 {
         return dades;
     }
     
+    /**
+     * Recull les dades per afegir un fitxer.
+     * 
+     * @return les dades
+     */
     public Object[] demana(){        
         Object[] dades=new Object[4];
         System.out.println("\nIntrodueix el camí del fitxer: ");
-        dades[0]=sc.nextLine();
+        dades[0]=pathClearing(sc.nextLine());
         System.out.println("\nVols introduir descripció? (y/n) ");
         String resposta=sc.nextLine();
         while((!(resposta.equals("n")))&&(!(resposta.equals("y")))){
@@ -204,6 +231,9 @@ public class AplicacioUB3 {
         return dades;
     }
     
+    /**
+     * Gestions relacionades amb els àlbums.
+     */
     public void gestioAlbums(){
         Menu<OpcionsAlbum> menu=new Menu<>("Gestió dels àlbums",OpcionsAlbum.values());
         menu.setDescripcions(ALBUM);
@@ -285,6 +315,11 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsAlbum.ALBUM_SORTIR);
     }
     
+    /**
+     * Gestions relacionades amb un àlbum en concret.
+     * 
+     * @param number opció que recull de gestionAlbums()
+     */
     public void gestioContingut(String number){
         Menu<OpcionsInclos> menu=new Menu<>("Gestió d'un dels àlbums",OpcionsInclos.values());
         menu.setDescripcions(INCLOS);
@@ -342,6 +377,9 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsInclos.INCLOS_SORTIR);
     }
     
+    /**
+     * Gestions del reproductor.
+     */
     public void gestioReproductor(){
         Menu<OpcionsRepro> menu=new Menu<>("Gestió del reproductor",OpcionsRepro.values());
         menu.setDescripcions(REPRO);
@@ -436,6 +474,9 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsRepro.REPRO_SORTIR);
     }
     
+    /**
+     * Controls del reproductor.
+     */
     public void gestioCurs() {
         Menu<OpcionsCurs> menu=new Menu<>("Gestió de la reproducció en curs",OpcionsCurs.values());
         menu.setDescripcions(CURS);
@@ -475,10 +516,27 @@ public class AplicacioUB3 {
         } while(opcio!=OpcionsCurs.CURS_SORTIR);
     }
     
+    /**
+     * Impremeix llistes.
+     * 
+     * @param llista obvi
+     */
     public void imprimir(List<String> llista){
         for(int i=0;i<llista.size();i++){
             System.out.print(llista.get(i));
         }
     }
     
+    /**
+     * Elimina els caràcters que causen conflicte quan s'introdueixen rutes al
+     * programa.
+     * 
+     * @param path  la ruta sense processar
+     * @return la ruta processada
+     */
+    public String pathClearing(String path){
+        String ruta = path;
+        ruta = ruta.replace("\"","");
+        return ruta;
+    }
 }

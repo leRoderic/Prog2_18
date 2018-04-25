@@ -8,6 +8,10 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic{
     private boolean reproduccioCiclica, reproduccioAleatoria;
     private int pos;
     
+    /**
+     * Constructor per defecte de la classe EscoltadorReproduccio.
+     * 
+     */
     public EscoltadorReproduccio(){
         this.llistaReproduint=new CarpetaFitxers();
         this.reproduccioCiclica=false;
@@ -15,6 +19,11 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic{
         this.pos=0;
     }
     
+    /**
+     * Setter per la carpeta de fitxers que és reproduïda.
+     * 
+     * @param llistaReproduint      la carpeta
+     */
     public void setLlista(CarpetaFitxers llistaReproduint){
         this.llistaReproduint=llistaReproduint;
         this.llistaCtrl=new boolean[this.llistaReproduint.getSize()];
@@ -28,30 +37,65 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic{
         }catch (AplicacioException e){}
     }
     
+    /**
+     * Canvia l'estat de la reprodució cíclica.
+     * 
+     * @param reproduccioCiclica    nou estat
+     */
     public void setCiclica(boolean reproduccioCiclica){
         this.reproduccioCiclica=reproduccioCiclica;
     }
     
+    /**
+     * Canvia l'estat de la reprodució aleatória.
+     * 
+     * @param reproduccioAleatoria  nou estat
+     */
     public void setAleatoria(boolean reproduccioAleatoria){
         this.reproduccioAleatoria=reproduccioAleatoria;
     }
     
+    /**
+     * Getter per la carpeta en reproducció.
+     * 
+     * @return la carpeta
+     */
     public CarpetaFitxers getLlista(){
         return this.llistaReproduint;
     }
     
+    /**
+     * Getter per l'array de control.
+     * 
+     * @return l'array de control
+     */
     public boolean[] getControl(){
         return this.llistaCtrl;
     }
     
+    /**
+     * Retorna l'estat de la reproducció cíclica.
+     * 
+     * @return estat de la reproducció cíclica
+     */
     public boolean getCiclica(){
         return this.reproduccioCiclica;
     }
     
+    /**
+     * Retorna l'estat de la reproducció aleatória.
+     * 
+     * @return estat de la reproducció aleatória
+     */
     public boolean getAleatoria(){
         return this.reproduccioAleatoria;
     }
-
+    
+    /**
+     * Si hi ha següent, reproduirà el següent fitxer. Si la reproducció cíclica
+     * és activa, tornarà a reproduir desde el principi. En altres cassos s'atura
+     * la reproducció.
+     */
     @Override
     protected void onEndFile(){
         if(hasNext()){
@@ -65,6 +109,12 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic{
         }
     }
 
+    /**
+     * Si la reproducció aleatória es seleccionada, triarà una posició aleatória
+     * que correspondrà a un fitxer de la carpeta reproduïda en l'instant. Si no
+     * és activa, augmentarà la posició una unitat per reproduïr el següent fitxer
+     * a la carpeta.
+     */
     @Override
     public void next() {
         if(getAleatoria()){
@@ -90,6 +140,11 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic{
         }catch (AplicacioException e){}
     }
 
+    /**
+     * Comprova si s'ha reproduït tota la carpeta.
+     * 
+     * @return true: queda per reproduïr    false: no hi has més fitxers
+     */
     @Override
     protected boolean hasNext() {
         for(int i=0;i<llistaCtrl.length;i++){
@@ -99,5 +154,4 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic{
         }
         return false;
     }
-
 }

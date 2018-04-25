@@ -28,7 +28,7 @@ public class Video extends FitxerReproduible {
     /**
      * Retorna la alçada del video
      * 
-     * @return alcada la alcaçada del video
+     * @return alcada   la alcaçada del video
      */
     public int getAlcada(){
         return this.alcada;
@@ -46,7 +46,7 @@ public class Video extends FitxerReproduible {
     /**
      * Retorna els fps' del video
      * 
-     * @return fps els fps'
+     * @return fps      els fps'
      */
     public float getFps(){
         return this.fps;
@@ -65,7 +65,6 @@ public class Video extends FitxerReproduible {
     
     /**
      * Reprodueix el vídeo.
-     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void reproduir() throws AplicacioException{

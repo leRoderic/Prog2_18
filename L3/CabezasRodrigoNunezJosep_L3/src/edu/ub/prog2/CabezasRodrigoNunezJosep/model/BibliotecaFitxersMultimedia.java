@@ -4,6 +4,10 @@ import java.io.File;
 
 public class BibliotecaFitxersMultimedia extends CarpetaFitxers{
     
+    /**
+     * Constructor per defecte classe BibliotecaFitxersMultimedia.
+     * 
+     */
     public BibliotecaFitxersMultimedia(){
         super();
     }
@@ -11,8 +15,7 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers{
     /**
      * Permet afegir un fitxer a la biblioteca.
      * 
-     * @param file fitxer a afegir
-     * @throws edu.ub.prog2.utils.AplicacioException
+     * @param file          fitxer a afegir
      */
     @Override
     public void addFitxer(File file) throws AplicacioException{
@@ -26,6 +29,5 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers{
         }else{
             throw new AplicacioException("Aquest fitxer no existeix.");
         }
-    }
-    
+    }   
 }

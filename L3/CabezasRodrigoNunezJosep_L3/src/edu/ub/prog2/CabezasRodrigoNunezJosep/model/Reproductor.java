@@ -4,7 +4,12 @@ import edu.ub.prog2.utils.ReproductorBasic;
 import java.io.File;
 
 public class Reproductor extends ReproductorBasic{
-
+    
+    /**
+     * Contructor per defecte de la classe Reproductor.
+     * 
+     * @param controlador   obvi
+     */
     public Reproductor(EscoltadorReproduccio controlador) {
         super(controlador);
     }
@@ -17,10 +22,23 @@ public class Reproductor extends ReproductorBasic{
         super(vlcPath, controlador);
     }*/
     
+    /**
+     * Reprodueix un fitxer.
+     * 
+     * @param fr            el fitxer en qëstió
+     * @throws AplicacioException abs
+     */
     public void reprodueix(FitxerReproduible fr) throws AplicacioException{
         this.play(fr);        
     }
     
+    /**
+     * Reprodueix un àudio.
+     * 
+     * @param audio         l'audio
+     * @param fitxerImatge  la seva caratula
+     * @throws AplicacioException abs
+     */
     public void reprodueix(Audio audio, File fitxerImatge) throws AplicacioException{
         this.play(audio,fitxerImatge);
     }

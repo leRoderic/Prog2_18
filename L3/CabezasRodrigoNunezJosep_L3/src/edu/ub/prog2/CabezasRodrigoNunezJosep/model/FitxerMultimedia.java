@@ -33,8 +33,8 @@ public class FitxerMultimedia extends File{
     /**
      * Constructor indicant la descripció.
      * 
-     * @param cami camí absolut del fitxer
-     * @param desc descripció del fitxer
+     * @param cami      camí absolut del fitxer
+     * @param desc      descripció del fitxer
      */
     public FitxerMultimedia(String cami, String desc) {
         super(cami);
@@ -75,7 +75,7 @@ public class FitxerMultimedia extends File{
     /**
      * Dóna nom a un fitxer.
      * 
-     * @param nom el nom del fitxer
+     * @param nom       el nom del fitxer
      */
     public void setNomFitxer(String nom){
         this.nom=nom;
@@ -84,7 +84,7 @@ public class FitxerMultimedia extends File{
     /**
      * Estableix extensió per el fitxer.
      * 
-     * @param extensio la extensió del fitxer
+     * @param extensio  la extensió del fitxer
      */
     public void setExtensio(String extensio){
         this.extensio=extensio;
@@ -148,7 +148,7 @@ public class FitxerMultimedia extends File{
      * Comparador de dos fitxers.
      * 
      * @param fitxerMultimedia fitxer a comparar
-     * @return true: són iguals false: són diferents
+     * @return true: són iguals     false: són diferents
      */
     public boolean equals(FitxerMultimedia fitxerMultimedia){
         if (!(fitxerMultimedia.getUltimaModificacio().equals(this.getUltimaModificacio()))){
@@ -164,6 +164,11 @@ public class FitxerMultimedia extends File{
         }        
     }
     
+    /**
+     * ToString de la classe FitxerMultimedia.
+     * 
+     * @return resum del fitxer
+     */
     @Override
     public String toString(){
         String retorn="Descripció = "+this.getDescripcio()+"\ndata = "+this.getUltimaModificacio()+"\nnom = "+this.getNomFitxer()+"\next = "+this.getExtensio()+"\ncamí complet = "+this.getCamiAbsolut()+"\n";

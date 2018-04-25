@@ -23,24 +23,54 @@ public abstract class FitxerReproduible extends FitxerMultimedia{
         this.reproductor = r;
     }
     
+    /**
+     * Reprodueix el fitxer.
+     * 
+     * @throws AplicacioException asb
+     */
     protected abstract void reproduir() throws AplicacioException;
     
+    /**
+     * Getter per reproductor.
+     * 
+     * @return el reproductor
+     */
     public Reproductor getReproductor(){
         return this.reproductor;
     }
-
+    
+    /**
+     * Getter per codec.
+     * 
+     * @return codec
+     */
     public String getCodec(){
         return this.codec;
     }
     
+    /**
+     * Getter per la durada del fitxer.
+     * 
+     * @return la durada
+     */
     public float getDurada(){
         return this.durada;
     }
     
+    /**
+     * Setter per reproductor.
+     * 
+     * @param reproductor obvi
+     */
     public void setReproductor(Reproductor reproductor){
         this.reproductor=reproductor;
     }
     
+    /**
+     * ToString de la classe FitxerReproduible.
+     * 
+     * @return resum del fitxer
+     */
     @Override
     public String toString(){
         String retorn=super.toString()+"codec = "+this.getCodec()+"\ndurada = "+this.getDurada()+"\n";

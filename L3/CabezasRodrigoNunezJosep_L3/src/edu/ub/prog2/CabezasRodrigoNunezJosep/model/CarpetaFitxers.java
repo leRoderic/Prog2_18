@@ -30,7 +30,7 @@ public class CarpetaFitxers implements InFileFolder,Serializable{
     /**
      * Retorna el fitxer de una posició donada.
      * 
-     * @param position la posició de la carpeta
+     * @param position      la posició de la carpeta
      * @return el fitxer de la carpeta
      */
     @Override
@@ -53,7 +53,7 @@ public class CarpetaFitxers implements InFileFolder,Serializable{
      * @return true: buida  false: hi ha algun fitxer
      */
     public boolean isEmpty(){
-        return this.getSize() == 0;
+        return (this.getSize() == 0);
     }
     
     /**
@@ -93,7 +93,7 @@ public class CarpetaFitxers implements InFileFolder,Serializable{
     /**
      * Comprova si un fitxer és a la carpeta.
      * 
-     * @param fitxer el fitxer que ha de ser comprovat
+     * @param fitxer        el fitxer que ha de ser comprovat
      * @return true: sí que hi és   false: no hi és
      */
     public boolean contains(FitxerMultimedia fitxer){
@@ -108,6 +108,12 @@ public class CarpetaFitxers implements InFileFolder,Serializable{
         return found;
     }
     
+    /**
+     * Retorna si el fitxer corresponent  la id és a la carpeta.
+     * 
+     * @param i             l'id del fitxer
+     * @return true: hi és  false: !no hi és
+     */
     public boolean acotat(int i){
         return ((i<this.getSize())&&(i>-1));
     }
@@ -115,8 +121,7 @@ public class CarpetaFitxers implements InFileFolder,Serializable{
     /**
      * Permet afegir un fitxer a la biblioteca.
      * 
-     * @param file fitxer a afegir
-     * @throws edu.ub.prog2.utils.AplicacioException
+     * @param file          fitxer a afegir
      */
     @Override
     public void addFitxer(File file) throws AplicacioException{
@@ -131,7 +136,7 @@ public class CarpetaFitxers implements InFileFolder,Serializable{
             throw new AplicacioException("Aquest fitxer no existeix.");
         }
     }
-
+    
     @Override
     public boolean isFull(){
         return false;
@@ -140,7 +145,7 @@ public class CarpetaFitxers implements InFileFolder,Serializable{
     /**
      * Elimina un fitxer de la biblioteca.
      * 
-     * @param file el fitxer a eliminar
+     * @param file          el fitxer a eliminar
      */
     @Override
     public void removeFitxer(File file){
@@ -155,5 +160,4 @@ public class CarpetaFitxers implements InFileFolder,Serializable{
             i++;
         }
     }
-    
 }
