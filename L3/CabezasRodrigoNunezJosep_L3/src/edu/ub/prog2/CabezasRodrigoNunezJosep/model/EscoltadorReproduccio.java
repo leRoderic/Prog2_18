@@ -93,7 +93,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic{
     
     /**
      * Si hi ha següent, reproduirà el següent fitxer. Si la reproducció cíclica
-     * és activa, tornarà a reproduir desde el principi. En altres cassos s'atura
+     * és activa, tornarà a reproduir desde el principi. En els altres cassos s'atura
      * la reproducció.
      */
     @Override
@@ -110,9 +110,9 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic{
     }
 
     /**
-     * Si la reproducció aleatória es seleccionada, triarà una posició aleatória
+     * Si la reproducció aleatòria es seleccionada, triarà una posició aleatòria
      * que correspondrà a un fitxer de la carpeta reproduïda en l'instant. Si no
-     * és activa, augmentarà la posició una unitat per reproduïr el següent fitxer
+     * és activa, augmentarà la posició una unitat per reproduir el següent fitxer
      * a la carpeta.
      */
     @Override

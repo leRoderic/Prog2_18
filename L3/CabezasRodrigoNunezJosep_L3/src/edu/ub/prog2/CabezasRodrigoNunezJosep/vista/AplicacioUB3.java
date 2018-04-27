@@ -517,7 +517,7 @@ public class AplicacioUB3 {
     }
     
     /**
-     * Impremeix llistes.
+     * Imprimeix llistes.
      * 
      * @param llista obvi
      */

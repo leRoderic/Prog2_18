@@ -79,6 +79,10 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers{
         }
     }
     
+    /**
+     * Elimina un fitxer del àlbum.
+     * @param i 
+     */
     public void removeFitxer(int i){
         this.carpeta.remove(i);
     }
