@@ -1,4 +1,5 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
+import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.*;
 import java.util.ArrayList;
@@ -258,8 +259,7 @@ public class Dades implements Serializable{
     public void guardar(String desti) throws AplicacioException{
         try{
             ObjectOutputStream os;
-            File fitxer = new File(desti,"Dades.dat");
-            try (FileOutputStream fileStream = new FileOutputStream(fitxer)) {
+            try (FileOutputStream fileStream = new FileOutputStream(desti)) {
                 os = new ObjectOutputStream(fileStream);
                 os.writeObject(this);
                 fileStream.close();

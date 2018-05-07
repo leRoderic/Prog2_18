@@ -1,4 +1,5 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
+import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 
 public abstract class FitxerReproduible extends FitxerMultimedia{
@@ -28,7 +29,7 @@ public abstract class FitxerReproduible extends FitxerMultimedia{
      * 
      * @throws AplicacioException asb
      */
-    protected abstract void reproduir() throws AplicacioException;
+    public abstract void reproduir() throws AplicacioException;
     
     /**
      * Getter per reproductor.

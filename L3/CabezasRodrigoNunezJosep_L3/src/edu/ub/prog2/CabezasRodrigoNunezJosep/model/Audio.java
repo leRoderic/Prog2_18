@@ -1,4 +1,5 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
+import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 

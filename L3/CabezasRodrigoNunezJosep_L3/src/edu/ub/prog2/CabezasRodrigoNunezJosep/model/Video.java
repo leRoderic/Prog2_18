@@ -1,4 +1,5 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
+import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 
 public class Video extends FitxerReproduible {

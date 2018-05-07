@@ -1,7 +1,5 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.controlador;
 import edu.ub.prog2.CabezasRodrigoNunezJosep.model.Dades;
-import edu.ub.prog2.CabezasRodrigoNunezJosep.model.EscoltadorReproduccio;
-import edu.ub.prog2.CabezasRodrigoNunezJosep.model.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.InControlador;
 import java.util.List;
@@ -26,6 +24,9 @@ public class Controlador implements InControlador{
      * @param state             estat de la reproducció cíclica
      */
     public void setContinu(boolean state){
+        try{
+            tancarFinestraReproductor();
+        }catch(AplicacioException e){}
         this.escoltador.setCiclica(state);
         this.reproductor=new Reproductor(this.escoltador);
         this.setReproductor();
@@ -37,6 +38,9 @@ public class Controlador implements InControlador{
      * @param state             estat de la reproducció aleatória
      */
     public void setAleatori(boolean state){
+        try{
+            tancarFinestraReproductor();
+        }catch(AplicacioException e){}
         this.escoltador.setAleatoria(state);
         this.reproductor=new Reproductor(this.escoltador);
         this.setReproductor();
@@ -125,6 +129,7 @@ public class Controlador implements InControlador{
      * Guarda les dades de BibliotecaFixerMultimedia al disc.
      * 
      * @param camiDesti     path on es guardaran les dades
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void guardarDadesDisc(String camiDesti) throws AplicacioException{
@@ -135,6 +140,7 @@ public class Controlador implements InControlador{
      * Carrega les dades d'un determinat path a BibliotecaFitxerMultimedia.
      *
      * @param camiOrigen    path d'on es carregaran les dades per BibliotectaFitxersMultimedia
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException{
@@ -311,9 +317,12 @@ public class Controlador implements InControlador{
      */
     @Override
     public void reproduirFitxer(int i) throws AplicacioException {
+        try{
+            tancarFinestraReproductor();
+        }catch(AplicacioException e){}
         obrirFinestraReproductor();
         escoltador.setLlista(this.dades.reproduirFitxer(i));
-        tancarFinestraReproductor();
+        //tancarFinestraReproductor();
     }
     
     /**
@@ -322,9 +331,12 @@ public class Controlador implements InControlador{
      */
     @Override
     public void reproduirCarpeta() throws AplicacioException {
+        try{
+            tancarFinestraReproductor();
+        }catch(AplicacioException e){}
         obrirFinestraReproductor();
         escoltador.setLlista(this.dades.reproduirCarpeta());
-        tancarFinestraReproductor();
+        //tancarFinestraReproductor();
     }
     
     /**
@@ -334,9 +346,12 @@ public class Controlador implements InControlador{
      */
     @Override
     public void reproduirCarpeta(String titol) throws AplicacioException {
+        try{
+            tancarFinestraReproductor();
+        }catch(AplicacioException e){}
         obrirFinestraReproductor();
         escoltador.setLlista(this.dades.reproduirCarpeta(titol));
-        tancarFinestraReproductor();
+        //tancarFinestraReproductor();
     }
     
     /**

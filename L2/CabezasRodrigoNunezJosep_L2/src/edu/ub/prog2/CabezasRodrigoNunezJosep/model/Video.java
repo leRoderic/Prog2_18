@@ -1,5 +1,7 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
 
+import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Reproductor;
+
 public class Video extends FitxerReproduible {
     
     private int alcada, amplada;

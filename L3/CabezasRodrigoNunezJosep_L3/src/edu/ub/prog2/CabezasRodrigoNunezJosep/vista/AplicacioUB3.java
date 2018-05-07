@@ -21,7 +21,7 @@ public class AplicacioUB3 {
     static private enum OpcionsRepro {REPRO_FITXER,REPRO_BIBLIO,REPRO_ALBUM,REPRO_CONT,REPRO_ALE,REPRO_CURS,REPRO_SORTIR};
     private static final String[] REPRO={"Reproduir un fitxer multimèdia","Reproduir el contingut de la biblioteca","Reproduir el contingut d'un àlbum","Modificar la continuïtat de la reproducció","Modificar l'aleatorietat de la reproducció","Gestionar la reproducció en curs","Menú anterior"};
     static private enum OpcionsCurs {CURS_PLAY,CURS_PAUSE,CURS_STOP,CURS_NEXT,CURS_SORTIR};
-    private static final String[] CURS={"Reactivar la reproducció   [▶]","Pausar la reproducció      [❚❚]","Parar la reproducció       [■]","Saltar al següent fitxer   [▶▶]","Menú anterior              [🗙]"};
+    private static final String[] CURS={"Reactivar la reproducció   [▶]","Pausar la reproducció      [❚❚]","Parar la reproducció       [■]","Saltar al següent fitxer   [▶▶]","Menú anterior              [X]"};
     private final Controlador controlador;
     private final Scanner sc;
     
@@ -187,11 +187,11 @@ public class AplicacioUB3 {
         }
         if (resposta.equals("y")){
             System.out.println("\nIntrodueix el camí de la imatge: ");
-            resposta=sc.nextLine();
+            resposta=pathClearing(sc.nextLine());
             File a=new File(resposta);
             while((a.isDirectory()) || (!(a.exists()))){                
                 System.out.println("\nIntrodueix un camí vàlid: ");
-                resposta=sc.nextLine();
+                resposta=pathClearing(sc.nextLine());
                 a=new File(resposta);
             }
             dades[0]=resposta;

@@ -1,4 +1,7 @@
-package edu.ub.prog2.CabezasRodrigoNunezJosep.model;
+package edu.ub.prog2.CabezasRodrigoNunezJosep.controlador;
+import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.EscoltadorReproduccio;
+import edu.ub.prog2.CabezasRodrigoNunezJosep.model.Audio;
+import edu.ub.prog2.CabezasRodrigoNunezJosep.model.FitxerReproduible;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.ReproductorBasic;
 import java.io.File;
