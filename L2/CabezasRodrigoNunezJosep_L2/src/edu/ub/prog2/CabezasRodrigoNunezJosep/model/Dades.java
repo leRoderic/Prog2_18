@@ -132,7 +132,9 @@ public class Dades implements Serializable{
             ois = new ObjectInputStream(fileStream);
             Object carrego=ois.readObject();
             while (carrego!=null){
-                this.biblioteca.addFitxer((FitxerMultimedia)carrego);
+                try{
+                    this.biblioteca.addFitxer((FitxerMultimedia)carrego);
+                }catch(AplicacioException e){}
                 carrego=ois.readObject();
             }
         }
