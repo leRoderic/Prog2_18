@@ -73,6 +73,9 @@ public class AplicacioUB3 {
                     }catch(AplicacioException e){}
                     break;                
                 case PRINCIPAL_SORTIR:
+                    try{
+                        this.controlador.tancarFinestraReproductor();
+                    }catch(AplicacioException e){}
                     System.out.println("\nFins aviat!\n");
                     break;
             }
