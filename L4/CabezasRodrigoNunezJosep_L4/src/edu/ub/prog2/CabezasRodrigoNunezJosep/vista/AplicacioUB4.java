@@ -2,7 +2,6 @@ package edu.ub.prog2.CabezasRodrigoNunezJosep.vista;
 
 import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Controlador;
 
-
 public class AplicacioUB4 extends javax.swing.JFrame {
     
     private final Controlador controlador;
