@@ -29,12 +29,15 @@ public class FrmGestioReproductor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton2 = new javax.swing.JToggleButton();
         btPlay = new javax.swing.JButton();
         btPause = new javax.swing.JButton();
         btSkip = new javax.swing.JButton();
         btStop = new javax.swing.JButton();
-        btRandom = new javax.swing.JButton();
-        btLoop = new javax.swing.JButton();
+        btRandom = new javax.swing.JToggleButton();
+        btLoop = new javax.swing.JToggleButton();
+
+        jToggleButton2.setText("jToggleButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Reproductor - Gestió curs");
@@ -94,7 +97,7 @@ public class FrmGestioReproductor extends javax.swing.JFrame {
                 .addComponent(btSkip, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btStop, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btRandom, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,15 +106,15 @@ public class FrmGestioReproductor extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btRandom, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btStop, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btPause, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btPlay, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                        .addComponent(btSkip, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)))
+                        .addComponent(btSkip, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                    .addComponent(btRandom, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -161,11 +164,12 @@ public class FrmGestioReproductor extends javax.swing.JFrame {
     }//GEN-LAST:event_btLoopActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btLoop;
+    private javax.swing.JToggleButton btLoop;
     private javax.swing.JButton btPause;
     private javax.swing.JButton btPlay;
-    private javax.swing.JButton btRandom;
+    private javax.swing.JToggleButton btRandom;
     private javax.swing.JButton btSkip;
     private javax.swing.JButton btStop;
+    private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }

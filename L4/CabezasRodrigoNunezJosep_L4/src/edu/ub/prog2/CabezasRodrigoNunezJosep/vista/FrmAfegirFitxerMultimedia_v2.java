@@ -1,13 +1,27 @@
 package edu.ub.prog2.CabezasRodrigoNunezJosep.vista;
 
-public class FrmAfegirFitxerMultimedia_v2 extends javax.swing.JDialog {
+import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Controlador;
+import edu.ub.prog2.utils.AplicacioException;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
+public class FrmAfegirFitxerMultimedia_v2 extends javax.swing.JDialog {
+    
+    private Controlador controlador;
     /**
      * Creates new form FrmAfegirFitxerMultimedia_v2
      */
-    public FrmAfegirFitxerMultimedia_v2(java.awt.Frame parent, boolean modal) {
+    public FrmAfegirFitxerMultimedia_v2(java.awt.Frame parent, boolean modal, Controlador controlador) {
         super(parent, modal);
+        this.controlador = controlador;
         initComponents();
+    }
+
+    private FrmAfegirFitxerMultimedia_v2(JFrame jFrame, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -19,6 +33,7 @@ public class FrmAfegirFitxerMultimedia_v2 extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popupMenu1 = new java.awt.PopupMenu();
         btnAfegir = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnSelecciona = new javax.swing.JButton();
@@ -26,8 +41,14 @@ public class FrmAfegirFitxerMultimedia_v2 extends javax.swing.JDialog {
         txtCami = new javax.swing.JLabel();
         txtFitxer = new javax.swing.JTextField();
         txtTipus = new javax.swing.JLabel();
+        labelImatge = new javax.swing.JLabel();
+        selectImatge = new javax.swing.JButton();
+        textImatge = new javax.swing.JTextField();
+
+        popupMenu1.setLabel("popupMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Reproductor - Afegir un nou fitxer");
 
         btnAfegir.setText("Afegir");
         btnAfegir.addActionListener(new java.awt.event.ActionListener() {
@@ -37,14 +58,52 @@ public class FrmAfegirFitxerMultimedia_v2 extends javax.swing.JDialog {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnSelecciona.setText("...");
+        btnSelecciona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionaActionPerformed(evt);
+            }
+        });
 
         selecTipus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Video", "Audio" }));
+        selecTipus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecTipusActionPerformed(evt);
+            }
+        });
 
         txtCami.setText("Camí del fitxer");
 
+        txtFitxer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFitxerActionPerformed(evt);
+            }
+        });
+
         txtTipus.setText("Tipus:");
+
+        labelImatge.setText("Camí imatge:");
+
+        selectImatge.setText("...");
+        selectImatge.setEnabled(false);
+        selectImatge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectImatgeActionPerformed(evt);
+            }
+        });
+
+        textImatge.setEnabled(false);
+        textImatge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textImatgeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -53,21 +112,26 @@ public class FrmAfegirFitxerMultimedia_v2 extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtCami)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtFitxer, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(btnSelecciona)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnAfegir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                         .addComponent(txtTipus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selecTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(selecTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCami)
+                            .addComponent(labelImatge))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtFitxer, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                            .addComponent(textImatge))
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selectImatge)
+                            .addComponent(btnSelecciona))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -78,21 +142,89 @@ public class FrmAfegirFitxerMultimedia_v2 extends javax.swing.JDialog {
                     .addComponent(txtCami)
                     .addComponent(txtFitxer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSelecciona))
-                .addGap(36, 36, 36)
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labelImatge)
+                        .addComponent(textImatge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectImatge))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(selecTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAfegir)
                     .addComponent(btnCancelar)
                     .addComponent(txtTipus))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAfegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirActionPerformed
-        // TODO add your handling code here:
+        switch(this.selecTipus.getSelectedIndex()){
+            case 0:
+        {
+            try {
+                //Vídeo
+                this.controlador.afegirVideo(txtFitxer.getText(), "", "", 3.f, 25, 25, 24.f);
+            } catch (AplicacioException ex) {
+                Logger.getLogger(FrmAfegirFitxerMultimedia_v2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+                break;
+            case 1:
+        {
+            try {
+                //Audio
+                
+                this.controlador.afegirAudio(txtFitxer.getText(), textImatge.getText(), "", "", 3.f, 52);
+            } catch (AplicacioException ex) {
+                Logger.getLogger(FrmAfegirFitxerMultimedia_v2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+                break;
+                
+        }
     }//GEN-LAST:event_btnAfegirActionPerformed
+
+    private void selecTipusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecTipusActionPerformed
+        switch(this.selecTipus.getSelectedIndex()){
+            case 0:
+                this.textImatge.setEnabled(false);
+                this.selectImatge.setEnabled(false);
+                break;
+            case 1:
+                this.textImatge.setEnabled(true);
+                this.selectImatge.setEnabled(true);
+                break;
+        }
+    }//GEN-LAST:event_selecTipusActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnSeleccionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionaActionPerformed
+        JFileChooser cercador = new javax.swing.JFileChooser();
+        cercador.showOpenDialog(this);
+        File file = cercador.getSelectedFile();
+        txtFitxer.setText(file.getAbsolutePath());
+    }//GEN-LAST:event_btnSeleccionaActionPerformed
+
+    private void txtFitxerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFitxerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFitxerActionPerformed
+
+    private void selectImatgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectImatgeActionPerformed
+       JFileChooser cercador = new javax.swing.JFileChooser();
+        cercador.showOpenDialog(this);
+        File file = cercador.getSelectedFile();
+        textImatge.setText(file.getAbsolutePath());
+    }//GEN-LAST:event_selectImatgeActionPerformed
+
+    private void textImatgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textImatgeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textImatgeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,7 +272,11 @@ public class FrmAfegirFitxerMultimedia_v2 extends javax.swing.JDialog {
     private javax.swing.JButton btnAfegir;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSelecciona;
+    private javax.swing.JLabel labelImatge;
+    private java.awt.PopupMenu popupMenu1;
     private javax.swing.JComboBox<String> selecTipus;
+    private javax.swing.JButton selectImatge;
+    private javax.swing.JTextField textImatge;
     private javax.swing.JLabel txtCami;
     private javax.swing.JTextField txtFitxer;
     private javax.swing.JLabel txtTipus;
