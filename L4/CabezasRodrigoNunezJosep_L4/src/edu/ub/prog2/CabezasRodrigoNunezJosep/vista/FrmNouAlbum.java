@@ -36,9 +36,10 @@ public class FrmNouAlbum extends javax.swing.JDialog {
             }
         });
 
-        lblAmount.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
-        lblAmount.setText("Capacitat");
+        lblAmount.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblAmount.setText("Capacitat:");
 
+        btnCrear.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnCrear.setText("Crear");
         btnCrear.setToolTipText("Crea el nou àlbum");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
@@ -47,20 +48,22 @@ public class FrmNouAlbum extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("Cancela i tanca la finestra");
+        btnCancelar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 0, 0)));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
 
-        lblNom.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
-        lblNom.setText("Nom");
+        lblNom.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblNom.setText("Nom:");
 
-        txtNom.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
+        txtNom.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
-        btnPlus.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnPlus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnPlus.setText("+");
         btnPlus.setToolTipText("Augmenta la capacitat");
         btnPlus.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +72,7 @@ public class FrmNouAlbum extends javax.swing.JDialog {
             }
         });
 
-        btnMinus.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnMinus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnMinus.setText("-");
         btnMinus.setToolTipText("Disminueix la capacitat");
         btnMinus.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +82,8 @@ public class FrmNouAlbum extends javax.swing.JDialog {
         });
 
         lblNum.setBackground(new java.awt.Color(255, 255, 255));
-        lblNum.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblNum.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblNum.setForeground(new java.awt.Color(0, 0, 204));
         lblNum.setText("10");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -92,43 +96,39 @@ public class FrmNouAlbum extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(lblNom)
-                        .addGap(35, 35, 35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNom)
-                        .addContainerGap())
+                        .addGap(29, 29, 29))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblAmount)
                                 .addGap(70, 70, 70)
                                 .addComponent(lblNum)
-                                .addGap(41, 41, 41))
-                            .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
+                                .addGap(104, 104, 104)
                                 .addComponent(btnPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 19, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60))))))
+                                .addComponent(btnMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 26, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNom))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAmount)
                     .addComponent(btnPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNum))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,6 +146,7 @@ public class FrmNouAlbum extends javax.swing.JDialog {
             this.controlador.afegirAlbum(txtNom.getText(),Integer.parseInt(lblNum.getText()));
             this.parent.opcionsComboBox();
             JOptionPane.showMessageDialog(rootPane, "Àlbum '"+txtNom.getText()+"' creat.");
+            this.dispose();
         }
         
     }//GEN-LAST:event_btnCrearActionPerformed

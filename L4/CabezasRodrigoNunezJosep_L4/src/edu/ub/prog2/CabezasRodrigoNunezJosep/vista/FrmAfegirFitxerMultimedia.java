@@ -41,8 +41,11 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
             }
         });
 
-        lblImatge.setText("Camí de la imatge");
+        lblImatge.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblImatge.setText("Camí de la imatge:");
+        lblImatge.setEnabled(false);
 
+        selectImatge.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         selectImatge.setText("...");
         selectImatge.setToolTipText("Selecciona...");
         selectImatge.setEnabled(false);
@@ -52,8 +55,10 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
             }
         });
 
+        txtImatge.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         txtImatge.setEnabled(false);
 
+        btnAfegir.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnAfegir.setText("Afegir");
         btnAfegir.setToolTipText("Afegeix el fitxer a la biblioteca");
         btnAfegir.addActionListener(new java.awt.event.ActionListener() {
@@ -62,14 +67,17 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("Cancela i tanca la finestra");
+        btnCancelar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 0, 0)));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
 
+        btnSelecciona.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnSelecciona.setText("...");
         btnSelecciona.setToolTipText("Selecciona...");
         btnSelecciona.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +86,8 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
             }
         });
 
-        selecTipus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Video", "Audio" }));
+        selecTipus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        selecTipus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Video", "Àudio" }));
         selecTipus.setToolTipText("Selecciona el tipus de fitxer...");
         selecTipus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,8 +95,12 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
             }
         });
 
-        lblCami.setText("Camí del fitxer");
+        lblCami.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblCami.setText("Camí del fitxer:");
 
+        txtFitxer.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        lblTipus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblTipus.setText("Tipus:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -97,53 +110,58 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblImatge)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(lblCami)))
+                            .addComponent(lblCami)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAfegir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtFitxer)
                             .addComponent(txtImatge))
-                        .addGap(11, 11, 11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(selectImatge)
-                            .addComponent(btnSelecciona)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(btnAfegir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                            .addComponent(btnSelecciona))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 424, Short.MAX_VALUE)
                         .addComponent(lblTipus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(selecTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)))
-                .addContainerGap())
+                        .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCami)
-                    .addComponent(txtFitxer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSelecciona))
-                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblImatge)
-                        .addComponent(txtImatge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(lblCami)
+                        .addGap(6, 6, 6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSelecciona)
+                            .addComponent(txtFitxer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtImatge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImatge)
                     .addComponent(selectImatge))
-                .addGap(18, 23, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAfegir, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTipus)
                     .addComponent(selecTipus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,24 +181,28 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
                 try {
                     //Vídeo
                     this.controlador.afegirVideo(txtFitxer.getText(), "", "", 3.f, 25, 25, 24.f);
+                    this.dispose();
+                    break;
                 } catch (AplicacioException ex) {
                     JOptionPane.showMessageDialog(rootPane, ex.getMessage());
                 }
             }
-            break;
             case 1:
             {
                 try {
                     //Audio
-                    this.controlador.afegirAudio(txtFitxer.getText(), txtImatge.getText(), "", "", 3.f, 52);
+                    if(this.txtImatge.getText().isEmpty())
+                        this.controlador.afegirAudio(txtFitxer.getText(), "", "", "", 3.f, 52);
+                    else
+                        this.controlador.afegirAudio(txtFitxer.getText(), txtImatge.getText(), "", "", 3.f, 52);
+                    this.dispose();
+                    break;
                 } catch (AplicacioException ex) {
                     JOptionPane.showMessageDialog(rootPane, ex.getMessage());
                 }
             }
-            break;
         }
         this.parent.ompleBiblio();
-        JOptionPane.showMessageDialog(rootPane, "Fitxer afegit amb èxit.");
     }//GEN-LAST:event_btnAfegirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -199,10 +221,12 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
             case 0:
             this.txtImatge.setEnabled(false);
             this.selectImatge.setEnabled(false);
+            this.lblImatge.setEnabled(false);
             break;
             case 1:
             this.txtImatge.setEnabled(true);
             this.selectImatge.setEnabled(true);
+            this.lblImatge.setEnabled(true);
             break;
         }
     }//GEN-LAST:event_selecTipusActionPerformed

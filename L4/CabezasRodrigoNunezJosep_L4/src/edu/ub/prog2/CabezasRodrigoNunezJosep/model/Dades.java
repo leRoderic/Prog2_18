@@ -258,8 +258,10 @@ public class Dades implements Serializable{
      */
     public void guardar(String desti) throws AplicacioException{
         try{
+            
             ObjectOutputStream os;
-            try (FileOutputStream fileStream = new FileOutputStream(desti)) {
+            File fitxer = new File(desti,"Dades.dat");
+            try (FileOutputStream fileStream = new FileOutputStream(fitxer)) {
                 os = new ObjectOutputStream(fileStream);
                 os.writeObject(this);
                 fileStream.close();

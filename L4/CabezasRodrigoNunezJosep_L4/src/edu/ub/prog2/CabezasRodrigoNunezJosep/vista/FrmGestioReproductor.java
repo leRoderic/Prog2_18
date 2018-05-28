@@ -153,13 +153,11 @@ public class FrmGestioReproductor extends javax.swing.JDialog {
     }//GEN-LAST:event_btStopActionPerformed
 
     private void btRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRandomActionPerformed
-        boolean estat = controlador.getAleatoria();
-        this.controlador.setAleatori(!estat);
+        this.controlador.setAleatori(btRandom.isSelected());
     }//GEN-LAST:event_btRandomActionPerformed
 
     private void btLoopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoopActionPerformed
-        boolean estat = controlador.getCiclica();
-        this.controlador.setContinu(!estat);
+        this.controlador.setContinu(btLoop.isSelected());
     }//GEN-LAST:event_btLoopActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

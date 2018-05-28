@@ -401,6 +401,7 @@ public class Controlador implements InControlador{
     @Override
     public void aturaReproduccio() throws AplicacioException {
         this.reproductor.stop();
+        tancarFinestraReproductor();
     }
     
     /**
@@ -422,20 +423,4 @@ public class Controlador implements InControlador{
         return this.dades.id2Titol(id);
     }
     
-    /**
-     * Comprova l'estat de la reproducció cíclica.
-     * 
-     * @return estat loop mode
-     */
-    public boolean getCiclica(){
-        return this.escoltador.getCiclica();
-    }
-    
-    /**
-     * Comprova l'estat de la reproducció aleatòria
-     * @return 
-     */
-    public boolean getAleatoria(){
-        return this.escoltador.getAleatoria();
-    }
 }
