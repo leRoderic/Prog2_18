@@ -203,7 +203,7 @@ public class Controlador implements InControlador{
      * @param titol         el títol del álbum
      */
     @Override
-    public void esborrarAlbum(String titol) throws AplicacioException {
+    public void esborrarAlbum(String titol){
         this.dades.esborrarAlbum(titol);
     }
     
@@ -284,7 +284,7 @@ public class Controlador implements InControlador{
      * @param i             id del fitxer que s'afegirà
      */
     @Override
-    public void esborrarFitxer(String titol, int i) throws AplicacioException {
+    public void esborrarFitxer(String titol, int i){
         this.dades.esborrarFitxer(titol,i);
     }
     
@@ -331,12 +331,14 @@ public class Controlador implements InControlador{
      */
     @Override
     public void reproduirCarpeta() throws AplicacioException {
-        try{
-            tancarFinestraReproductor();
-        }catch(AplicacioException e){}
-        obrirFinestraReproductor();
-        escoltador.setLlista(this.dades.reproduirCarpeta());
-        //tancarFinestraReproductor();
+        if (!this.isEmpty()){
+            try{
+                tancarFinestraReproductor();
+            }catch(AplicacioException e){}
+            obrirFinestraReproductor();
+            escoltador.setLlista(this.dades.reproduirCarpeta());
+            //tancarFinestraReproductor();
+        }
     }
     
     /**
@@ -346,12 +348,14 @@ public class Controlador implements InControlador{
      */
     @Override
     public void reproduirCarpeta(String titol) throws AplicacioException {
-        try{
-            tancarFinestraReproductor();
-        }catch(AplicacioException e){}
-        obrirFinestraReproductor();
-        escoltador.setLlista(this.dades.reproduirCarpeta(titol));
-        //tancarFinestraReproductor();
+        if (!this.isEmpty(titol)){
+            try{
+                tancarFinestraReproductor();
+            }catch(AplicacioException e){}
+            obrirFinestraReproductor();
+            escoltador.setLlista(this.dades.reproduirCarpeta(titol));
+            //tancarFinestraReproductor();
+        }
     }
     
     /**

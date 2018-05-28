@@ -75,14 +75,14 @@ public class Dades implements Serializable{
     public List<String> mostrarAlbums(){
         List<String> resum=new ArrayList<>();
         if(this.albums.isEmpty()){
-            resum.add("\nNo hi ha cap àlbum.\n\n");
+            resum.add("No hi ha cap àlbum");
         }else{
-            resum.add("\nÀlbums:\n==============\n\n");
+            //resum.add("\nÀlbums:\n==============\n\n");
             for (int i=0;i<this.albums.size();i++){
-                resum.add("["+(i+1)+"] "+this.albums.get(i).getTitol()+"\n");
+                resum.add("["+(i+1)+"] "+this.albums.get(i).getTitol());
             }        
         }
-        resum.add("\n");
+        //resum.add("\n");
         return resum;
     }
     

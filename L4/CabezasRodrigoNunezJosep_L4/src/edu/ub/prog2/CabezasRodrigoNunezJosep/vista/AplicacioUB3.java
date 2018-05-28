@@ -284,9 +284,7 @@ public class AplicacioUB3 {
                             num=sc.nextInt()-1;
                         }
                         String number=this.controlador.id2Titol(num);
-                        try{
-                            this.controlador.esborrarAlbum(number);
-                        }catch (AplicacioException e){}
+                        this.controlador.esborrarAlbum(number);
                     }else{
                         System.out.println("\nNo hi ha cap àlbum.\n");
                     }
@@ -363,9 +361,7 @@ public class AplicacioUB3 {
                             System.out.println("\nTorna-ho a provar: ");
                             num=sc.nextInt()-1;
                         }
-                        try{
-                            this.controlador.esborrarFitxer(number,num);
-                        }catch (AplicacioException e){}
+                        this.controlador.esborrarFitxer(number,num);
                     }else{
                         System.out.println("\nL'àlbum és buit. No es pot esborrar cap fitxer.\n");
                     }

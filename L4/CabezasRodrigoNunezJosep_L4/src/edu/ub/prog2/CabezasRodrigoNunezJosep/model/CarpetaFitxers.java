@@ -82,11 +82,11 @@ public class CarpetaFitxers implements InFileFolder,Serializable{
      */
     public List<String> writeCamins(){        
         List<String> resum =new ArrayList<>();
-        resum.add("\n==============\n");
+        //resum.add("\n==============\n");
         for (int i=0;i<carpeta.size();i++){
-            resum.add("["+(i+1)+"] "+this.getAt(i).getCamiAbsolut()+"\n");
+            resum.add("["+(i+1)+"] "+this.getAt(i).getNomFitxer()+this.getAt(i).getExtensio());
         }
-        resum.add("\n");
+        //resum.add("\n");
         return resum;
     }
     
