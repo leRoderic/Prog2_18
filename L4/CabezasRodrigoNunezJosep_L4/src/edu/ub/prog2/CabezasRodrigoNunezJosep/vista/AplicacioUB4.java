@@ -20,11 +20,12 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
     
     public AplicacioUB4() {
         initComponents();
+        setVisible(true);
         this.controlador=new Controlador();
         this.repro=new FrmGestioReproductor(this,controlador);
         this.fitxer=new FrmAfegirFitxerMultimedia(this,controlador);
         this.album=new FrmNouAlbum(this,controlador);
-        listAlbum.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listAlbum.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         listCarpeta.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         ompleBiblio();
         opcionsComboBox();
@@ -49,8 +50,8 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                 model.addElement(llista.get(i));
             }
             listAlbum.setModel(model);
-        } catch (Exception ex) {            
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage());    
+        } catch (Exception ignored) {            
+            //JOptionPane.showMessageDialog(rootPane, ex.getMessage());    
         }
     }
     
@@ -328,8 +329,21 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
 
     private void btnEliminarAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlbumActionPerformed
         if (listAlbum.getSelectedIndex()>=0){
-            controlador.esborrarFitxer(selecAlbum.getSelectedItem().toString().substring(4),listAlbum.getSelectedIndex());
-            ompleAlbum();
+            int[] asd = listAlbum.getSelectedIndices();
+            for(int i : asd){
+                controlador.esborrarFitxer(selecAlbum.getSelectedItem().toString().substring(4),i);
+                ompleBiblio();
+                ompleAlbum();
+                /*
+                Cada vegada que elimina un fitxer, s'avançen tots una posició
+                endavant, per tant cal decremenetar els seguënts índexs seleccionats
+                per tal de que s'eliminin correctament.
+                */
+                for(int s = 0; s < asd.length; s++){
+                    asd[s] = asd[s] - 1;
+                }
+            }
+            JOptionPane.showMessageDialog(null, String.valueOf(asd.length) +  " fitxers eliminats correctament del àlbum.", "Operació completada", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarAlbumActionPerformed
 
@@ -341,6 +355,9 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
     private void btnAfegirAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirAlbumActionPerformed
         if((listCarpeta.getSelectedIndex()>=0)&&(!(selecAlbum.getSelectedItem().toString().equals("No hi ha cap àlbum")))){
             int i = 0;
+            /*
+            Permet afegir més d'un fitxer alhora a un àlbum.
+            */
             int[] asd = listCarpeta.getSelectedIndices();
             while(i < listCarpeta.getSelectedIndices().length){
                 try {
@@ -358,11 +375,19 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         if (listCarpeta.getSelectedIndex()>=0){
             int[] asd = listCarpeta.getSelectedIndices();
             for(int i : asd){
-                controlador.esborrarFitxer(asd[i]);
-                asd = listCarpeta.getSelectedIndices();
+                controlador.esborrarFitxer(i);
                 ompleBiblio();
                 ompleAlbum();
+                /*
+                Cada vegada que elimina un fitxer, s'avançen tots una posició
+                endavant, per tant cal decremenetar els seguënts índexs seleccionats
+                per tal de que s'eliminin correctament.
+                */
+                for(int s = 0; s < asd.length; s++){
+                    asd[s] = asd[s] - 1;
+                }
             }
+            JOptionPane.showMessageDialog(null, String.valueOf(asd.length) +  " fitxers eliminats correctament de la biblioteca.", "Operació completada", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -432,7 +457,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoActionPerformed
-        JOptionPane.showMessageDialog(null, "Versió:    1.0 \nFet per:\n               Josep Núñez Riba\n               Rodrigo Cabezas Quirós", "Informació del reproductor", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Versió:    1.0 [08/06/2018] \nFet per:\n               Josep Núñez Riba\n               Rodrigo Cabezas Quirós", "Informació del reproductor", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btInfoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
