@@ -24,9 +24,8 @@ public class FrmNouAlbum extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         lblNom = new javax.swing.JLabel();
         txtNom = new javax.swing.JTextField();
-        btnPlus = new javax.swing.JButton();
-        btnMinus = new javax.swing.JButton();
-        lblNum = new javax.swing.JLabel();
+        slider = new javax.swing.JSlider();
+        barra = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Crea un nou àlbum");
@@ -63,76 +62,67 @@ public class FrmNouAlbum extends javax.swing.JDialog {
 
         txtNom.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
-        btnPlus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnPlus.setText("+");
-        btnPlus.setToolTipText("Augmenta la capacitat");
-        btnPlus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlusActionPerformed(evt);
+        slider.setMinimum(1);
+        slider.setValue(10);
+        slider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderStateChanged(evt);
             }
         });
 
-        btnMinus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnMinus.setText("-");
-        btnMinus.setToolTipText("Disminueix la capacitat");
-        btnMinus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMinusActionPerformed(evt);
-            }
-        });
-
-        lblNum.setBackground(new java.awt.Color(255, 255, 255));
-        lblNum.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lblNum.setForeground(new java.awt.Color(0, 0, 204));
-        lblNum.setText("10");
+        barra.setForeground(new java.awt.Color(0, 0, 255));
+        barra.setMaximum(slider.getMaximum());
+        barra.setMinimum(slider.getMinimum());
+        barra.setValue(slider.getValue());
+        barra.setString(String.valueOf(slider.getValue() + " fitxers")
+        );
+        barra.setStringPainted(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(lblNom)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNom)
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblNom)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNom))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(lblAmount)
-                                .addGap(70, 70, 70)
-                                .addComponent(lblNum)
-                                .addGap(104, 104, 104)
-                                .addComponent(btnPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 26, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(barra, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(38, 38, 38))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNom))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNom)
+                    .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAmount)
-                    .addComponent(btnPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNum))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(barra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,9 +133,10 @@ public class FrmNouAlbum extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Ja existeix un àlbum amb aquest nom!");
         }else if(txtNom.getText().equals("")){        
         }else{
-            this.controlador.afegirAlbum(txtNom.getText(),Integer.parseInt(lblNum.getText()));
+            this.controlador.afegirAlbum(txtNom.getText(),slider.getValue());
             this.parent.opcionsComboBox();
             JOptionPane.showMessageDialog(rootPane, "Àlbum '"+txtNom.getText()+"' creat.");
+            slider.setValue(10);
             this.dispose();
         }
         
@@ -155,34 +146,26 @@ public class FrmNouAlbum extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusActionPerformed
-        int value = Integer.parseInt(lblNum.getText());
-        value++;
-        lblNum.setText(""+value);
-    }//GEN-LAST:event_btnPlusActionPerformed
-
-    private void btnMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinusActionPerformed
-        int value = Integer.parseInt(lblNum.getText());
-        if (value>1){
-            value--;
-            lblNum.setText(""+value);        
-        }
-    }//GEN-LAST:event_btnMinusActionPerformed
-
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         this.txtNom.setText("");
-        this.lblNum.setText("10");
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosed
 
+    private void sliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderStateChanged
+        barra.setValue(slider.getValue());
+        if(slider.getValue() == 1)
+            barra.setString(String.valueOf(slider.getValue()) + " fitxer");
+        else
+            barra.setString(String.valueOf(slider.getValue()) + " fitxers");
+    }//GEN-LAST:event_sliderStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar barra;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
-    private javax.swing.JButton btnMinus;
-    private javax.swing.JButton btnPlus;
     private javax.swing.JLabel lblAmount;
     private javax.swing.JLabel lblNom;
-    private javax.swing.JLabel lblNum;
+    private javax.swing.JSlider slider;
     private javax.swing.JTextField txtNom;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,7 +25,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         this.fitxer=new FrmAfegirFitxerMultimedia(this,controlador);
         this.album=new FrmNouAlbum(this,controlador);
         listAlbum.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        listCarpeta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listCarpeta.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         ompleBiblio();
         opcionsComboBox();
     }
@@ -68,6 +68,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jOptionPane1 = new javax.swing.JOptionPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         listCarpeta = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -84,8 +85,12 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         txtBiblio = new javax.swing.JLabel();
         btnEliminarAlbum = new javax.swing.JButton();
         btnReproGestor = new javax.swing.JButton();
-        btGuardar = new javax.swing.JButton();
-        btCarregar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btCarregar = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        btGuardar = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        btInfo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Biblioteca de fitxers multimèdia");
@@ -198,21 +203,50 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
             }
         });
 
+        btCarregar.setText("Dades");
+        btCarregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem1.setText("Carregar");
+        jMenuItem1.setToolTipText("Carregar dades del disc");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        btCarregar.add(jMenuItem1);
+
+        btGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
         btGuardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btGuardar.setText("Guardar dades");
+        btGuardar.setText("Guardar");
+        btGuardar.setToolTipText("Guardar dades al disc");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btGuardarActionPerformed(evt);
             }
         });
+        btCarregar.add(btGuardar);
 
-        btCarregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btCarregar.setText("Carregar dades");
-        btCarregar.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(btCarregar);
+
+        jMenu2.setText("Ajuda");
+        jMenu2.setActionCommand("Sobre");
+        jMenu2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        btInfo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btInfo.setText("Informació");
+        btInfo.setActionCommand("btInfo");
+        btInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCarregarActionPerformed(evt);
+                btInfoActionPerformed(evt);
             }
         });
+        jMenu2.add(btInfo);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -225,8 +259,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                     .addComponent(btnAfegirAlbum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnReproBiblio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnReproFitxer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 19, Short.MAX_VALUE)
@@ -239,24 +272,18 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(selecAlbum, 0, 200, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNewAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnNoAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEliminarAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnReproAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnReproGestor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())))
+                        .addComponent(btnNewAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnNoAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminarAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnReproAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReproGestor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -277,9 +304,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnReproAlbum)
                         .addGap(18, 18, 18)
-                        .addComponent(btnReproGestor)
-                        .addGap(18, 18, 18)
-                        .addComponent(btCarregar))
+                        .addComponent(btnReproGestor))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAfegir)
@@ -290,9 +315,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnReproBiblio)
                         .addGap(18, 18, 18)
-                        .addComponent(btnReproFitxer)
-                        .addGap(18, 18, 18)
-                        .addComponent(btGuardar))
+                        .addComponent(btnReproFitxer))
                     .addComponent(jScrollPane1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -324,18 +347,28 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
 
     private void btnAfegirAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirAlbumActionPerformed
         if((listCarpeta.getSelectedIndex()>=0)&&(!(selecAlbum.getSelectedItem().toString().equals("No hi ha cap àlbum")))){
-            try {
-                controlador.afegirFitxer(selecAlbum.getSelectedItem().toString().substring(4),listCarpeta.getSelectedIndex());
-                ompleAlbum();
-            } catch (AplicacioException ex) {            
-                JOptionPane.showMessageDialog(rootPane, ex.getMessage());    
+            int i = 0;
+            int[] asd = listCarpeta.getSelectedIndices();
+            while(i < listCarpeta.getSelectedIndices().length){
+                try {
+                    controlador.afegirFitxer(selecAlbum.getSelectedItem().toString().substring(4),asd[i]);
+                    i++;
+                } catch (AplicacioException ex) {
+                    Logger.getLogger(AplicacioUB4.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ompleAlbum();    
             }
         }        
     }//GEN-LAST:event_btnAfegirAlbumActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (listCarpeta.getSelectedIndex()>=0){
-            controlador.esborrarFitxer(listCarpeta.getSelectedIndex());
+            int i = 0;
+            int[] asd = listCarpeta.getSelectedIndices();
+            while(i < asd.length + -1){
+                controlador.esborrarFitxer(asd[i]);
+                i++; 
+            }
             ompleBiblio();
             ompleAlbum();
         }
@@ -383,19 +416,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         album.setVisible(true);
     }//GEN-LAST:event_btnNewAlbumActionPerformed
 
-    private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        JFileChooser cercador = new javax.swing.JFileChooser();
-        cercador.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        cercador.showOpenDialog(this);
-        System.out.println(cercador.getSelectedFile().getAbsolutePath());
-        try {
-            this.controlador.guardarDadesDisc(cercador.getSelectedFile().getAbsolutePath());
-        } catch (AplicacioException ex) {
-            Logger.getLogger(AplicacioUB4.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btGuardarActionPerformed
-
-    private void btCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCarregarActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         JFileChooser cercador2 = new javax.swing.JFileChooser();
         cercador2.showOpenDialog(this);
         try {
@@ -405,11 +426,27 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         } catch (AplicacioException ex) {
             Logger.getLogger(AplicacioUB4.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btCarregarActionPerformed
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
+        JFileChooser cercador = new javax.swing.JFileChooser();
+        cercador.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        cercador.showOpenDialog(this);
+        try {
+            this.controlador.guardarDadesDisc(cercador.getSelectedFile().getAbsolutePath());
+        } catch (AplicacioException ex) {
+            Logger.getLogger(AplicacioUB4.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btGuardarActionPerformed
+
+    private void btInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoActionPerformed
+        JOptionPane.showMessageDialog(null, "Versió: 1.0 \nFet per: \n Josep Núñez Riba \n Rodrigo Cabezas Quirós", "Informació del reproductor", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btInfoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCarregar;
-    private javax.swing.JButton btGuardar;
+    private javax.swing.JMenu btCarregar;
+    private javax.swing.JMenuItem btGuardar;
+    private javax.swing.JMenuItem btInfo;
     private javax.swing.JButton btnAfegir;
     private javax.swing.JButton btnAfegirAlbum;
     private javax.swing.JButton btnEliminar;
@@ -420,6 +457,10 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
     private javax.swing.JButton btnReproBiblio;
     private javax.swing.JButton btnReproFitxer;
     private javax.swing.JButton btnReproGestor;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> listAlbum;
