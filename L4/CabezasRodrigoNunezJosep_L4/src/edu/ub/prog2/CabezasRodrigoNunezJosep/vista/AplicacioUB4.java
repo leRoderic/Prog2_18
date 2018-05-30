@@ -231,6 +231,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         jMenuBar1.add(btCarregar);
 
         jMenu2.setText("Ajuda");
+        jMenu2.setToolTipText("Informació sobre l'aplicació.");
         jMenu2.setActionCommand("Sobre");
         jMenu2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
@@ -260,37 +261,29 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                     .addComponent(btnReproBiblio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnReproFitxer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 19, Short.MAX_VALUE)
-                        .addComponent(txtBiblio)
-                        .addGap(176, 176, 176))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(selecAlbum, 0, 200, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBiblio))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNewAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNoAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminarAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnReproAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnReproGestor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                            .addComponent(btnNoAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNewAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminarAlbum)
+                            .addComponent(btnReproAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReproGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(selecAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(selecAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBiblio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -305,7 +298,6 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                         .addComponent(btnReproAlbum)
                         .addGap(18, 18, 18)
                         .addComponent(btnReproGestor))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAfegir)
                         .addGap(18, 18, 18)
@@ -316,7 +308,8 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                         .addComponent(btnReproBiblio)
                         .addGap(18, 18, 18)
                         .addComponent(btnReproFitxer))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -363,14 +356,13 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (listCarpeta.getSelectedIndex()>=0){
-            int i = 0;
             int[] asd = listCarpeta.getSelectedIndices();
-            while(i < asd.length + -1){
+            for(int i : asd){
                 controlador.esborrarFitxer(asd[i]);
-                i++; 
+                asd = listCarpeta.getSelectedIndices();
+                ompleBiblio();
+                ompleAlbum();
             }
-            ompleBiblio();
-            ompleAlbum();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -440,7 +432,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoActionPerformed
-        JOptionPane.showMessageDialog(null, "Versió: 1.0 \nFet per: \n Josep Núñez Riba \n Rodrigo Cabezas Quirós", "Informació del reproductor", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Versió:    1.0 \nFet per:\n               Josep Núñez Riba\n               Rodrigo Cabezas Quirós", "Informació del reproductor", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btInfoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

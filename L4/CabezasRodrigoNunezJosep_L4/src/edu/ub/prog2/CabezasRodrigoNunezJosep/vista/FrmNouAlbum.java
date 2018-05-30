@@ -63,16 +63,23 @@ public class FrmNouAlbum extends javax.swing.JDialog {
         txtNom.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
         slider.setMinimum(1);
+        slider.setToolTipText("Clic per canviar el límit de la capacitat màxima");
         slider.setValue(10);
         slider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 sliderStateChanged(evt);
             }
         });
+        slider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sliderMouseClicked(evt);
+            }
+        });
 
         barra.setForeground(new java.awt.Color(0, 0, 255));
         barra.setMaximum(slider.getMaximum());
         barra.setMinimum(slider.getMinimum());
+        barra.setToolTipText("Capacitat total del àlbum.");
         barra.setValue(slider.getValue());
         barra.setString(String.valueOf(slider.getValue() + " fitxers")
         );
@@ -158,6 +165,19 @@ public class FrmNouAlbum extends javax.swing.JDialog {
         else
             barra.setString(String.valueOf(slider.getValue()) + " fitxers");
     }//GEN-LAST:event_sliderStateChanged
+
+    private void sliderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sliderMouseClicked
+        int asd = JOptionPane.showConfirmDialog(null, "Canviar límit màxim?", "Configuració",JOptionPane.YES_NO_OPTION);
+        String tmp;
+        if(asd == 0){
+            while(asd <= 0){
+            tmp = JOptionPane.showInputDialog("Introdueix nou límit màxim:");
+            asd = Integer.parseInt(tmp);
+            }
+            slider.setMaximum(asd);
+            barra.setMaximum(asd);
+        }
+    }//GEN-LAST:event_sliderMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar barra;

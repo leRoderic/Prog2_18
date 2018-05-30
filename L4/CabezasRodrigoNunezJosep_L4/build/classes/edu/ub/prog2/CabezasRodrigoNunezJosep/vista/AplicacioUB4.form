@@ -49,6 +49,7 @@
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ajuda"/>
+            <Property name="toolTipText" type="java.lang.String" value="Informaci&#xf3; sobre l&apos;aplicaci&#xf3;."/>
             <Property name="actionCommand" type="java.lang.String" value="Sobre"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="1"/>
@@ -105,39 +106,27 @@
                   <Component id="btnReproFitxer" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnEliminar" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace type="separate" pref="19" max="32767" attributes="0"/>
-                      <Component id="txtBiblio" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="selecAlbum" pref="200" max="32767" attributes="0"/>
-                  <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="200" max="-2" attributes="0"/>
+                  <Component id="txtBiblio" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btnNewAlbum" min="-2" pref="206" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="206" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnNoAlbum" alignment="1" min="-2" pref="206" max="-2" attributes="0"/>
-                          <Component id="btnEliminarAlbum" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnReproAlbum" alignment="1" min="-2" pref="206" max="-2" attributes="0"/>
-                          <Component id="btnReproGestor" alignment="1" min="-2" pref="206" max="-2" attributes="0"/>
+                          <Component id="btnNoAlbum" min="-2" pref="206" max="-2" attributes="0"/>
+                          <Component id="btnNewAlbum" min="-2" pref="206" max="-2" attributes="0"/>
+                          <Component id="btnEliminarAlbum" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnReproAlbum" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                          <Component id="btnReproGestor" min="-2" pref="206" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
+                  <Component id="selecAlbum" min="-2" pref="200" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -145,9 +134,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="selecAlbum" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtBiblio" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="selecAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtBiblio" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -162,7 +151,6 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnReproGestor" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane2" alignment="0" pref="279" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="btnAfegir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -174,7 +162,8 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnReproFitxer" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="299" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
