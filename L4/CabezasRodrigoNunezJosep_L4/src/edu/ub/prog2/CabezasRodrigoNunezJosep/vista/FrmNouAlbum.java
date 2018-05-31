@@ -70,6 +70,11 @@ public class FrmNouAlbum extends javax.swing.JDialog {
                 sliderStateChanged(evt);
             }
         });
+        slider.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                sliderMouseWheelMoved(evt);
+            }
+        });
         slider.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sliderMouseClicked(evt);
@@ -178,6 +183,10 @@ public class FrmNouAlbum extends javax.swing.JDialog {
             barra.setMaximum(asd);
         }
     }//GEN-LAST:event_sliderMouseClicked
+
+    private void sliderMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_sliderMouseWheelMoved
+        slider.setValue(slider.getValue() + evt.getUnitsToScroll());
+    }//GEN-LAST:event_sliderMouseWheelMoved
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar barra;

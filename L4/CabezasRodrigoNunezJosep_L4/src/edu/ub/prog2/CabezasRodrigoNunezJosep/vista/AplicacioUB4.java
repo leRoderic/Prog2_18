@@ -95,6 +95,8 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Biblioteca de fitxers multimèdia");
+        setBackground(new java.awt.Color(0, 0, 0));
+        setForeground(java.awt.Color.orange);
 
         listCarpeta.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(listCarpeta);
