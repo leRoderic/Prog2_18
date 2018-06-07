@@ -257,10 +257,9 @@ public class Dades implements Serializable{
      * @throws AplicacioException abs
      */
     public void guardar(String desti) throws AplicacioException{
-        try{
-            
+        try{            
             ObjectOutputStream os;
-            File fitxer = new File(desti,"Dades.dat");
+            File fitxer = new File(desti,"Dades.data");
             try (FileOutputStream fileStream = new FileOutputStream(fitxer)) {
                 os = new ObjectOutputStream(fileStream);
                 os.writeObject(this);
@@ -353,6 +352,20 @@ public class Dades implements Serializable{
     public CarpetaFitxers reproduirFitxer(int i) throws AplicacioException {
         CarpetaFitxers retorn=new CarpetaFitxers();
         retorn.addFitxer(this.biblioteca.getAt(i));
+        return retorn;
+    }
+    
+    /**
+     * Retorna una nova CarpetaFitxers amb el fitxer a reproduir.
+     * 
+     * @param i         id del fitxer
+     * @return carpeta amb el fitxer a reproduir
+     * @throws AplicacioException abs
+     */
+    public CarpetaFitxers reproduirFitxers(int[] i) throws AplicacioException {
+        CarpetaFitxers retorn=new CarpetaFitxers();
+        for (int a:i)
+            retorn.addFitxer(this.biblioteca.getAt(a));
         return retorn;
     }
     

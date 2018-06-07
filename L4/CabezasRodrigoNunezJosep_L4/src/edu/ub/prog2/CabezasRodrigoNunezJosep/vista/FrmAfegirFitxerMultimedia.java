@@ -87,7 +87,7 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
         });
 
         selecTipus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        selecTipus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Video", "Àudio" }));
+        selecTipus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vídeo", "Àudio" }));
         selecTipus.setToolTipText("Selecciona el tipus de fitxer...");
         selecTipus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,11 +168,14 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void selectImatgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectImatgeActionPerformed
-        JFileChooser cercador2 = new javax.swing.JFileChooser();
-        cercador2.showOpenDialog(this);
-        cercador2.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator")+ "Pictures"));
-        File file = cercador2.getSelectedFile();
-        txtImatge.setText(file.getAbsolutePath());
+        parent.getCercador().setFileSelectionMode(JFileChooser.FILES_ONLY);
+        parent.getCercador().setSelectedFile(new File(""));
+        parent.getCercador().setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator")+ "Pictures"));
+        parent.getCercador().showOpenDialog(this);
+        File file = parent.getCercador().getSelectedFile();
+        if (file != null && file.isFile()){
+            txtImatge.setText(file.getAbsolutePath());        
+        }
     }//GEN-LAST:event_selectImatgeActionPerformed
 
     private void btnAfegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirActionPerformed
@@ -211,17 +214,20 @@ public class FrmAfegirFitxerMultimedia extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSeleccionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionaActionPerformed
-        JFileChooser cercador = new javax.swing.JFileChooser();
+        parent.getCercador().setFileSelectionMode(JFileChooser.FILES_ONLY);
+        parent.getCercador().setSelectedFile(new File(""));
         switch(this.selecTipus.getSelectedIndex()){
             case 0: // Per default a carpeta de vídeos
-                cercador.setCurrentDirectory(new File (System.getProperty("user.home") + System.getProperty("file.separator")+ "Videos"));
+                parent.getCercador().setCurrentDirectory(new File (System.getProperty("user.home") + System.getProperty("file.separator")+ "Videos"));
                 break;
             case 1: // Per default a carpeta de música
-                cercador.setCurrentDirectory(new File (System.getProperty("user.home") + System.getProperty("file.separator")+ "Music"));
+                parent.getCercador().setCurrentDirectory(new File (System.getProperty("user.home") + System.getProperty("file.separator")+ "Music"));
         }
-        cercador.showOpenDialog(this);
-        File file = cercador.getSelectedFile();
-        txtFitxer.setText(file.getAbsolutePath());
+        parent.getCercador().showOpenDialog(this);
+        File file = parent.getCercador().getSelectedFile();
+        if (file != null && file.isFile()){
+            txtFitxer.setText(file.getAbsolutePath());        
+        }
     }//GEN-LAST:event_btnSeleccionaActionPerformed
 
     private void selecTipusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecTipusActionPerformed

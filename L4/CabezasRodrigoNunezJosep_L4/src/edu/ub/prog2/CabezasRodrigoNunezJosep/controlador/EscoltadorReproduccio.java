@@ -149,9 +149,11 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic{
      */
     @Override
     protected boolean hasNext() {
-        for(int i=0;i<llistaCtrl.length;i++){
-            if(!(llistaCtrl[i])){
-                return true;
+        if (llistaCtrl != null){
+            for(int i=0;i<llistaCtrl.length;i++){
+                if(!(llistaCtrl[i])){
+                    return true;
+                }
             }
         }
         return false;

@@ -27,36 +27,39 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btPlay" min="-2" pref="96" max="-2" attributes="0"/>
+              <Component id="btnPlay" min="-2" pref="96" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btPause" min="-2" pref="96" max="-2" attributes="0"/>
+              <Component id="btnPause" min="-2" pref="96" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btSkip" min="-2" pref="96" max="-2" attributes="0"/>
+              <Component id="btnSkip" min="-2" pref="96" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btStop" min="-2" pref="96" max="-2" attributes="0"/>
+              <Component id="btnStop" min="-2" pref="96" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btRandom" min="-2" pref="96" max="-2" attributes="0"/>
+              <Component id="btnRandom" min="-2" pref="96" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btLoop" min="-2" pref="96" max="-2" attributes="0"/>
+              <Component id="btnLoop" min="-2" pref="96" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnStop1" min="-2" pref="96" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btLoop" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
-                  <Component id="btStop" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
+                  <Component id="btnStop1" min="-2" pref="87" max="-2" attributes="0"/>
+                  <Component id="btnLoop" min="-2" pref="87" max="-2" attributes="0"/>
+                  <Component id="btnStop" min="-2" pref="87" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btPause" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btPlay" alignment="0" pref="87" max="32767" attributes="0"/>
-                      <Component id="btSkip" alignment="0" pref="87" max="32767" attributes="0"/>
+                      <Component id="btnPause" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnPlay" alignment="0" pref="87" max="32767" attributes="0"/>
+                      <Component id="btnSkip" alignment="0" pref="87" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="btRandom" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
+                  <Component id="btnRandom" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -64,7 +67,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btPlay">
+    <Component class="javax.swing.JButton" name="btnPlay">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-play-50.png"/>
@@ -72,10 +75,10 @@
         <Property name="toolTipText" type="java.lang.String" value="Repr&#xe9;n la reproducci&#xf3; pausada o aturada"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPlay"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlay"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btPause">
+    <Component class="javax.swing.JButton" name="btnPause">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-pause-50.png"/>
@@ -83,10 +86,10 @@
         <Property name="toolTipText" type="java.lang.String" value="Pausa la reproducci&#xf3; actual"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPauseActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPauseActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btSkip">
+    <Component class="javax.swing.JButton" name="btnSkip">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-end-50.png"/>
@@ -94,10 +97,10 @@
         <Property name="toolTipText" type="java.lang.String" value="Salta al seg&#xfc;ent fitxer"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSkipActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkipActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btStop">
+    <Component class="javax.swing.JButton" name="btnStop">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-stop-50.png"/>
@@ -105,10 +108,10 @@
         <Property name="toolTipText" type="java.lang.String" value="Atura la reproducci&#xf3; actual"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btStopActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStopActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="btRandom">
+    <Component class="javax.swing.JToggleButton" name="btnRandom">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-shuffle-50.png"/>
@@ -116,10 +119,10 @@
         <Property name="toolTipText" type="java.lang.String" value="Commuta l&apos;aleatorietat de la reproducci&#xf3;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRandomActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRandomActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="btLoop">
+    <Component class="javax.swing.JToggleButton" name="btnLoop">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-repeat-50.png"/>
@@ -127,7 +130,18 @@
         <Property name="toolTipText" type="java.lang.String" value="Commuta la continu&#xef;tat de la reproducci&#xf3;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLoopActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoopActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnStop1">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/wrong.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Tanca la finestra del reproductor"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStop1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

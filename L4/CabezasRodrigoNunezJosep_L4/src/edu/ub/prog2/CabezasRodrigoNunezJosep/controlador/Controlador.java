@@ -54,19 +54,7 @@ public class Controlador implements InControlador{
     }
     
     /**
-     * Afegir vídeo a BibliotecaFitxerMultimedia
-     * 
-     * @param path          direcció del arxiu
-     * @param nomVideo      nom del fitxer
-     * @param codec         el codec de l'audio
-     * @param durada        la duració del video
-     * @param alcada        la altura del video
-     * @param amplada       la amplada del video
-     * @param fps           els fps' del video
-     */
-    
-    /**
-     * Afegeix vídeo a la biblitoeca.
+     * Afegeix vídeo a la biblioteca
      * 
      * @param path          camí absolut del fitxer
      * @param nomVideo      nom del vídeo
@@ -75,6 +63,7 @@ public class Controlador implements InControlador{
      * @param alcada        alçada del vídeo
      * @param amplada       amplada del vídeo
      * @param fps           els fps del vídeo
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void afegirVideo(String path, String nomVideo, String codec, float durada, int alcada, int amplada, float fps) throws AplicacioException{
@@ -99,6 +88,7 @@ public class Controlador implements InControlador{
      * @param codec         el codec del video
      * @param durada        la durada del video
      * @param kbps          velocitat del audio
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException{
@@ -271,6 +261,7 @@ public class Controlador implements InControlador{
      * 
      * @param titol         l'àlbum al que afegirem
      * @param i             id del fitxer que s'afegirà
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void afegirFitxer(String titol, int i) throws AplicacioException {
@@ -293,6 +284,7 @@ public class Controlador implements InControlador{
      * 
      * @param titol         el títol del àlbum
      * @return llista amb el títol dels fitxers
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public List<String> mostrarAlbum(String titol) throws AplicacioException {
@@ -314,6 +306,7 @@ public class Controlador implements InControlador{
      * Reprodueix un fitxer.
      * 
      * @param i             id del fitxer
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void reproduirFitxer(int i) throws AplicacioException {
@@ -326,8 +319,24 @@ public class Controlador implements InControlador{
     }
     
     /**
+     * Reprodueix un fitxer.
+     * 
+     * @param i             id del fitxer
+     * @throws edu.ub.prog2.utils.AplicacioException
+     */
+    public void reproduirFitxers(int[] i) throws AplicacioException {
+        try{
+            tancarFinestraReproductor();
+        }catch(AplicacioException e){}
+        obrirFinestraReproductor();
+        escoltador.setLlista(this.dades.reproduirFitxers(i));
+        //tancarFinestraReproductor();
+    }
+    
+    /**
      * Reprodueix tot el contingut de la carpeta.
      * 
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void reproduirCarpeta() throws AplicacioException {
@@ -345,6 +354,7 @@ public class Controlador implements InControlador{
      * Reprodueix el fitxer corresponent al titol que se li passa.
      * 
      * @param titol         el títol del fitxer que es reproduirà
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void reproduirCarpeta(String titol) throws AplicacioException {
@@ -370,6 +380,7 @@ public class Controlador implements InControlador{
     /**
      * Tanca la finestra amb els controls del reproductor.
      * 
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void tancarFinestraReproductor() throws AplicacioException {
@@ -379,6 +390,7 @@ public class Controlador implements InControlador{
     /**
      * Torna a reproduir el fitxer després d'haver-se pausat.
      * 
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void reemprenReproduccio() throws AplicacioException {
@@ -388,6 +400,7 @@ public class Controlador implements InControlador{
     /**
      * Pausa el fitxer que s'està reproduint en el moment.
      * 
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void pausaReproduccio() throws AplicacioException {
@@ -397,20 +410,28 @@ public class Controlador implements InControlador{
     /**
      * Atura la reproducció, NO ES POT FER RESUME.
      * 
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void aturaReproduccio() throws AplicacioException {
         this.reproductor.stop();
-        tancarFinestraReproductor();
     }
     
     /**
      * Salta al següent fitxer a reproduir.
      * 
+     * @throws edu.ub.prog2.utils.AplicacioException
      */
     @Override
     public void saltaReproduccio() throws AplicacioException {
-        this.escoltador.next();
+        if (this.escoltador.hasNext()){            
+            this.escoltador.next();
+        }else if (this.escoltador.getCiclica()){
+            this.escoltador.setLlista(this.escoltador.getLlista());
+            this.escoltador.next();
+        }else{
+            this.aturaReproduccio();
+        }
     }
     
     /**

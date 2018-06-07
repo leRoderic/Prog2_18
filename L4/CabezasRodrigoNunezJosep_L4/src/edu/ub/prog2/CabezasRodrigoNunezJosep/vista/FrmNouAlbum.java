@@ -26,6 +26,7 @@ public class FrmNouAlbum extends javax.swing.JDialog {
         txtNom = new javax.swing.JTextField();
         slider = new javax.swing.JSlider();
         barra = new javax.swing.JProgressBar();
+        btnLimit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Crea un nou àlbum");
@@ -63,7 +64,8 @@ public class FrmNouAlbum extends javax.swing.JDialog {
         txtNom.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
         slider.setMinimum(1);
-        slider.setToolTipText("Clic per canviar el límit de la capacitat màxima");
+        slider.setSnapToTicks(true);
+        slider.setToolTipText("Llisca per canviar la capacitat de l'àlbum");
         slider.setValue(10);
         slider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -84,11 +86,21 @@ public class FrmNouAlbum extends javax.swing.JDialog {
         barra.setForeground(new java.awt.Color(0, 0, 255));
         barra.setMaximum(slider.getMaximum());
         barra.setMinimum(slider.getMinimum());
-        barra.setToolTipText("Capacitat total del àlbum.");
+        barra.setToolTipText("Capacitat total de l'àlbum");
         barra.setValue(slider.getValue());
         barra.setString(String.valueOf(slider.getValue() + " fitxers")
         );
         barra.setStringPainted(true);
+
+        btnLimit.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnLimit.setText("Canviar límit màxim");
+        btnLimit.setToolTipText("Canvia el límit màxim de la capacitat");
+        btnLimit.setBorder(btnCrear.getBorder());
+        btnLimit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,26 +108,27 @@ public class FrmNouAlbum extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(lblNom)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNom))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblNom)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNom))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(418, 418, 418)
+                                .addComponent(btnLimit))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblAmount)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(barra, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(38, 38, 38))))
+                                    .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,8 +146,9 @@ public class FrmNouAlbum extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 13, Short.MAX_VALUE))
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,7 +157,8 @@ public class FrmNouAlbum extends javax.swing.JDialog {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         if (this.controlador.existeixAlbum(txtNom.getText())){
             JOptionPane.showMessageDialog(rootPane, "Ja existeix un àlbum amb aquest nom!");
-        }else if(txtNom.getText().equals("")){        
+        }else if(txtNom.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "S'ha d'escriure un nom!");
         }else{
             this.controlador.afegirAlbum(txtNom.getText(),slider.getValue());
             this.parent.opcionsComboBox();
@@ -172,7 +187,7 @@ public class FrmNouAlbum extends javax.swing.JDialog {
     }//GEN-LAST:event_sliderStateChanged
 
     private void sliderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sliderMouseClicked
-        int asd = JOptionPane.showConfirmDialog(null, "Canviar límit màxim?", "Configuració",JOptionPane.YES_NO_OPTION);
+        /*int asd = JOptionPane.showConfirmDialog(null, "Canviar límit màxim?", "Configuració",JOptionPane.YES_NO_OPTION);
         String tmp;
         if(asd == 0){
             while(asd <= 0){
@@ -181,17 +196,29 @@ public class FrmNouAlbum extends javax.swing.JDialog {
             }
             slider.setMaximum(asd);
             barra.setMaximum(asd);
-        }
+        }*/
     }//GEN-LAST:event_sliderMouseClicked
 
     private void sliderMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_sliderMouseWheelMoved
-        slider.setValue(slider.getValue() + evt.getUnitsToScroll());
+        slider.setValue(slider.getValue() - evt.getUnitsToScroll());
     }//GEN-LAST:event_sliderMouseWheelMoved
+
+    private void btnLimitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimitActionPerformed
+        String tmp = JOptionPane.showInputDialog("Introdueix nou límit màxim:");
+        int asd = Integer.parseInt(tmp);
+        while(asd <= 0){
+            tmp = JOptionPane.showInputDialog("Introdueix nou límit màxim:");
+            asd = Integer.parseInt(tmp);
+        }
+        slider.setMaximum(asd);
+        barra.setMaximum(asd);
+    }//GEN-LAST:event_btnLimitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar barra;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnLimit;
     private javax.swing.JLabel lblAmount;
     private javax.swing.JLabel lblNom;
     private javax.swing.JSlider slider;

@@ -2,9 +2,8 @@ package edu.ub.prog2.CabezasRodrigoNunezJosep.vista;
 
 import edu.ub.prog2.CabezasRodrigoNunezJosep.controlador.Controlador;
 import edu.ub.prog2.utils.AplicacioException;
+import java.io.File;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -14,21 +13,27 @@ import javax.swing.ListSelectionModel;
 public final class AplicacioUB4 extends javax.swing.JFrame {
     
     private final Controlador controlador;
-    FrmGestioReproductor repro;
-    FrmAfegirFitxerMultimedia fitxer;
-    FrmNouAlbum album;
+    private final FrmGestioReproductor repro;
+    private final FrmAfegirFitxerMultimedia fitxer;
+    private final FrmNouAlbum album;
+    private final JFileChooser cercador;
     
     public AplicacioUB4() {
         initComponents();
-        setVisible(true);
         this.controlador=new Controlador();
         this.repro=new FrmGestioReproductor(this,controlador);
         this.fitxer=new FrmAfegirFitxerMultimedia(this,controlador);
         this.album=new FrmNouAlbum(this,controlador);
+        this.cercador = new javax.swing.JFileChooser();
+        cercador.setCurrentDirectory(new File(System.getProperty("user.home")));
+        cercador.setApproveButtonText("Seleccionar");
+        cercador.setApproveButtonToolTipText("Selecciona l'actual");
+        cercador.setDialogTitle("Selecciona...");
         listAlbum.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         listCarpeta.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         ompleBiblio();
-        opcionsComboBox();
+        opcionsComboBox();        
+        setVisible(true);
     }
     
     protected void ompleBiblio(){
@@ -43,15 +48,17 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
     
     protected void ompleAlbum(){
         try {
-            DefaultListModel model = new DefaultListModel();
-            model.clear();
-            List<String> llista=controlador.mostrarCaminsAlbum(selecAlbum.getSelectedItem().toString().substring(4));
-            for(int i=0;i<llista.size();i++){
-                model.addElement(llista.get(i));
+            if(!(selecAlbum.getSelectedItem().toString().equals("No hi ha cap àlbum"))){                
+                DefaultListModel model = new DefaultListModel();
+                model.clear();
+                List<String> llista=controlador.mostrarCaminsAlbum(selecAlbum.getSelectedItem().toString().substring(4));
+                for(int i=0;i<llista.size();i++){
+                    model.addElement(llista.get(i));
+                }
+                listAlbum.setModel(model);            
             }
-            listAlbum.setModel(model);
-        } catch (Exception ignored) {            
-            //JOptionPane.showMessageDialog(rootPane, ex.getMessage());    
+        } catch (Exception ex) {            
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());    
         }
     }
     
@@ -63,6 +70,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         }
         DefaultComboBoxModel opcions = new DefaultComboBoxModel(items);
         selecAlbum.setModel(opcions);
+        ompleAlbum();
     }
     
     @SuppressWarnings("unchecked")
@@ -87,11 +95,11 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         btnEliminarAlbum = new javax.swing.JButton();
         btnReproGestor = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        btCarregar = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        btGuardar = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        btInfo = new javax.swing.JMenuItem();
+        gestioDades = new javax.swing.JMenu();
+        btnCarregar = new javax.swing.JMenuItem();
+        btnGuardar = new javax.swing.JMenuItem();
+        gestioHelp = new javax.swing.JMenu();
+        btnInfo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Biblioteca de fitxers multimèdia");
@@ -105,7 +113,7 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         jScrollPane2.setViewportView(listAlbum);
 
         selecAlbum.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        selecAlbum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Àlbums" }));
+        selecAlbum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No hi ha cap àlbum" }));
         selecAlbum.setToolTipText("Selecciona un àlbum...");
         selecAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,49 +214,51 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
             }
         });
 
-        btCarregar.setText("Dades");
-        btCarregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        gestioDades.setText("Dades");
+        gestioDades.setToolTipText("Gestió de les dades a disc");
+        gestioDades.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuItem1.setText("Carregar");
-        jMenuItem1.setToolTipText("Carregar dades del disc");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btnCarregar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        btnCarregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnCarregar.setText("Carregar");
+        btnCarregar.setToolTipText("Carrega dades del disc");
+        btnCarregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                btnCarregarActionPerformed(evt);
             }
         });
-        btCarregar.add(jMenuItem1);
+        gestioDades.add(btnCarregar);
 
-        btGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
-        btGuardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btGuardar.setText("Guardar");
-        btGuardar.setToolTipText("Guardar dades al disc");
-        btGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        btnGuardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setToolTipText("Guarda dades al disc");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btGuardarActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        btCarregar.add(btGuardar);
+        gestioDades.add(btnGuardar);
 
-        jMenuBar1.add(btCarregar);
+        jMenuBar1.add(gestioDades);
 
-        jMenu2.setText("Ajuda");
-        jMenu2.setToolTipText("Informació sobre l'aplicació.");
-        jMenu2.setActionCommand("Sobre");
-        jMenu2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        gestioHelp.setText("Ajuda");
+        gestioHelp.setToolTipText("Informació sobre l'aplicació");
+        gestioHelp.setActionCommand("Sobre");
+        gestioHelp.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
-        btInfo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btInfo.setText("Informació");
-        btInfo.setActionCommand("btInfo");
-        btInfo.addActionListener(new java.awt.event.ActionListener() {
+        btnInfo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnInfo.setText("Informació");
+        btnInfo.setActionCommand("btInfo");
+        btnInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btInfoActionPerformed(evt);
+                btnInfoActionPerformed(evt);
             }
         });
-        jMenu2.add(btInfo);
+        gestioHelp.add(btnInfo);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(gestioHelp);
+        gestioHelp.getAccessibleContext().setAccessibleDescription("Informació sobre l'aplicació");
 
         setJMenuBar(jMenuBar1);
 
@@ -345,8 +355,12 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                     asd[s] = asd[s] - 1;
                 }
             }
-            JOptionPane.showMessageDialog(null, String.valueOf(asd.length) +  " fitxers eliminats correctament del àlbum.", "Operació completada", JOptionPane.INFORMATION_MESSAGE);
-        }
+            if (asd.length>1)
+                JOptionPane.showMessageDialog(null, String.valueOf(asd.length) +  " fitxers eliminats correctament de l'àlbum.", "Operació completada", JOptionPane.INFORMATION_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(null, String.valueOf(asd.length) +  " fitxer eliminat correctament de l'àlbum.", "Operació completada", JOptionPane.INFORMATION_MESSAGE);
+        }else
+            JOptionPane.showMessageDialog(rootPane, "No s'ha seleccionat cap fitxer.");
     }//GEN-LAST:event_btnEliminarAlbumActionPerformed
 
     private void btnReproGestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproGestorActionPerformed
@@ -355,7 +369,13 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReproGestorActionPerformed
 
     private void btnAfegirAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirAlbumActionPerformed
-        if((listCarpeta.getSelectedIndex()>=0)&&(!(selecAlbum.getSelectedItem().toString().equals("No hi ha cap àlbum")))){
+        if ((listCarpeta.getSelectedIndex()<0)&&(selecAlbum.getSelectedItem().toString().equals("No hi ha cap àlbum"))){
+            JOptionPane.showMessageDialog(rootPane, "No s'ha seleccionat cap fitxer i no hi cap àlbum on afegir-ne.");
+        }else if(listCarpeta.getSelectedIndex()<0){
+            JOptionPane.showMessageDialog(rootPane, "No s'ha seleccionat cap fitxer.");
+        }else if(selecAlbum.getSelectedItem().toString().equals("No hi ha cap àlbum")){
+            JOptionPane.showMessageDialog(rootPane, "No hi cap àlbum on afegir fitxers.");
+        }else{
             int i = 0;
             /*
             Permet afegir més d'un fitxer alhora a un àlbum.
@@ -364,13 +384,13 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
             while(i < listCarpeta.getSelectedIndices().length){
                 try {
                     controlador.afegirFitxer(selecAlbum.getSelectedItem().toString().substring(4),asd[i]);
-                    i++;
                 } catch (AplicacioException ex) {
-                    Logger.getLogger(AplicacioUB4.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(rootPane, ex.getMessage());
                 }
+                i++;
                 ompleAlbum();    
             }
-        }        
+        }       
     }//GEN-LAST:event_btnAfegirAlbumActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -389,8 +409,12 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                     asd[s] = asd[s] - 1;
                 }
             }
-            JOptionPane.showMessageDialog(null, String.valueOf(asd.length) +  " fitxers eliminats correctament de la biblioteca.", "Operació completada", JOptionPane.INFORMATION_MESSAGE);
-        }
+            if (asd.length>1)
+                JOptionPane.showMessageDialog(null, String.valueOf(asd.length) +  " fitxers eliminats correctament de la biblioteca.", "Operació completada", JOptionPane.INFORMATION_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(null, String.valueOf(asd.length) +  " fitxer eliminat correctament de la biblioteca.", "Operació completada", JOptionPane.INFORMATION_MESSAGE);
+        }else
+            JOptionPane.showMessageDialog(rootPane, "No s'ha seleccionat cap fitxer.");
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnReproBiblioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproBiblioActionPerformed
@@ -404,20 +428,21 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
     private void btnReproFitxerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproFitxerActionPerformed
         try {
             if (listCarpeta.getSelectedIndex()>=0){
-                controlador.reproduirFitxer(listCarpeta.getSelectedIndex());
-            }
+                int[] asd = listCarpeta.getSelectedIndices();
+                controlador.reproduirFitxers(asd);
+            }else
+                JOptionPane.showMessageDialog(rootPane, "No s'ha seleccionat cap fitxer.");
         } catch (AplicacioException ex) {            
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());    
         }
     }//GEN-LAST:event_btnReproFitxerActionPerformed
 
     private void btnNoAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoAlbumActionPerformed
-        if(!(selecAlbum.getSelectedItem().toString().equals("No hi ha cap àlbum"))){
-            controlador.esborrarAlbum(selecAlbum.getSelectedItem().toString().substring(4));            
-        }
-        opcionsComboBox();
-        if(!(selecAlbum.getSelectedItem().toString().equals("No hi ha cap àlbum"))){
-            ompleAlbum();           
+        if(selecAlbum.getSelectedItem().toString().equals("No hi ha cap àlbum")){
+            JOptionPane.showMessageDialog(rootPane, "No hi ha cap àlbum a eliminar.");            
+        }else{
+            controlador.esborrarAlbum(selecAlbum.getSelectedItem().toString().substring(4));
+            opcionsComboBox();
         }
     }//GEN-LAST:event_btnNoAlbumActionPerformed
 
@@ -435,50 +460,58 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         album.setVisible(true);
     }//GEN-LAST:event_btnNewAlbumActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JFileChooser cercador2 = new javax.swing.JFileChooser();
-        cercador2.showOpenDialog(this);
+    private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
+        cercador.setSelectedFile(new File(""));
+        cercador.setFileSelectionMode(JFileChooser.FILES_ONLY);        
+        cercador.setCurrentDirectory(new File(System.getProperty("user.home")));
+        cercador.showOpenDialog(this);
         try {
-            this.controlador.carregarDadesDisc(cercador2.getSelectedFile().getAbsolutePath());
+            this.controlador.carregarDadesDisc(cercador.getSelectedFile().getAbsolutePath());
             ompleBiblio();
+            opcionsComboBox();
             ompleAlbum();
         } catch (AplicacioException ex) {
-            Logger.getLogger(AplicacioUB4.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_btnCarregarActionPerformed
 
-    private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        JFileChooser cercador = new javax.swing.JFileChooser();
-        cercador.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        cercador.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);                
+        cercador.setSelectedFile(new File(""));        
+        cercador.setCurrentDirectory(new File(System.getProperty("user.home")));
         cercador.showOpenDialog(this);
         try {
             this.controlador.guardarDadesDisc(cercador.getSelectedFile().getAbsolutePath());
         } catch (AplicacioException ex) {
-            Logger.getLogger(AplicacioUB4.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-    }//GEN-LAST:event_btGuardarActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoActionPerformed
+    private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
         JOptionPane.showMessageDialog(null, "Versió:    1.0 [08/06/2018] \nFet per:\n               Josep Núñez Riba\n               Rodrigo Cabezas Quirós", "Informació del reproductor", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_btInfoActionPerformed
+    }//GEN-LAST:event_btnInfoActionPerformed
 
+    public JFileChooser getCercador(){
+        return this.cercador;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu btCarregar;
-    private javax.swing.JMenuItem btGuardar;
-    private javax.swing.JMenuItem btInfo;
     private javax.swing.JButton btnAfegir;
     private javax.swing.JButton btnAfegirAlbum;
+    private javax.swing.JMenuItem btnCarregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarAlbum;
+    private javax.swing.JMenuItem btnGuardar;
+    private javax.swing.JMenuItem btnInfo;
     private javax.swing.JButton btnNewAlbum;
     private javax.swing.JButton btnNoAlbum;
     private javax.swing.JButton btnReproAlbum;
     private javax.swing.JButton btnReproBiblio;
     private javax.swing.JButton btnReproFitxer;
     private javax.swing.JButton btnReproGestor;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu gestioDades;
+    private javax.swing.JMenu gestioHelp;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

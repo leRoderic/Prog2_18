@@ -20,12 +20,13 @@ public class FrmGestioReproductor extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btPlay = new javax.swing.JButton();
-        btPause = new javax.swing.JButton();
-        btSkip = new javax.swing.JButton();
-        btStop = new javax.swing.JButton();
-        btRandom = new javax.swing.JToggleButton();
-        btLoop = new javax.swing.JToggleButton();
+        btnPlay = new javax.swing.JButton();
+        btnPause = new javax.swing.JButton();
+        btnSkip = new javax.swing.JButton();
+        btnStop = new javax.swing.JButton();
+        btnRandom = new javax.swing.JToggleButton();
+        btnLoop = new javax.swing.JToggleButton();
+        btnStop1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestor de la reproducció en curs");
@@ -35,51 +36,59 @@ public class FrmGestioReproductor extends javax.swing.JDialog {
             }
         });
 
-        btPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-play-50.png"))); // NOI18N
-        btPlay.setToolTipText("Reprén la reproducció pausada o aturada");
-        btPlay.addActionListener(new java.awt.event.ActionListener() {
+        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-play-50.png"))); // NOI18N
+        btnPlay.setToolTipText("Reprén la reproducció pausada o aturada");
+        btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPlay(evt);
+                btnPlay(evt);
             }
         });
 
-        btPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-pause-50.png"))); // NOI18N
-        btPause.setToolTipText("Pausa la reproducció actual");
-        btPause.addActionListener(new java.awt.event.ActionListener() {
+        btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-pause-50.png"))); // NOI18N
+        btnPause.setToolTipText("Pausa la reproducció actual");
+        btnPause.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPauseActionPerformed(evt);
+                btnPauseActionPerformed(evt);
             }
         });
 
-        btSkip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-end-50.png"))); // NOI18N
-        btSkip.setToolTipText("Salta al següent fitxer");
-        btSkip.addActionListener(new java.awt.event.ActionListener() {
+        btnSkip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-end-50.png"))); // NOI18N
+        btnSkip.setToolTipText("Salta al següent fitxer");
+        btnSkip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSkipActionPerformed(evt);
+                btnSkipActionPerformed(evt);
             }
         });
 
-        btStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-stop-50.png"))); // NOI18N
-        btStop.setToolTipText("Atura la reproducció actual");
-        btStop.addActionListener(new java.awt.event.ActionListener() {
+        btnStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-stop-50.png"))); // NOI18N
+        btnStop.setToolTipText("Atura la reproducció actual");
+        btnStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btStopActionPerformed(evt);
+                btnStopActionPerformed(evt);
             }
         });
 
-        btRandom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-shuffle-50.png"))); // NOI18N
-        btRandom.setToolTipText("Commuta l'aleatorietat de la reproducció");
-        btRandom.addActionListener(new java.awt.event.ActionListener() {
+        btnRandom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-shuffle-50.png"))); // NOI18N
+        btnRandom.setToolTipText("Commuta l'aleatorietat de la reproducció");
+        btnRandom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRandomActionPerformed(evt);
+                btnRandomActionPerformed(evt);
             }
         });
 
-        btLoop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-repeat-50.png"))); // NOI18N
-        btLoop.setToolTipText("Commuta la continuïtat de la reproducció");
-        btLoop.addActionListener(new java.awt.event.ActionListener() {
+        btnLoop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/icons8-repeat-50.png"))); // NOI18N
+        btnLoop.setToolTipText("Commuta la continuïtat de la reproducció");
+        btnLoop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btLoopActionPerformed(evt);
+                btnLoopActionPerformed(evt);
+            }
+        });
+
+        btnStop1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ub/prog2/CabezasRodrigoNunezJosep/vista/media controls/wrong.png"))); // NOI18N
+        btnStop1.setToolTipText("Tanca la finestra del reproductor");
+        btnStop1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStop1ActionPerformed(evt);
             }
         });
 
@@ -89,17 +98,19 @@ public class FrmGestioReproductor extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btPause, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btSkip, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSkip, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btStop, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btRandom, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRandom, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnStop1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,70 +118,79 @@ public class FrmGestioReproductor extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btStop, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStop1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btPause, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btPlay, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                        .addComponent(btSkip, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
-                    .addComponent(btRandom, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPause, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPlay, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                        .addComponent(btnSkip, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                    .addComponent(btnRandom, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btPlay(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPlay
+    private void btnPlay(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlay
         try {
             this.controlador.reemprenReproduccio();
         } catch (AplicacioException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-    }//GEN-LAST:event_btPlay
+    }//GEN-LAST:event_btnPlay
 
-    private void btPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPauseActionPerformed
+    private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
         try {
             this.controlador.pausaReproduccio();
         } catch (AplicacioException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-    }//GEN-LAST:event_btPauseActionPerformed
+    }//GEN-LAST:event_btnPauseActionPerformed
 
-    private void btSkipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSkipActionPerformed
+    private void btnSkipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkipActionPerformed
         try {
             this.controlador.saltaReproduccio();
         } catch (AplicacioException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-    }//GEN-LAST:event_btSkipActionPerformed
+    }//GEN-LAST:event_btnSkipActionPerformed
 
-    private void btStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStopActionPerformed
+    private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
         try {
             this.controlador.aturaReproduccio();
         } catch (AplicacioException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-    }//GEN-LAST:event_btStopActionPerformed
+    }//GEN-LAST:event_btnStopActionPerformed
 
-    private void btRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRandomActionPerformed
-        this.controlador.setAleatori(btRandom.isSelected());
-    }//GEN-LAST:event_btRandomActionPerformed
+    private void btnRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRandomActionPerformed
+        this.controlador.setAleatori(btnRandom.isSelected());
+    }//GEN-LAST:event_btnRandomActionPerformed
 
-    private void btLoopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoopActionPerformed
-        this.controlador.setContinu(btLoop.isSelected());
-    }//GEN-LAST:event_btLoopActionPerformed
+    private void btnLoopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoopActionPerformed
+        this.controlador.setContinu(btnLoop.isSelected());
+    }//GEN-LAST:event_btnLoopActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         this.setVisible(false);
-        //parent.setEnabled(true);
     }//GEN-LAST:event_formWindowClosed
 
+    private void btnStop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop1ActionPerformed
+        try {
+            this.controlador.tancarFinestraReproductor();
+        } catch (AplicacioException ex) {
+            JOptionPane.showMessageDialog(rootPane, "No hi ha cap reproducció en curs.");
+        }
+    }//GEN-LAST:event_btnStop1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btLoop;
-    private javax.swing.JButton btPause;
-    private javax.swing.JButton btPlay;
-    private javax.swing.JToggleButton btRandom;
-    private javax.swing.JButton btSkip;
-    private javax.swing.JButton btStop;
+    private javax.swing.JToggleButton btnLoop;
+    private javax.swing.JButton btnPause;
+    private javax.swing.JButton btnPlay;
+    private javax.swing.JToggleButton btnRandom;
+    private javax.swing.JButton btnSkip;
+    private javax.swing.JButton btnStop;
+    private javax.swing.JButton btnStop1;
     // End of variables declaration//GEN-END:variables
 }
