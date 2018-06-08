@@ -44,6 +44,16 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
             model.addElement(llista.get(i));
         }
         listCarpeta.setModel(model);
+        ompleAlbum();
+        if(listCarpeta.getModel().getSize() == 0){
+            this.btnEliminar.setEnabled(false);
+            this.btnReproFitxer.setEnabled(false);
+            this.btnReproBiblio.setEnabled(false);
+        }else{
+            this.btnEliminar.setEnabled(true);
+            this.btnReproFitxer.setEnabled(true);
+            this.btnReproBiblio.setEnabled(true);
+        }
     }
     
     protected void ompleAlbum(){
@@ -56,6 +66,13 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
                     model.addElement(llista.get(i));
                 }
                 listAlbum.setModel(model);            
+            }
+            if(listAlbum.getModel().getSize() != 0){
+                this.btnReproAlbum.setEnabled(true);
+                this.btnEliminarAlbum.setEnabled(true);
+            }else{
+                this.btnReproAlbum.setEnabled(false);
+                this.btnEliminarAlbum.setEnabled(false);
             }
         } catch (Exception ex) {            
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());    
@@ -70,6 +87,14 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         }
         DefaultComboBoxModel opcions = new DefaultComboBoxModel(items);
         selecAlbum.setModel(opcions);
+        if(selecAlbum.getSelectedItem().toString().equals("No hi ha cap àlbum")){
+            this.btnNoAlbum.setEnabled(false);
+            this.btnAfegirAlbum.setEnabled(false);
+        }
+        else{
+            this.btnNoAlbum.setEnabled(true);
+            this.btnAfegirAlbum.setEnabled(true);
+        }
         ompleAlbum();
     }
     
@@ -258,7 +283,6 @@ public final class AplicacioUB4 extends javax.swing.JFrame {
         gestioHelp.add(btnInfo);
 
         jMenuBar1.add(gestioHelp);
-        gestioHelp.getAccessibleContext().setAccessibleDescription("Informació sobre l'aplicació");
 
         setJMenuBar(jMenuBar1);
 

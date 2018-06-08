@@ -56,9 +56,6 @@
               <Font name="Dialog" size="14" style="1"/>
             </Property>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Informaci&#xf3; sobre l&apos;aplicaci&#xf3;"/>
-          </AccessibilityProperties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="btnInfo">
               <Properties>
